@@ -1,0 +1,74 @@
+import React from 'react';
+import { Settings, Sun, Moon, Sparkles } from 'lucide-react';
+import { useSettings } from '../../context/SettingsContext';
+
+interface TopBarProps {
+  onOpenSettings: () => void;
+}
+
+export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
+  const { settings, effectiveTheme, updateSettings, accentTheme } = useSettings();
+
+  const toggleTheme = () => {
+    const next = effectiveTheme === 'dark' ? 'light' : 'dark';
+    updateSettings({ theme: next });
+  };
+
+  return (
+    <header className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-neutral-300">
+      {/* Zone 1: Single element brand wordmark */}
+      <div className="flex items-center gap-2">
+        <span className="font-semibold text-sm tracking-wide text-neutral-100 flex items-center gap-1.5">
+          <Sparkles className={`w-3.5 h-3.5 ${accentTheme.textColor}`} />
+          <span>AuraTab</span>
+        </span>
+        <span className="text-xs text-neutral-400 font-normal hidden sm:inline">
+          · Productivity Dashboard
+        </span>
+      </div>
+
+      {/* Zone 2: Quiet shortcut tips */}
+      <div className="hidden md:flex items-center gap-4 text-xs text-neutral-400">
+        <span className="flex items-center gap-1">
+          <kbd className="px-1.5 py-0.5 rounded bg-white/10 dark:bg-black/30 border border-white/10 font-mono text-[11px] text-neutral-300">
+            /
+          </kbd>
+          <span>Search</span>
+        </span>
+        <span aria-hidden="true" className="text-neutral-600">·</span>
+        <span className="flex items-center gap-1">
+          <kbd className="px-1.5 py-0.5 rounded bg-white/10 dark:bg-black/30 border border-white/10 font-mono text-[11px] text-neutral-300">
+            T
+          </kbd>
+          <span>Task</span>
+        </span>
+      </div>
+
+      {/* Zone 3: Actions */}
+      <div className="flex items-center gap-2">
+        <button
+          onClick={toggleTheme}
+          title={`Switch to ${effectiveTheme === 'dark' ? 'Light' : 'Dark'} mode`}
+          aria-label="Toggle theme"
+          className="p-2 rounded-xl text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50"
+        >
+          {effectiveTheme === 'dark' ? (
+            <Sun className="w-4 h-4 text-amber-400" />
+          ) : (
+            <Moon className="w-4 h-4 text-neutral-800" />
+          )}
+        </button>
+
+        <button
+          onClick={onOpenSettings}
+          title="Open Dashboard Settings (Ctrl+,)"
+          aria-label="Open settings"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-neutral-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50"
+        >
+          <Settings className="w-4 h-4" />
+          <span className="hidden sm:inline">Settings</span>
+        </button>
+      </div>
+    </header>
+  );
+};

@@ -1,0 +1,6 @@
+{
+  "name": "AuraTab - Minimal Productivity New Tab",
+  "description": "A privacy-first, customizable productivity New Tab dashboard for Chromium and Firefox featuring digital clock, tasks, interactive calendar, quick links, wallpaper studio, and web search.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
