@@ -57,57 +57,83 @@ export const TasksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       priority,
       dueDate: dueDate || todayDateIso,
     };
-    persist([newTask, ...tasks]);
+    setTasks((prev) => {
+      const next = [newTask, ...prev];
+      saveTasks(next);
+      return next;
+    });
+    // Ensure new task is visible if user was on completed filter
+    if (filter === 'completed') {
+      setFilter('all');
+    }
   };
 
   const updateTask = (id: string, updates: Partial<TaskItem>) => {
-    const next = tasks.map((t) => (t.id === id ? { ...t, ...updates } : t));
-    persist(next);
+    setTasks((prev) => {
+      const next = prev.map((t) => (t.id === id ? { ...t, ...updates } : t));
+      saveTasks(next);
+      return next;
+    });
   };
 
   const deleteTask = (id: string) => {
-    const next = tasks.filter((t) => t.id !== id);
-    persist(next);
+    setTasks((prev) => {
+      const next = prev.filter((t) => t.id !== id);
+      saveTasks(next);
+      return next;
+    });
   };
 
   const toggleTask = (id: string) => {
-    const next = tasks.map((t) => {
-      if (t.id === id) {
-        const nextCompleted = !t.completed;
-        return {
-          ...t,
-          completed: nextCompleted,
-          completedAt: nextCompleted ? Date.now() : undefined,
-        };
-      }
-      return t;
+    setTasks((prev) => {
+      const next = prev.map((t) => {
+        if (t.id === id) {
+          const nextCompleted = !t.completed;
+          return {
+            ...t,
+            completed: nextCompleted,
+            completedAt: nextCompleted ? Date.now() : undefined,
+          };
+        }
+        return t;
+      });
+      saveTasks(next);
+      return next;
     });
-    persist(next);
   };
 
   const moveTaskUp = (id: string) => {
-    const index = tasks.findIndex((t) => t.id === id);
-    if (index <= 0) return;
-    const copy = [...tasks];
-    const temp = copy[index - 1];
-    copy[index - 1] = copy[index];
-    copy[index] = temp;
-    persist(copy);
+    setTasks((prev) => {
+      const index = prev.findIndex((t) => t.id === id);
+      if (index <= 0) return prev;
+      const copy = [...prev];
+      const temp = copy[index - 1];
+      copy[index - 1] = copy[index];
+      copy[index] = temp;
+      saveTasks(copy);
+      return copy;
+    });
   };
 
   const moveTaskDown = (id: string) => {
-    const index = tasks.findIndex((t) => t.id === id);
-    if (index === -1 || index >= tasks.length - 1) return;
-    const copy = [...tasks];
-    const temp = copy[index + 1];
-    copy[index + 1] = copy[index];
-    copy[index] = temp;
-    persist(copy);
+    setTasks((prev) => {
+      const index = prev.findIndex((t) => t.id === id);
+      if (index === -1 || index >= prev.length - 1) return prev;
+      const copy = [...prev];
+      const temp = copy[index + 1];
+      copy[index + 1] = copy[index];
+      copy[index] = temp;
+      saveTasks(copy);
+      return copy;
+    });
   };
 
   const clearCompleted = () => {
-    const next = tasks.filter((t) => !t.completed);
-    persist(next);
+    setTasks((prev) => {
+      const next = prev.filter((t) => !t.completed);
+      saveTasks(next);
+      return next;
+    });
   };
 
   const filteredTasks = useMemo(() => {

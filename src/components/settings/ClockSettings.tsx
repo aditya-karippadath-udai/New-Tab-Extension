@@ -1,37 +1,71 @@
 import React from 'react';
-import { Clock, User } from 'lucide-react';
+import { Clock, User, Gauge } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
-import { ClockStyle } from '../../types';
+import { ClockStyle, ClockType } from '../../types';
 
 export const ClockSettings: React.FC = () => {
   const { settings, updateSettings, accentTheme } = useSettings();
 
   return (
     <div className="space-y-6 text-xs text-neutral-300">
-      {/* Clock Style */}
+      {/* 1. Clock Mode (Digital vs Analog Speedometer) */}
       <section>
         <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Clock Typography & Style</span>
+          <span>Clock Mode</span>
         </h4>
-        <div className="grid grid-cols-3 gap-2">
-          {(['digital', 'minimal', 'large'] as ClockStyle[]).map((st) => (
-            <button
-              key={st}
-              onClick={() => updateSettings({ clockStyle: st })}
-              className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-medium ${
-                settings.clockStyle === st
-                  ? `${accentTheme.bgActive} border-cyan-500/50`
-                  : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
-              }`}
-            >
-              {st}
-            </button>
-          ))}
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            onClick={() => updateSettings({ clockType: 'digital' })}
+            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-center transition-all font-medium cursor-pointer ${
+              settings.clockType === 'digital'
+                ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs font-semibold`
+                : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+            }`}
+          >
+            <Clock className="w-4 h-4" />
+            <span>Digital Clock</span>
+          </button>
+
+          <button
+            onClick={() => updateSettings({ clockType: 'analog' })}
+            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-center transition-all font-medium cursor-pointer ${
+              settings.clockType === 'analog'
+                ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs font-semibold`
+                : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+            }`}
+          >
+            <Gauge className="w-4 h-4 text-cyan-400" />
+            <span>Speedometer Analog</span>
+          </button>
         </div>
       </section>
 
-      {/* Format Toggles */}
+      {/* 2. Digital Typography Style (if Digital) */}
+      {settings.clockType === 'digital' && (
+        <section>
+          <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2">
+            Digital Clock Layout
+          </h4>
+          <div className="grid grid-cols-3 gap-2">
+            {(['digital', 'minimal', 'large'] as ClockStyle[]).map((st) => (
+              <button
+                key={st}
+                onClick={() => updateSettings({ clockStyle: st })}
+                className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-medium cursor-pointer ${
+                  settings.clockStyle === st
+                    ? `${accentTheme.bgActive} border-cyan-500/50`
+                    : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+                }`}
+              >
+                {st}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 3. Display Preferences */}
       <section className="space-y-3">
         <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider">
           Display Preferences
@@ -57,7 +91,9 @@ export const ClockSettings: React.FC = () => {
         <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
           <div>
             <div className="font-medium text-neutral-200">Show Seconds</div>
-            <div className="text-[11px] text-neutral-500">Live ticking seconds indicator</div>
+            <div className="text-[11px] text-neutral-500">
+              Live ticking seconds and speedometer redline sweep needle
+            </div>
           </div>
           <input
             type="checkbox"
@@ -98,7 +134,7 @@ export const ClockSettings: React.FC = () => {
         </label>
       </section>
 
-      {/* Greeting User Name */}
+      {/* 4. Greeting User Name */}
       {settings.showGreeting && (
         <section className="space-y-2">
           <label className="block text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">

@@ -15,6 +15,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   accent: 'blue',
   density: 'comfortable',
 
+  clockType: 'digital',
   timeFormat24: false,
   showSeconds: false,
   showDate: true,

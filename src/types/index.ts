@@ -9,6 +9,7 @@ export type AccentColor =
   | 'rose';    // Crimson Rose
 
 export type ClockStyle = 'digital' | 'minimal' | 'large';
+export type ClockType = 'digital' | 'analog';
 
 export type LayoutDensity = 'compact' | 'comfortable' | 'spacious';
 
@@ -95,6 +96,7 @@ export interface AppSettings {
   density: LayoutDensity;
   
   // Clock
+  clockType: ClockType; // 'digital' | 'analog'
   timeFormat24: boolean;
   showSeconds: boolean;
   showDate: boolean;
