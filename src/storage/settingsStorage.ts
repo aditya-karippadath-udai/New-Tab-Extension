@@ -22,6 +22,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   showDate: true,
   showGreeting: true,
   userName: 'Aditya',
+  showUserNameInHeader: true,
   clockStyle: 'digital',
 
   defaultSearchEngine: 'google',

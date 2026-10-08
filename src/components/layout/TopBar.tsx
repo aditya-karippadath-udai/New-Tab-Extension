@@ -22,7 +22,11 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
       <div className="flex items-center gap-2">
         <span className="font-semibold text-sm tracking-wide text-neutral-100 flex items-center gap-1.5">
           <Sparkles className={`w-3.5 h-3.5 ${accentTheme.textColor}`} />
-          <span>AuraTab</span>
+          <span>
+            {settings.showUserNameInHeader !== false && settings.userName?.trim()
+              ? settings.userName.trim()
+              : 'AuraTab'}
+          </span>
         </span>
         <span className="text-xs text-neutral-400 font-normal hidden sm:inline">
           · Productivity Dashboard

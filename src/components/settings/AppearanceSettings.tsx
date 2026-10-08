@@ -9,6 +9,7 @@ import {
   Check,
   RefreshCw,
   Eye,
+  User,
 } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 import { BUILTIN_WALLPAPERS } from '../../utils/builtinWallpapers';
@@ -68,7 +69,46 @@ export const AppearanceSettings: React.FC = () => {
 
   return (
     <div className="space-y-6 text-xs text-neutral-300">
-      {/* 1. Theme Mode */}
+      {/* 1. User Name & Header Display */}
+      <section className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+          <User className="w-3.5 h-3.5 text-cyan-400" />
+          <span>User Name & Header Display</span>
+        </h4>
+
+        <div>
+          <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+            Your Name / Header Title
+          </label>
+          <input
+            type="text"
+            value={settings.userName || ''}
+            onChange={(e) => updateSettings({ userName: e.target.value })}
+            placeholder="Enter your name (e.g. Aditya)"
+            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-100 placeholder:text-neutral-500 outline-none focus:border-white/30 transition-all"
+          />
+          <p className="text-[11px] text-neutral-400 mt-1">
+            Displayed in the top bar header and used for greetings.
+          </p>
+        </div>
+
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+          <div>
+            <div className="font-medium text-neutral-200">Show Name in Header</div>
+            <div className="text-[11px] text-neutral-400">
+              Display "{settings.userName?.trim() || 'Your Name'}" in place of "AuraTab"
+            </div>
+          </div>
+          <input
+            type="checkbox"
+            checked={settings.showUserNameInHeader !== false}
+            onChange={(e) => updateSettings({ showUserNameInHeader: e.target.checked })}
+            className="w-4 h-4 rounded accent-cyan-500 cursor-pointer"
+          />
+        </label>
+      </section>
+
+      {/* 2. Theme Mode */}
       <section>
         <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <Palette className="w-3.5 h-3.5 text-cyan-400" />

@@ -95,13 +95,14 @@ export interface AppSettings {
   accent: AccentColor;
   density: LayoutDensity;
   
-  // Clock
+  // Clock & Profile
   clockType: ClockType; // 'digital' | 'analog'
   timeFormat24: boolean;
   showSeconds: boolean;
   showDate: boolean;
   showGreeting: boolean;
   userName: string;
+  showUserNameInHeader?: boolean;
   clockStyle: ClockStyle;
 
   // Search
