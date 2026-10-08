@@ -9,6 +9,8 @@ interface FavoritesContextType {
   deleteFavorite: (id: string) => void;
   moveFavorite: (id: string, direction: 'left' | 'right') => void;
   openFavorite: (url: string, forceNewTab?: boolean) => void;
+  syncFavoriteBookmark: (title: string, url: string, isFav: boolean) => void;
+  isFavoriteUrl: (url: string) => boolean;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | null>(null);
@@ -79,6 +81,26 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     window.open(url, target, forceNewTab ? 'noopener,noreferrer' : undefined);
   };
 
+  const isFavoriteUrl = (url: string): boolean => {
+    const normalized = url.replace(/\/+$/, '').toLowerCase();
+    return favorites.some(
+      (f) => f.url.replace(/\/+$/, '').toLowerCase() === normalized
+    );
+  };
+
+  const syncFavoriteBookmark = (title: string, url: string, isFav: boolean) => {
+    const normalized = url.replace(/\/+$/, '').toLowerCase();
+    const existing = favorites.find(
+      (f) => f.url.replace(/\/+$/, '').toLowerCase() === normalized
+    );
+
+    if (isFav && !existing) {
+      addFavorite(title, url);
+    } else if (!isFav && existing) {
+      deleteFavorite(existing.id);
+    }
+  };
+
   return (
     <FavoritesContext.Provider
       value={{
@@ -88,6 +110,8 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         deleteFavorite,
         moveFavorite,
         openFavorite,
+        syncFavoriteBookmark,
+        isFavoriteUrl,
       }}
     >
       {children}

@@ -58,7 +58,7 @@ export interface WallpaperConfig {
   animatedEffect: boolean; // gentle starry drift effect
 }
 
-export type WidgetType = 'clock' | 'search' | 'favorites' | 'tasks' | 'calendar' | 'notes';
+export type WidgetType = 'clock' | 'search' | 'favorites' | 'tasks' | 'calendar' | 'notes' | 'bookmarks';
 
 export type WidgetSize = 'small' | 'medium' | 'large';
 
@@ -124,4 +124,9 @@ export interface AppSettings {
 
   // Quick notes (bonus widget)
   quickNotes: string;
+
+  // Bookmarks widget configuration
+  bookmarkWidget?: import('./bookmark').BookmarkWidgetConfig;
 }
+
+export * from './bookmark';

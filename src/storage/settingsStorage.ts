@@ -7,7 +7,8 @@ export const DEFAULT_WIDGETS: WidgetConfig[] = [
   { id: 'calendar', name: 'Calendar', enabled: true, size: 'medium', order: 2 },
   { id: 'tasks', name: 'Tasks & To-Do', enabled: true, size: 'medium', order: 3 },
   { id: 'favorites', name: 'Favourite Pages', enabled: true, size: 'large', order: 4 },
-  { id: 'notes', name: 'Quick Notes', enabled: false, size: 'medium', order: 5 },
+  { id: 'bookmarks', name: 'Bookmarks Explorer', enabled: true, size: 'large', order: 5 },
+  { id: 'notes', name: 'Quick Notes', enabled: false, size: 'medium', order: 6 },
 ];
 
 export const DEFAULT_SETTINGS: AppSettings = {
@@ -48,6 +49,11 @@ export const DEFAULT_SETTINGS: AppSettings = {
   widgets: DEFAULT_WIDGETS,
 
   quickNotes: '💡 Quick notes / scratchpad — automatically saved to browser storage.',
+
+  bookmarkWidget: {
+    displayMode: 'tree',
+    maxItems: 8,
+  },
 };
 
 const SETTINGS_KEY = 'auratab_settings';
@@ -61,7 +67,12 @@ export async function getSettings(): Promise<AppSettings> {
       ...DEFAULT_SETTINGS.wallpaper,
       ...(loaded.wallpaper || {}),
     },
-    widgets: loaded.widgets && loaded.widgets.length > 0 ? loaded.widgets : DEFAULT_SETTINGS.widgets,
+    widgets: (() => {
+      if (!loaded.widgets || loaded.widgets.length === 0) return DEFAULT_SETTINGS.widgets;
+      const existingIds = new Set(loaded.widgets.map((w) => w.id));
+      const missingDefaults = DEFAULT_SETTINGS.widgets.filter((w) => !existingIds.has(w.id));
+      return [...loaded.widgets, ...missingDefaults];
+    })(),
   };
 }
 

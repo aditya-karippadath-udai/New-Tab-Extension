@@ -5,6 +5,7 @@ interface KeyboardShortcutHandlers {
   onFocusTask?: () => void;
   onCloseOverlays?: () => void;
   onToggleSettings?: () => void;
+  onToggleBookmarks?: () => void;
 }
 
 export function useKeyboardShortcuts({
@@ -12,6 +13,7 @@ export function useKeyboardShortcuts({
   onFocusTask,
   onCloseOverlays,
   onToggleSettings,
+  onToggleBookmarks,
 }: KeyboardShortcutHandlers) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -60,9 +62,16 @@ export function useKeyboardShortcuts({
         onFocusTask?.();
         return;
       }
+
+      // 'B' or 'b' key to toggle bookmarks explorer
+      if (e.key.toLowerCase() === 'b' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        onToggleBookmarks?.();
+        return;
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onFocusSearch, onFocusTask, onCloseOverlays, onToggleSettings]);
+  }, [onFocusSearch, onFocusTask, onCloseOverlays, onToggleSettings, onToggleBookmarks]);
 }

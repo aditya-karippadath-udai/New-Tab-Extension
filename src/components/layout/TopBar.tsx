@@ -1,6 +1,7 @@
 import React from 'react';
-import { Settings, Sun, Moon, Sparkles } from 'lucide-react';
+import { Settings, Sun, Moon, Sparkles, Bookmark } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
+import { useBookmarks } from '../../context/BookmarkContext';
 
 interface TopBarProps {
   onOpenSettings: () => void;
@@ -8,6 +9,7 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
   const { settings, effectiveTheme, updateSettings, accentTheme } = useSettings();
+  const { setIsManagerOpen, stats } = useBookmarks();
 
   const toggleTheme = () => {
     const next = effectiveTheme === 'dark' ? 'light' : 'dark';
@@ -42,15 +44,33 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
           </kbd>
           <span>Task</span>
         </span>
+        <span aria-hidden="true" className="text-neutral-600">·</span>
+        <span className="flex items-center gap-1">
+          <kbd className="px-1.5 py-0.5 rounded bg-white/10 dark:bg-black/30 border border-white/10 font-mono text-[11px] text-neutral-300">
+            B
+          </kbd>
+          <span>Bookmarks</span>
+        </span>
       </div>
 
       {/* Zone 3: Actions */}
       <div className="flex items-center gap-2">
         <button
+          onClick={() => setIsManagerOpen(true)}
+          title="Open Bookmarks Explorer (B)"
+          aria-label="Open bookmarks"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-neutral-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 cursor-pointer"
+        >
+          <Bookmark className="w-3.5 h-3.5 text-cyan-400" />
+          <span className="hidden sm:inline">Bookmarks</span>
+          <span className="text-[10px] text-neutral-400 font-mono tabular-nums">({stats.totalBookmarks})</span>
+        </button>
+
+        <button
           onClick={toggleTheme}
           title={`Switch to ${effectiveTheme === 'dark' ? 'Light' : 'Dark'} mode`}
           aria-label="Toggle theme"
-          className="p-2 rounded-xl text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50"
+          className="p-2 rounded-xl text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 cursor-pointer"
         >
           {effectiveTheme === 'dark' ? (
             <Sun className="w-4 h-4 text-amber-400" />
@@ -63,7 +83,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
           onClick={onOpenSettings}
           title="Open Dashboard Settings (Ctrl+,)"
           aria-label="Open settings"
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-neutral-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-neutral-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 cursor-pointer"
         >
           <Settings className="w-4 h-4" />
           <span className="hidden sm:inline">Settings</span>

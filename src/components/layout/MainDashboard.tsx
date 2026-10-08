@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useSettings } from '../../context/SettingsContext';
+import { useBookmarks } from '../../context/BookmarkContext';
 import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts';
 import { TopBar } from './TopBar';
 import { ClockWidget } from '../widgets/ClockWidget';
@@ -8,15 +9,19 @@ import { CalendarWidget } from '../widgets/CalendarWidget';
 import { TasksWidget } from '../widgets/TasksWidget';
 import { FavoritesWidget } from '../widgets/FavoritesWidget';
 import { NotesWidget } from '../widgets/NotesWidget';
+import { BookmarksWidget } from '../bookmarks/BookmarksWidget';
+import { BookmarkManager } from '../bookmarks/BookmarkManager';
 import { SettingsDrawer } from '../settings/SettingsDrawer';
 import { WidgetType } from '../../types';
 
 export const MainDashboard: React.FC = () => {
   const { settings, isSettingsOpen, setIsSettingsOpen } = useSettings();
+  const { isManagerOpen, setIsManagerOpen } = useBookmarks();
+
   const searchInputRef = useRef<HTMLInputElement>(null);
   const taskInputRef = useRef<HTMLInputElement>(null);
 
-  // Setup keyboard shortcuts: '/', 'T', 'Esc', 'Cmd+K', 'Cmd+,'
+  // Setup keyboard shortcuts: '/', 'T', 'B', 'Esc', 'Cmd+K', 'Cmd+,'
   useKeyboardShortcuts({
     onFocusSearch: () => {
       searchInputRef.current?.focus();
@@ -24,8 +29,13 @@ export const MainDashboard: React.FC = () => {
     onFocusTask: () => {
       taskInputRef.current?.focus();
     },
+    onToggleBookmarks: () => {
+      setIsManagerOpen(!isManagerOpen);
+    },
     onCloseOverlays: () => {
-      if (isSettingsOpen) {
+      if (isManagerOpen) {
+        setIsManagerOpen(false);
+      } else if (isSettingsOpen) {
         setIsSettingsOpen(false);
       }
     },
@@ -40,16 +50,12 @@ export const MainDashboard: React.FC = () => {
     return found ? found.enabled : true;
   };
 
-  const getWidgetSize = (id: WidgetType) => {
-    const found = settings.widgets.find((w) => w.id === id);
-    return found ? found.size : 'medium';
-  };
-
   const isSearchEnabled = isWidgetEnabled('search');
   const isClockEnabled = isWidgetEnabled('clock');
   const isCalendarEnabled = isWidgetEnabled('calendar');
   const isTasksEnabled = isWidgetEnabled('tasks');
   const isFavoritesEnabled = isWidgetEnabled('favorites');
+  const isBookmarksEnabled = isWidgetEnabled('bookmarks');
   const isNotesEnabled = isWidgetEnabled('notes');
 
   // Layout density spacing
@@ -75,7 +81,7 @@ export const MainDashboard: React.FC = () => {
             </div>
           )}
 
-          {/* 2. Clock & Date & Greeting */}
+          {/* 2. Clock & Date & Greeting (Supports Digital and Speedometer Analog) */}
           {isClockEnabled && (
             <div className="w-full">
               <ClockWidget />
@@ -105,7 +111,14 @@ export const MainDashboard: React.FC = () => {
             </div>
           )}
 
-          {/* 5. Optional Notes / Scratchpad */}
+          {/* 5. Bookmarks Explorer Widget */}
+          {isBookmarksEnabled && (
+            <div className="w-full">
+              <BookmarksWidget />
+            </div>
+          )}
+
+          {/* 6. Optional Notes / Scratchpad */}
           {isNotesEnabled && (
             <div className="w-full">
               <NotesWidget />
@@ -114,20 +127,32 @@ export const MainDashboard: React.FC = () => {
         </div>
       </main>
 
-      {/* Subtle bottom footer with quiet copyright & settings shortcut */}
+      {/* Subtle bottom footer with quiet copyright, bookmarks link, & settings shortcut */}
       <footer className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-[11px] text-neutral-400 select-none">
         <div>
           <span>AuraTab</span>
           <span className="mx-1.5 opacity-40">·</span>
           <span>Fast, Minimal & Private</span>
         </div>
-        <button
-          onClick={() => setIsSettingsOpen(true)}
-          className="hover:text-neutral-200 transition-colors cursor-pointer"
-        >
-          Preferences (Ctrl+,)
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsManagerOpen(true)}
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            Bookmarks Explorer (B)
+          </button>
+          <span aria-hidden="true" className="opacity-30">·</span>
+          <button
+            onClick={() => setIsSettingsOpen(true)}
+            className="hover:text-neutral-200 transition-colors cursor-pointer"
+          >
+            Preferences (Ctrl+,)
+          </button>
+        </div>
       </footer>
+
+      {/* Full Bookmarks Explorer Overlay Window */}
+      <BookmarkManager />
 
       {/* Customization Drawer */}
       <SettingsDrawer />
