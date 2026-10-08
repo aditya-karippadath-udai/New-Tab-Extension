@@ -9,6 +9,7 @@ import { CalendarWidget } from '../widgets/CalendarWidget';
 import { TasksWidget } from '../widgets/TasksWidget';
 import { FavoritesWidget } from '../widgets/FavoritesWidget';
 import { NotesWidget } from '../widgets/NotesWidget';
+import { FocusTimerWidget } from '../widgets/FocusTimerWidget';
 import { BookmarksWidget } from '../bookmarks/BookmarksWidget';
 import { BookmarkManager } from '../bookmarks/BookmarkManager';
 import { SettingsDrawer } from '../settings/SettingsDrawer';
@@ -56,6 +57,7 @@ export const MainDashboard: React.FC = () => {
   const isTasksEnabled = isWidgetEnabled('tasks');
   const isFavoritesEnabled = isWidgetEnabled('favorites');
   const isBookmarksEnabled = isWidgetEnabled('bookmarks');
+  const isFocusEnabled = isWidgetEnabled('focus');
   const isNotesEnabled = isWidgetEnabled('notes');
 
   // Layout density spacing
@@ -118,7 +120,14 @@ export const MainDashboard: React.FC = () => {
             </div>
           )}
 
-          {/* 6. Optional Notes / Scratchpad */}
+          {/* 6. Focus Timer & BrowserTime */}
+          {isFocusEnabled && (
+            <div className="w-full">
+              <FocusTimerWidget />
+            </div>
+          )}
+
+          {/* 7. Optional Notes / Scratchpad */}
           {isNotesEnabled && (
             <div className="w-full">
               <NotesWidget />

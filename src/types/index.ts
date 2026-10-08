@@ -58,7 +58,7 @@ export interface WallpaperConfig {
   animatedEffect: boolean; // gentle starry drift effect
 }
 
-export type WidgetType = 'clock' | 'search' | 'favorites' | 'tasks' | 'calendar' | 'notes' | 'bookmarks';
+export type WidgetType = 'clock' | 'search' | 'favorites' | 'tasks' | 'calendar' | 'notes' | 'bookmarks' | 'focus';
 
 export type WidgetSize = 'small' | 'medium' | 'large';
 

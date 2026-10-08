@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "node scripts/build-extension.mjs",
+    "build:chrome": "node scripts/build-extension.mjs chrome",
+    "build:firefox": "node scripts/build-extension.mjs firefox",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
+    "clean": "rm -rf dist chrome-dist firefox-dist",
     "lint": "tsc --noEmit"
   },
   "dependencies": {

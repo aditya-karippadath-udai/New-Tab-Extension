@@ -8,7 +8,8 @@ export const DEFAULT_WIDGETS: WidgetConfig[] = [
   { id: 'tasks', name: 'Tasks & To-Do', enabled: true, size: 'medium', order: 3 },
   { id: 'favorites', name: 'Favourite Pages', enabled: true, size: 'large', order: 4 },
   { id: 'bookmarks', name: 'Bookmarks Explorer', enabled: true, size: 'large', order: 5 },
-  { id: 'notes', name: 'Quick Notes', enabled: false, size: 'medium', order: 6 },
+  { id: 'focus', name: 'Focus Timer & Pomodoro', enabled: true, size: 'medium', order: 6 },
+  { id: 'notes', name: 'Quick Notes', enabled: false, size: 'medium', order: 7 },
 ];
 
 export const DEFAULT_SETTINGS: AppSettings = {
