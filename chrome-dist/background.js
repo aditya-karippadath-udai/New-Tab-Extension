@@ -27,7 +27,7 @@ browserAPI?.runtime?.onInstalled?.addListener((details) => {
     }
   }
 });
-browserAPI?.contextMenus?.onClicked?.addListener((info, tab) => {
+browserAPI?.contextMenus?.onClicked?.addListener((info) => {
   if (info.menuItemId === "auratab-open-dashboard") {
     browserAPI.tabs.create({ url: browserAPI.runtime.getURL("index.html") });
   } else if (info.menuItemId === "auratab-search-selected" && info.selectionText) {
