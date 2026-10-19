@@ -25,7 +25,7 @@ export const DeleteConfirmDialog: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
       <div className="w-full max-w-md rounded-2xl glass-panel bg-neutral-900/95 border border-rose-500/30 p-5 shadow-2xl text-neutral-200">
         <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
           <h3 className="text-sm font-semibold text-rose-300 flex items-center gap-2">

@@ -12,6 +12,7 @@ import { NotesWidget } from '../widgets/NotesWidget';
 import { FocusTimerWidget } from '../widgets/FocusTimerWidget';
 import { BookmarksWidget } from '../bookmarks/BookmarksWidget';
 import { BookmarkManager } from '../bookmarks/BookmarkManager';
+import { BookmarkModals } from '../bookmarks/BookmarkModals';
 import { SettingsDrawer } from '../settings/SettingsDrawer';
 import { WidgetType } from '../../types';
 
@@ -162,6 +163,9 @@ export const MainDashboard: React.FC = () => {
 
       {/* Full Bookmarks Explorer Overlay Window */}
       <BookmarkManager />
+
+      {/* Bookmark Modals & Dialogs (Add Bookmark, Add Folder, Delete, Import/Export) */}
+      <BookmarkModals />
 
       {/* Customization Drawer */}
       <SettingsDrawer />

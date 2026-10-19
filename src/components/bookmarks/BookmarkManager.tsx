@@ -7,11 +7,6 @@ import { BookmarkBreadcrumbs } from './BookmarkBreadcrumbs';
 import { BookmarkTree } from './BookmarkTree';
 import { BookmarkFolderView } from './BookmarkFolderView';
 import { BookmarkSearch } from './BookmarkSearch';
-import { BookmarkContextMenu } from './BookmarkContextMenu';
-import { AddBookmarkDialog } from './AddBookmarkDialog';
-import { AddFolderDialog } from './AddFolderDialog';
-import { DeleteConfirmDialog } from './DeleteConfirmDialog';
-import { ImportExportDialog } from './ImportExportDialog';
 
 export const BookmarkManager: React.FC = () => {
   const { isManagerOpen, setIsManagerOpen, searchQuery, stats } = useBookmarks();
@@ -111,13 +106,6 @@ export const BookmarkManager: React.FC = () => {
           </div>
         </footer>
       </div>
-
-      {/* Modals & Dialogs */}
-      <BookmarkContextMenu />
-      <AddBookmarkDialog />
-      <AddFolderDialog />
-      <DeleteConfirmDialog />
-      <ImportExportDialog />
     </div>
   );
 };
