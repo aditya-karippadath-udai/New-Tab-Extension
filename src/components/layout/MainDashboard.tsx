@@ -13,6 +13,9 @@ import { FocusTimerWidget } from '../widgets/FocusTimerWidget';
 import { BookmarksWidget } from '../bookmarks/BookmarksWidget';
 import { BookmarkManager } from '../bookmarks/BookmarkManager';
 import { BookmarkModals } from '../bookmarks/BookmarkModals';
+import { EventCountdownWidget } from '../events/EventCountdownWidget';
+import { AddEventDialog } from '../events/AddEventDialog';
+import { ManageEventsModal } from '../events/ManageEventsModal';
 import { SettingsDrawer } from '../settings/SettingsDrawer';
 import { WidgetType } from '../../types';
 
@@ -86,8 +89,10 @@ export const MainDashboard: React.FC = () => {
 
           {/* 2. Clock & Date & Greeting (Supports Digital and Speedometer Analog) */}
           {isClockEnabled && (
-            <div className="w-full">
+            <div className="w-full flex flex-col items-center">
               <ClockWidget />
+              {/* Event Countdown displayed after clock */}
+              <EventCountdownWidget />
             </div>
           )}
 
@@ -166,6 +171,10 @@ export const MainDashboard: React.FC = () => {
 
       {/* Bookmark Modals & Dialogs (Add Bookmark, Add Folder, Delete, Import/Export) */}
       <BookmarkModals />
+
+      {/* Event Countdowns Modals & Dialogs (Add Event, Manage Events) */}
+      <AddEventDialog />
+      <ManageEventsModal />
 
       {/* Customization Drawer */}
       <SettingsDrawer />

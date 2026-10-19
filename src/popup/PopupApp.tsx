@@ -3,6 +3,7 @@ import { SettingsProvider } from '../context/SettingsContext';
 import { TasksProvider } from '../context/TasksContext';
 import { FavoritesProvider } from '../context/FavoritesContext';
 import { BookmarkProvider } from '../context/BookmarkContext';
+import { EventProvider } from '../context/EventContext';
 import { Popup } from './Popup';
 
 export const PopupApp: React.FC = () => {
@@ -11,7 +12,9 @@ export const PopupApp: React.FC = () => {
       <TasksProvider>
         <FavoritesProvider>
           <BookmarkProvider>
-            <Popup />
+            <EventProvider>
+              <Popup />
+            </EventProvider>
           </BookmarkProvider>
         </FavoritesProvider>
       </TasksProvider>

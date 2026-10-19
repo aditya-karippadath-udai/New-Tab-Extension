@@ -17,8 +17,10 @@ import { useSettings } from '../context/SettingsContext';
 import { useTasks } from '../context/TasksContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { useBookmarks } from '../context/BookmarkContext';
+import { useEvents } from '../context/EventContext';
 import { useClock } from '../hooks/useClock';
 import { getGreeting } from '../utils/dateUtils';
+import { calculateCountdown } from '../utils/countdownUtils';
 import { SEARCH_ENGINES } from '../utils/searchEngines';
 import { getFaviconUrl } from '../utils/faviconUtils';
 import { getBrowserTimeStats, BrowserTimeStats } from '../services/browserTimeService';
@@ -31,6 +33,7 @@ export const Popup: React.FC = () => {
   const { tasks, addTask, toggleTask } = useTasks();
   const { favorites } = useFavorites();
   const { bookmarks } = useBookmarks();
+  const { activeEvent } = useEvents();
   const { now, hours, minutes, period, formattedDate } = useClock(settings.timeFormat24, settings.showSeconds);
 
   const timeString = `${hours}:${minutes}${period ? ` ${period}` : ''}`;
@@ -140,6 +143,22 @@ export const Popup: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Event Countdown Banner right after clock banner */}
+      {activeEvent && (() => {
+        const cd = calculateCountdown(activeEvent, now);
+        return (
+          <div className="px-4 py-1.5 bg-cyan-500/10 border-b border-cyan-500/20 flex items-center justify-between text-xs">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <Sparkles className="w-3 h-3 text-cyan-400 shrink-0" />
+              <span className="font-medium text-white truncate">{activeEvent.title}</span>
+            </div>
+            <span className="font-mono text-[11px] font-semibold text-cyan-300 shrink-0 ml-2">
+              {cd.isToday ? 'Today! 🎉' : cd.isPast ? cd.relativeText : `${cd.days}d ${cd.hours}h ${cd.minutes}m`}
+            </span>
+          </div>
+        );
+      })()}
 
       {/* Quick Search */}
       <div className="px-4 py-2">

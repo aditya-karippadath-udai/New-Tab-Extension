@@ -90,6 +90,19 @@ export interface FavoriteItem {
   order: number;
 }
 
+export type EventCategory = 'milestone' | 'birthday' | 'deadline' | 'meeting' | 'holiday' | 'special';
+
+export interface EventItem {
+  id: string;
+  title: string;
+  date: string; // YYYY-MM-DD
+  time?: string; // HH:MM
+  category?: EventCategory;
+  color?: string; // e.g. 'cyan', 'blue', 'purple', 'emerald', 'amber', 'rose'
+  description?: string;
+  createdAt: number;
+}
+
 export interface AppSettings {
   theme: ThemeMode;
   accent: AccentColor;
