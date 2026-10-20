@@ -105,7 +105,7 @@ export const SearchWidget: React.FC<SearchWidgetProps> = ({ inputRef: externalIn
   };
 
   return (
-    <div ref={containerRef} className="w-full max-w-2xl mx-auto relative select-none">
+    <div ref={containerRef} className="w-full relative select-none">
       {/* Search Bar Container */}
       <div
         className={`glass-panel relative flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl border transition-all duration-200 ${

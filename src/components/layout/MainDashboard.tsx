@@ -96,19 +96,17 @@ export const MainDashboard: React.FC = () => {
             </div>
           )}
 
-          {/* 3. Middle Section: Calendar & Tasks */}
-          {(isCalendarEnabled || isTasksEnabled) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start">
-              {isCalendarEnabled && (
-                <div className="w-full">
-                  <CalendarWidget />
-                </div>
-              )}
-              {isTasksEnabled && (
-                <div className="w-full">
-                  <TasksWidget inputRef={taskInputRef} />
-                </div>
-              )}
+          {/* 3. Calendar */}
+          {isCalendarEnabled && (
+            <div className="w-full">
+              <CalendarWidget />
+            </div>
+          )}
+
+          {/* Tasks & To-Do */}
+          {isTasksEnabled && (
+            <div className="w-full">
+              <TasksWidget inputRef={taskInputRef} />
             </div>
           )}
 

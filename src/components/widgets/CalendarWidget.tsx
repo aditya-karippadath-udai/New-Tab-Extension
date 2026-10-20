@@ -145,12 +145,12 @@ export const CalendarWidget: React.FC = () => {
         </div>
 
         {/* Days grid */}
-        <div className="grid grid-cols-7 gap-1 text-center text-xs">
+        <div className="grid grid-cols-7 gap-1 sm:gap-1.5 text-center text-xs">
           {/* Prev month days */}
           {prevMonthDays.map((d) => (
             <div
               key={`prev-${d}`}
-              className="py-1 text-neutral-600 dark:text-neutral-600 font-mono text-[11px]"
+              className="py-1.5 sm:py-2 min-h-[34px] flex items-center justify-center text-neutral-600 dark:text-neutral-600 font-mono text-[11px]"
             >
               {d}
             </div>
@@ -169,7 +169,7 @@ export const CalendarWidget: React.FC = () => {
               <button
                 key={`curr-${d}`}
                 onClick={() => setSelectedDate(thisDate)}
-                className={`relative py-1 rounded-lg font-mono text-xs transition-all flex flex-col items-center justify-center ${
+                className={`relative py-1.5 sm:py-2 min-h-[34px] rounded-lg font-mono text-xs transition-all flex flex-col items-center justify-center ${
                   isSelected
                     ? `${accentTheme.buttonClass} font-bold`
                     : isToday
@@ -179,7 +179,7 @@ export const CalendarWidget: React.FC = () => {
               >
                 <span>{d}</span>
                 {/* Dots container */}
-                <div className="absolute bottom-0.5 flex items-center gap-0.5">
+                <div className="absolute bottom-1 flex items-center gap-0.5">
                   {/* Dot for tasks indicator */}
                   {hasTasks && (
                     <span
@@ -205,7 +205,7 @@ export const CalendarWidget: React.FC = () => {
           {nextMonthDays.map((d) => (
             <div
               key={`next-${d}`}
-              className="py-1 text-neutral-600 dark:text-neutral-600 font-mono text-[11px]"
+              className="py-1.5 sm:py-2 min-h-[34px] flex items-center justify-center text-neutral-600 dark:text-neutral-600 font-mono text-[11px]"
             >
               {d}
             </div>

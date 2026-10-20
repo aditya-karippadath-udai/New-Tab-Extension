@@ -141,7 +141,7 @@ export const EventCountdownWidget: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto mt-2 mb-2 px-2 select-none animate-fade-in">
+    <div className="w-full mt-2 mb-2 select-none animate-fade-in">
       <div
         className={`relative overflow-hidden rounded-2xl p-3.5 sm:p-4 bg-neutral-900/60 dark:bg-black/40 backdrop-blur-xl border ${colorStyle.border} shadow-lg ${colorStyle.glow} transition-all duration-300`}
       >

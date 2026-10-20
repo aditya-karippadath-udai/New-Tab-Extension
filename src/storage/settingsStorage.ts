@@ -4,12 +4,12 @@ import { getStorageItem, setStorageItem } from './browserStorage';
 export const DEFAULT_WIDGETS: WidgetConfig[] = [
   { id: 'search', name: 'Search', enabled: true, size: 'large', order: 0 },
   { id: 'clock', name: 'Digital Clock', enabled: true, size: 'large', order: 1 },
-  { id: 'calendar', name: 'Calendar', enabled: true, size: 'medium', order: 2 },
-  { id: 'tasks', name: 'Tasks & To-Do', enabled: true, size: 'medium', order: 3 },
+  { id: 'calendar', name: 'Calendar', enabled: true, size: 'large', order: 2 },
+  { id: 'tasks', name: 'Tasks & To-Do', enabled: true, size: 'large', order: 3 },
   { id: 'favorites', name: 'Favourite Pages', enabled: true, size: 'large', order: 4 },
   { id: 'bookmarks', name: 'Bookmarks Explorer', enabled: true, size: 'large', order: 5 },
-  { id: 'focus', name: 'Focus Timer & Pomodoro', enabled: true, size: 'medium', order: 6 },
-  { id: 'notes', name: 'Quick Notes', enabled: false, size: 'medium', order: 7 },
+  { id: 'focus', name: 'Focus Timer & Pomodoro', enabled: true, size: 'large', order: 6 },
+  { id: 'notes', name: 'Quick Notes', enabled: false, size: 'large', order: 7 },
 ];
 
 export const DEFAULT_SETTINGS: AppSettings = {
