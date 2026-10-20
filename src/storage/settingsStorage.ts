@@ -46,6 +46,12 @@ export const DEFAULT_SETTINGS: AppSettings = {
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     animatedEffect: true,
+    liveWallpaper: {
+      type: 'aurora',
+      speed: 1,
+      interactive: true,
+      colorScheme: 'cyan',
+    },
   },
 
   widgets: DEFAULT_WIDGETS,

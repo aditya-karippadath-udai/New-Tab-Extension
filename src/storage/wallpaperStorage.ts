@@ -3,6 +3,10 @@ import { BUILTIN_WALLPAPERS } from '../utils/builtinWallpapers';
 import { getWallpaperBlob, saveWallpaperBlob, deleteWallpaperBlob } from './indexedDbStorage';
 
 export async function resolveWallpaperSource(wallpaper: WallpaperConfig): Promise<string> {
+  if (wallpaper.sourceType === 'live') {
+    return '';
+  }
+
   if (wallpaper.sourceType === 'builtin') {
     const found = BUILTIN_WALLPAPERS.find(w => w.id === wallpaper.selectedBuiltinId);
     if (found) {

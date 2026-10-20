@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSettings } from '../../context/SettingsContext';
 import { resolveWallpaperSource } from '../../storage/wallpaperStorage';
+import { LiveWallpaperCanvas } from '../wallpaper/LiveWallpaperCanvas';
 
 export const BackgroundLayer: React.FC = () => {
   const { settings, effectiveTheme } = useSettings();
@@ -9,11 +10,13 @@ export const BackgroundLayer: React.FC = () => {
 
   useEffect(() => {
     let isMounted = true;
-    resolveWallpaperSource(wallpaper).then((source) => {
-      if (isMounted) {
-        setResolvedSource(source);
-      }
-    });
+    if (wallpaper.sourceType !== 'live') {
+      resolveWallpaperSource(wallpaper).then((source) => {
+        if (isMounted) {
+          setResolvedSource(source);
+        }
+      });
+    }
     return () => {
       isMounted = false;
     };
@@ -41,7 +44,7 @@ export const BackgroundLayer: React.FC = () => {
 
   if (isGradient) {
     backgroundStyle.backgroundImage = resolvedSource;
-  } else if (resolvedSource) {
+  } else if (resolvedSource && wallpaper.sourceType !== 'live') {
     backgroundStyle.backgroundImage = `url("${resolvedSource}")`;
     backgroundStyle.backgroundRepeat = 'no-repeat';
   }
@@ -55,11 +58,19 @@ export const BackgroundLayer: React.FC = () => {
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden select-none pointer-events-none bg-neutral-950">
-      {/* Primary wallpaper layer */}
-      <div
-        className="absolute inset-0 w-full h-full"
-        style={backgroundStyle}
-      />
+      {/* Live Wallpaper or Static Wallpaper layer */}
+      {wallpaper.sourceType === 'live' ? (
+        <LiveWallpaperCanvas
+          config={wallpaper.liveWallpaper}
+          brightness={wallpaper.brightness}
+          blur={wallpaper.blur}
+        />
+      ) : (
+        <div
+          className="absolute inset-0 w-full h-full"
+          style={backgroundStyle}
+        />
+      )}
 
       {/* Measured Dark / Light Scrim Overlay for WCAG AA readability */}
       <div

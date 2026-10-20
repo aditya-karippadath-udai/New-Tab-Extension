@@ -23,7 +23,30 @@ export interface SearchEngine {
   iconName: string;
 }
 
-export type WallpaperSourceType = 'builtin' | 'url' | 'upload' | 'gradient';
+export type WallpaperSourceType = 'builtin' | 'url' | 'upload' | 'gradient' | 'live';
+
+export type LiveWallpaperType =
+  | 'aurora'
+  | 'starfield'
+  | 'particles'
+  | 'matrix'
+  | 'waves'
+  | 'gradientMesh';
+
+export type LiveWallpaperColorScheme =
+  | 'cyan'
+  | 'cyber'
+  | 'violet'
+  | 'emerald'
+  | 'fire'
+  | 'monochrome';
+
+export interface LiveWallpaperConfig {
+  type: LiveWallpaperType;
+  speed: number; // 0.3 - 2.5 (1 is normal)
+  interactive: boolean; // responds to mouse movement
+  colorScheme: LiveWallpaperColorScheme;
+}
 
 export type WallpaperCategory = 
   | 'Abstract' 
@@ -56,6 +79,7 @@ export interface WallpaperConfig {
   backgroundPosition: string; // 'center', 'top', 'bottom'
   backgroundSize: 'cover' | 'contain';
   animatedEffect: boolean; // gentle starry drift effect
+  liveWallpaper?: LiveWallpaperConfig;
 }
 
 export type WidgetType = 'clock' | 'search' | 'favorites' | 'tasks' | 'calendar' | 'notes' | 'bookmarks' | 'focus';

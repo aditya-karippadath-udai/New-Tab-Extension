@@ -20,8 +20,12 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
     <header className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-neutral-300">
       {/* Zone 1: Single element brand wordmark */}
       <div className="flex items-center gap-2">
+        <img
+          src="./icons/Icon.png"
+          alt="AuraTab Icon"
+          className="w-5 h-5 rounded-md object-cover shadow-xs border border-white/10"
+        />
         <span className="font-semibold text-sm tracking-wide text-neutral-100 flex items-center gap-1.5">
-          <Sparkles className={`w-3.5 h-3.5 ${accentTheme.textColor}`} />
           <span>
             {settings.showUserNameInHeader !== false && settings.userName?.trim()
               ? settings.userName.trim()

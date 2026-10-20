@@ -138,19 +138,45 @@ function crc32(buf) {
   return (crc ^ 0xffffffff) >>> 0;
 }
 
+import { execSync } from 'node:child_process';
+
 export function generateAllIcons(outputDir) {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
+  const sourceIcon = path.join(outputDir, 'Icon.png');
   const sizes = [16, 32, 48, 128];
+
+  if (fs.existsSync(sourceIcon)) {
+    try {
+      for (const size of sizes) {
+        const dest = path.join(outputDir, `icon${size}.png`);
+        execSync(`convert "${sourceIcon}" -resize ${size}x${size} "${dest}"`);
+      }
+      // Also generate root public favicon
+      const publicDir = path.dirname(outputDir);
+      if (fs.existsSync(publicDir)) {
+        try {
+          execSync(`convert "${sourceIcon}" -resize 32x32 "${path.join(publicDir, 'favicon.png')}"`);
+          execSync(`convert "${sourceIcon}" -resize 32x32 "${path.join(publicDir, 'favicon.ico')}"`);
+        } catch {}
+      }
+      console.log(`✅ Scaled custom Icon.png to extension icons (${sizes.join(', ')}) in ${outputDir}`);
+      return;
+    } catch (e) {
+      console.warn('⚠️ Could not scale Icon.png with convert, falling back to programmatic icons:', e.message);
+    }
+  }
+
   for (const size of sizes) {
     const png = createPNG(size, size);
     fs.writeFileSync(path.join(outputDir, `icon${size}.png`), png);
   }
-  console.log(`Generated extension icons (${sizes.join(', ')}) in ${outputDir}`);
+  console.log(`Generated procedural extension icons (${sizes.join(', ')}) in ${outputDir}`);
 }
 
 // Execute if run directly
 const targetDir = path.resolve(process.cwd(), 'public/icons');
 generateAllIcons(targetDir);
+

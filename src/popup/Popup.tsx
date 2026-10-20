@@ -88,9 +88,11 @@ export const Popup: React.FC = () => {
       {/* Top Header */}
       <header className="px-4 py-3 bg-neutral-900/80 border-b border-white/10 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          </div>
+          <img
+            src="./icons/Icon.png"
+            alt="AuraTab"
+            className="w-6 h-6 rounded-lg object-cover border border-white/10 shadow-xs"
+          />
           <div>
             <div className="text-xs font-bold tracking-tight text-white flex items-center gap-1.5">
               <span>{settings.userName || 'AuraTab'}</span>
