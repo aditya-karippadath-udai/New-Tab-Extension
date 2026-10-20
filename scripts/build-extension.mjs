@@ -67,6 +67,25 @@ async function run() {
   });
   console.log(`   Compiled background.js to ${backgroundOut}`);
 
+  function cleanExtensionHtml(targetDir) {
+    for (const file of ['index.html', 'popup.html']) {
+      const filePath = path.join(targetDir, file);
+      if (!fs.existsSync(filePath)) continue;
+      let content = fs.readFileSync(filePath, 'utf-8');
+      // Remove crossorigin attribute which triggers Firefox moz-extension:// CORS blocking
+      content = content.replace(/\s+crossorigin(="[^"]*")?/gi, '');
+      // Ensure relative paths for extension packages
+      content = content.replace(/src="\/assets\//g, 'src="./assets/');
+      content = content.replace(/href="\/assets\//g, 'href="./assets/');
+      content = content.replace(/src="\/icons\//g, 'src="./icons/');
+      content = content.replace(/href="\/icons\//g, 'href="./icons/');
+      fs.writeFileSync(filePath, content, 'utf-8');
+    }
+  }
+
+  // Clean distDir HTML first
+  cleanExtensionHtml(distDir);
+
   // Step 4: Build Chrome extension distribution
   if (buildChrome) {
     console.log('\n🌐 Step 4: Packaging chrome-dist/ (Manifest V3)...');
@@ -75,6 +94,7 @@ async function run() {
       fs.rmSync(chromeDist, { recursive: true, force: true });
     }
     copyDirRecursive(distDir, chromeDist);
+    cleanExtensionHtml(chromeDist);
 
     // Copy Chrome Manifest
     const chromeManifestSrc = path.join(rootDir, 'manifests/chrome/manifest.json');
@@ -91,6 +111,7 @@ async function run() {
       fs.rmSync(firefoxDist, { recursive: true, force: true });
     }
     copyDirRecursive(distDir, firefoxDist);
+    cleanExtensionHtml(firefoxDist);
 
     // Copy Firefox Manifest
     const firefoxManifestSrc = path.join(rootDir, 'manifests/firefox/manifest.json');
