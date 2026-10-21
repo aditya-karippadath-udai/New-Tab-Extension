@@ -16,6 +16,9 @@ import {
   Waves,
   Droplets,
   Zap,
+  Video,
+  Film,
+  Trash2,
 } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 import { BUILTIN_WALLPAPERS } from '../../utils/builtinWallpapers';
@@ -89,6 +92,36 @@ const COLOR_SCHEMES: { id: LiveWallpaperColorScheme; label: string; dot: string 
   { id: 'monochrome', label: 'Monochrome', dot: 'bg-gradient-to-r from-slate-200 to-slate-400' },
 ];
 
+const CURATED_LIVE_VIDEOS: {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  gradient: string;
+}[] = [
+  {
+    id: 'cyber_rain',
+    title: 'Cyber City Rain',
+    description: 'Moody neon metropolis with dynamic night rain',
+    url: 'https://assets.mixkit.co/videos/preview/mixkit-driving-through-a-futuristic-city-at-night-42289-large.mp4',
+    gradient: 'from-blue-700/40 via-cyan-600/30 to-purple-800/40',
+  },
+  {
+    id: 'space_flight',
+    title: 'Interstellar Nebula',
+    description: 'Drifting through deep cosmic gas & starlight',
+    url: 'https://assets.mixkit.co/videos/preview/mixkit-flying-through-space-stars-and-nebula-42407-large.mp4',
+    gradient: 'from-purple-800/40 via-indigo-700/30 to-pink-700/40',
+  },
+  {
+    id: 'sunset_waves',
+    title: 'Coastal Twilight Waves',
+    description: 'Rhythmic rolling ocean surf under purple sunset',
+    url: 'https://assets.mixkit.co/videos/preview/mixkit-waves-coming-to-the-beach-5016-large.mp4',
+    gradient: 'from-amber-600/40 via-pink-600/30 to-indigo-800/40',
+  },
+];
+
 const CATEGORIES: WallpaperCategory[] = [
   'Space',
   'Mountains',
@@ -103,10 +136,13 @@ export const AppearanceSettings: React.FC = () => {
   const { settings, updateSettings, updateWallpaper, accentTheme } = useSettings();
   const { wallpaper } = settings;
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
 
   const [activeCategory, setActiveCategory] = useState<WallpaperCategory>('Space');
   const [urlInput, setUrlInput] = useState(wallpaper.customUrl || '');
+  const [liveVideoUrlInput, setLiveVideoUrlInput] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [uploadingVideo, setUploadingVideo] = useState(false);
   const [wallpaperMode, setWallpaperMode] = useState<'live' | 'static'>(
     wallpaper.sourceType === 'live' ? 'live' : 'static'
   );
@@ -128,6 +164,50 @@ export const AppearanceSettings: React.FC = () => {
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingVideo(true);
+    try {
+      const { id, previewUrl } = await storeUploadedWallpaper(file);
+      updateWallpaper({
+        sourceType: 'live',
+        liveWallpaper: {
+          type: 'video',
+          videoId: id,
+          videoUrl: previewUrl,
+          videoName: file.name,
+          speed: wallpaper.liveWallpaper?.speed ?? 1,
+          interactive: false,
+          colorScheme: wallpaper.liveWallpaper?.colorScheme ?? 'cyan',
+        },
+      });
+    } catch (err) {
+      console.error('Video upload error:', err);
+    } finally {
+      setUploadingVideo(false);
+    }
+  };
+
+  const handleApplyLiveVideoUrl = () => {
+    const trimmed = liveVideoUrlInput.trim();
+    if (!trimmed) return;
+
+    updateWallpaper({
+      sourceType: 'live',
+      liveWallpaper: {
+        type: 'video',
+        videoUrl: trimmed,
+        videoName: trimmed.split('/').pop()?.split('?')[0] || 'Custom Video URL',
+        speed: wallpaper.liveWallpaper?.speed ?? 1,
+        interactive: false,
+        colorScheme: wallpaper.liveWallpaper?.colorScheme ?? 'cyan',
+      },
+    });
+    setLiveVideoUrlInput('');
   };
 
   const handleApplyUrl = () => {
@@ -319,13 +399,160 @@ export const AppearanceSettings: React.FC = () => {
 
         {/* LIVE WALLPAPERS PANEL */}
         {(wallpaperMode === 'live' || wallpaper.sourceType === 'live') ? (
-          <div className="space-y-3 pt-1">
-            <div className="text-[11px] font-medium text-neutral-400 flex items-center justify-between">
-              <span>Choose Dynamic Engine Preset</span>
-              <span className="text-[10px] text-neutral-500 font-mono">Auto-pauses when hidden</span>
+          <div className="space-y-4 pt-1">
+            {/* 1. Custom Video Live Wallpaper Importer */}
+            <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 font-medium text-xs text-neutral-200">
+                  <Film className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Import Custom Live Wallpaper</span>
+                </div>
+                <span className="text-[10px] text-neutral-400">MP4, WebM, GIF, or Video URL</span>
+              </div>
+
+              {/* Active custom video banner */}
+              {wallpaper.sourceType === 'live' && wallpaper.liveWallpaper?.type === 'video' && (
+                <div className="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/40 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 shrink-0">
+                      <Video className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold text-cyan-200 truncate">
+                        {wallpaper.liveWallpaper.videoName || 'Custom Video Wallpaper'}
+                      </div>
+                      <div className="text-[10px] text-cyan-400/80">Active Playing on Background</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() =>
+                      updateWallpaper({
+                        sourceType: 'live',
+                        liveWallpaper: {
+                          type: 'aurora',
+                          speed: 1,
+                          interactive: true,
+                          colorScheme: 'cyan',
+                        },
+                      })
+                    }
+                    title="Switch back to Canvas Engine"
+                    className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-300 hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+
+              {/* Upload file + URL input */}
+              <div className="space-y-2">
+                <input
+                  type="file"
+                  ref={videoInputRef}
+                  onChange={handleVideoUpload}
+                  accept="video/mp4,video/webm,video/ogg,image/gif"
+                  className="hidden"
+                />
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => videoInputRef.current?.click()}
+                    disabled={uploadingVideo}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-neutral-200 transition-colors cursor-pointer text-xs font-medium"
+                  >
+                    <Upload className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>{uploadingVideo ? 'Importing Video...' : 'Upload Video File (.mp4, .webm, .gif)'}</span>
+                  </button>
+                </div>
+
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <input
+                      type="text"
+                      value={liveVideoUrlInput}
+                      onChange={(e) => setLiveVideoUrlInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleApplyLiveVideoUrl();
+                      }}
+                      placeholder="Or paste direct video/live wallpaper URL..."
+                      className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-neutral-200 placeholder:text-neutral-500 outline-none focus:border-white/30 font-mono"
+                    />
+                    <Link className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-2" />
+                  </div>
+                  <button
+                    onClick={handleApplyLiveVideoUrl}
+                    className={`px-3 py-1.5 rounded-xl font-medium text-white cursor-pointer ${accentTheme.buttonClass}`}
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {/* 2. Curated Live Video Loops */}
+            <div className="pt-1">
+              <div className="text-[11px] font-medium text-neutral-400 mb-2 flex items-center justify-between">
+                <span>Curated Cinematic Video Loops</span>
+                <span className="text-[10px] text-neutral-500">Looping MP4</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {CURATED_LIVE_VIDEOS.map((vid) => {
+                  const isSelected =
+                    wallpaper.sourceType === 'live' &&
+                    wallpaper.liveWallpaper?.type === 'video' &&
+                    wallpaper.liveWallpaper?.videoUrl === vid.url;
+
+                  return (
+                    <button
+                      key={vid.id}
+                      onClick={() =>
+                        updateWallpaper({
+                          sourceType: 'live',
+                          liveWallpaper: {
+                            type: 'video',
+                            videoUrl: vid.url,
+                            videoName: vid.title,
+                            speed: wallpaper.liveWallpaper?.speed ?? 1,
+                            interactive: false,
+                            colorScheme: wallpaper.liveWallpaper?.colorScheme ?? 'cyan',
+                          },
+                        })
+                      }
+                      className={`group relative p-3 rounded-xl border text-left transition-all overflow-hidden flex flex-col justify-between min-h-[90px] cursor-pointer ${
+                        isSelected
+                          ? 'border-cyan-400 ring-2 ring-cyan-500/40 bg-white/10 shadow-md shadow-cyan-950/40'
+                          : 'border-white/10 hover:border-white/25 bg-white/5 hover:bg-white/[0.08]'
+                      }`}
+                    >
+                      <div className={`absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-gradient-to-br ${vid.gradient} blur-xl pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity`} />
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div className="p-1 rounded-lg bg-black/40 border border-white/10 text-cyan-400">
+                            <Video className="w-3.5 h-3.5" />
+                          </div>
+                          {isSelected && (
+                            <span className="p-0.5 rounded-full bg-cyan-500 text-black">
+                              <Check className="w-2.5 h-2.5 stroke-3" />
+                            </span>
+                          )}
+                        </div>
+                        <div className="font-semibold text-xs text-neutral-200">{vid.title}</div>
+                      </div>
+                      <div className="text-[10px] text-neutral-400 line-clamp-1 mt-1">{vid.description}</div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 3. Dynamic Canvas FX Engines */}
+            <div className="pt-1">
+              <div className="text-[11px] font-medium text-neutral-400 flex items-center justify-between mb-2">
+                <span>Dynamic Canvas FX Engines (60 FPS)</span>
+                <span className="text-[10px] text-neutral-500 font-mono">Zero CPU when hidden</span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {LIVE_PRESETS.map((preset) => {
                 const isSelected =
                   wallpaper.sourceType === 'live' &&

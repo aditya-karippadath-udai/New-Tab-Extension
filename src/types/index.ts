@@ -31,7 +31,8 @@ export type LiveWallpaperType =
   | 'particles'
   | 'matrix'
   | 'waves'
-  | 'gradientMesh';
+  | 'gradientMesh'
+  | 'video';
 
 export type LiveWallpaperColorScheme =
   | 'cyan'
@@ -46,6 +47,9 @@ export interface LiveWallpaperConfig {
   speed: number; // 0.3 - 2.5 (1 is normal)
   interactive: boolean; // responds to mouse movement
   colorScheme: LiveWallpaperColorScheme;
+  videoUrl?: string; // Direct video URL or blob URL
+  videoId?: string; // Stored in IndexedDB for custom video files
+  videoName?: string; // Display name of imported live wallpaper
 }
 
 export type WallpaperCategory = 

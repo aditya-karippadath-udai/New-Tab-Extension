@@ -176,7 +176,11 @@ export const SearchWidget: React.FC<SearchWidgetProps> = ({ inputRef: externalIn
           }}
           onKeyDown={handleKeyDown}
           placeholder={activeEngine.placeholder}
-          className="w-full bg-transparent text-sm sm:text-base outline-none text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500"
+          className={`w-full bg-transparent text-sm sm:text-base outline-none font-medium transition-colors ${
+            isDark
+              ? 'text-white placeholder:text-neutral-400 caret-cyan-400'
+              : 'text-neutral-900 placeholder:text-neutral-500 caret-cyan-600'
+          }`}
           autoComplete="off"
           spellCheck="false"
         />

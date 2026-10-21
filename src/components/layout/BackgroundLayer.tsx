@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSettings } from '../../context/SettingsContext';
-import { resolveWallpaperSource } from '../../storage/wallpaperStorage';
+import { resolveWallpaperSource, resolveLiveVideoSource } from '../../storage/wallpaperStorage';
 import { LiveWallpaperCanvas } from '../wallpaper/LiveWallpaperCanvas';
 
 export const BackgroundLayer: React.FC = () => {
   const { settings, effectiveTheme } = useSettings();
   const { wallpaper } = settings;
   const [resolvedSource, setResolvedSource] = useState<string>('');
+  const [liveVideoSource, setLiveVideoSource] = useState<string>('');
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  // Resolve static wallpaper
   useEffect(() => {
     let isMounted = true;
     if (wallpaper.sourceType !== 'live') {
@@ -28,6 +31,45 @@ export const BackgroundLayer: React.FC = () => {
     wallpaper.uploadedImageData,
     wallpaper.gradient,
   ]);
+
+  // Resolve live video wallpaper
+  useEffect(() => {
+    let isMounted = true;
+    if (wallpaper.sourceType === 'live' && wallpaper.liveWallpaper?.type === 'video') {
+      resolveLiveVideoSource(wallpaper.liveWallpaper).then((vSrc) => {
+        if (isMounted) {
+          setLiveVideoSource(vSrc);
+        }
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [
+    wallpaper.sourceType,
+    wallpaper.liveWallpaper?.type,
+    wallpaper.liveWallpaper?.videoId,
+    wallpaper.liveWallpaper?.videoUrl,
+  ]);
+
+  // Playback rate and tab visibility handling for video wallpaper
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.playbackRate = wallpaper.liveWallpaper?.speed || 1;
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        video.play().catch(() => {});
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [liveVideoSource, wallpaper.liveWallpaper?.speed]);
 
   const isGradient =
     resolvedSource.startsWith('linear-gradient') ||
@@ -60,11 +102,36 @@ export const BackgroundLayer: React.FC = () => {
     <div className="fixed inset-0 -z-10 overflow-hidden select-none pointer-events-none bg-neutral-950">
       {/* Live Wallpaper or Static Wallpaper layer */}
       {wallpaper.sourceType === 'live' ? (
-        <LiveWallpaperCanvas
-          config={wallpaper.liveWallpaper}
-          brightness={wallpaper.brightness}
-          blur={wallpaper.blur}
-        />
+        wallpaper.liveWallpaper?.type === 'video' ? (
+          <div className="absolute inset-0 w-full h-full overflow-hidden">
+            {liveVideoSource ? (
+              <video
+                key={liveVideoSource}
+                ref={videoRef}
+                src={liveVideoSource}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover transition-opacity duration-500"
+                style={{
+                  filter: `brightness(${wallpaper.brightness}%) blur(${wallpaper.blur}px)`,
+                  transform: wallpaper.blur > 0 ? 'scale(1.05)' : 'none',
+                }}
+              />
+            ) : (
+              <div className="w-full h-full bg-neutral-950 flex items-center justify-center text-xs text-neutral-500 font-mono">
+                Loading custom live video...
+              </div>
+            )}
+          </div>
+        ) : (
+          <LiveWallpaperCanvas
+            config={wallpaper.liveWallpaper}
+            brightness={wallpaper.brightness}
+            blur={wallpaper.blur}
+          />
+        )
       ) : (
         <div
           className="absolute inset-0 w-full h-full"

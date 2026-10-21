@@ -1,6 +1,15 @@
-import { WallpaperConfig } from '../types';
+import { LiveWallpaperConfig, WallpaperConfig } from '../types';
 import { BUILTIN_WALLPAPERS } from '../utils/builtinWallpapers';
 import { getWallpaperBlob, saveWallpaperBlob, deleteWallpaperBlob } from './indexedDbStorage';
+
+export async function resolveLiveVideoSource(liveWallpaper?: LiveWallpaperConfig): Promise<string> {
+  if (!liveWallpaper || liveWallpaper.type !== 'video') return '';
+  if (liveWallpaper.videoId) {
+    const blobData = await getWallpaperBlob(liveWallpaper.videoId);
+    if (blobData) return blobData;
+  }
+  return liveWallpaper.videoUrl || '';
+}
 
 export async function resolveWallpaperSource(wallpaper: WallpaperConfig): Promise<string> {
   if (wallpaper.sourceType === 'live') {
