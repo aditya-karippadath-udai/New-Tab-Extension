@@ -47,27 +47,40 @@ export async function resolveWallpaperSource(wallpaper: WallpaperConfig): Promis
 }
 
 export async function storeUploadedWallpaper(file: File): Promise<{ id: string; previewUrl: string }> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    const id = `upload_${Date.now()}`;
+  const id = `upload_${Date.now()}`;
+  try {
+    await saveWallpaperBlob(id, file, {
+      name: file.name,
+      size: file.size,
+      mimeType: file.type,
+      createdAt: Date.now(),
+    });
+    const previewUrl = URL.createObjectURL(file);
+    return { id, previewUrl };
+  } catch (err) {
+    console.error('Failed to store upload in IndexedDB:', err);
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve({ id, previewUrl: reader.result as string });
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsDataURL(file);
+    });
+  }
+}
 
-    reader.onload = async () => {
-      const dataUrl = reader.result as string;
-      try {
-        await saveWallpaperBlob(id, dataUrl);
-        resolve({ id, previewUrl: dataUrl });
-      } catch (err) {
-        console.error('Failed to store upload in IndexedDB:', err);
-        // Return previewUrl even if IDB fails so it still shows in current session
-        resolve({ id, previewUrl: dataUrl });
-      }
-    };
-
-    reader.onerror = () => reject(new Error('Failed to read file'));
-    reader.readAsDataURL(file);
+export async function storeUploadedLiveVideo(file: File): Promise<{ id: string; previewUrl: string; name: string }> {
+  const id = `live_vid_${Date.now()}`;
+  await saveWallpaperBlob(id, file, {
+    name: file.name,
+    size: file.size,
+    mimeType: file.type,
+    createdAt: Date.now(),
   });
+  const previewUrl = URL.createObjectURL(file);
+  return { id, previewUrl, name: file.name };
 }
 
 export async function clearUploadedWallpaper(id: string): Promise<void> {
   await deleteWallpaperBlob(id);
 }
+

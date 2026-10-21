@@ -17,11 +17,13 @@ import { EventCountdownWidget } from '../events/EventCountdownWidget';
 import { AddEventDialog } from '../events/AddEventDialog';
 import { ManageEventsModal } from '../events/ManageEventsModal';
 import { SettingsDrawer } from '../settings/SettingsDrawer';
+import { LiveWallpaperModal } from '../wallpaper/LiveWallpaperModal';
 import { WidgetType } from '../../types';
 
 export const MainDashboard: React.FC = () => {
   const { settings, isSettingsOpen, setIsSettingsOpen } = useSettings();
   const { isManagerOpen, setIsManagerOpen } = useBookmarks();
+  const [isLiveWallpaperOpen, setIsLiveWallpaperOpen] = React.useState(false);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const taskInputRef = useRef<HTMLInputElement>(null);
@@ -38,7 +40,9 @@ export const MainDashboard: React.FC = () => {
       setIsManagerOpen(!isManagerOpen);
     },
     onCloseOverlays: () => {
-      if (isManagerOpen) {
+      if (isLiveWallpaperOpen) {
+        setIsLiveWallpaperOpen(false);
+      } else if (isManagerOpen) {
         setIsManagerOpen(false);
       } else if (isSettingsOpen) {
         setIsSettingsOpen(false);
@@ -75,7 +79,10 @@ export const MainDashboard: React.FC = () => {
   return (
     <div className="relative min-h-screen flex flex-col justify-between">
       {/* Top Bar with brand and controls */}
-      <TopBar onOpenSettings={() => setIsSettingsOpen(true)} />
+      <TopBar
+        onOpenSettings={() => setIsSettingsOpen(true)}
+        onOpenLiveWallpaper={() => setIsLiveWallpaperOpen(true)}
+      />
 
       {/* Main Center Content Container */}
       <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-4 flex-1 flex flex-col justify-center">
@@ -176,6 +183,12 @@ export const MainDashboard: React.FC = () => {
 
       {/* Customization Drawer */}
       <SettingsDrawer />
+
+      {/* Dedicated Live Wallpaper Studio Modal */}
+      <LiveWallpaperModal
+        isOpen={isLiveWallpaperOpen}
+        onClose={() => setIsLiveWallpaperOpen(false)}
+      />
     </div>
   );
 };

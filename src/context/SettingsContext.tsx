@@ -60,9 +60,10 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return settings.theme;
   }, [settings.theme, systemIsDark]);
 
-  // Apply dark or light class to document
+  // Apply dark or light class & colorScheme to document
   useEffect(() => {
     const root = document.documentElement;
+    root.style.colorScheme = effectiveTheme;
     if (effectiveTheme === 'dark') {
       root.classList.add('dark');
       root.classList.remove('light');

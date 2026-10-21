@@ -30,7 +30,7 @@ import {
   LiveWallpaperType,
   LiveWallpaperColorScheme,
 } from '../../types';
-import { storeUploadedWallpaper } from '../../storage/wallpaperStorage';
+import { storeUploadedWallpaper, storeUploadedLiveVideo } from '../../storage/wallpaperStorage';
 
 const LIVE_PRESETS: {
   id: LiveWallpaperType;
@@ -172,14 +172,14 @@ export const AppearanceSettings: React.FC = () => {
 
     setUploadingVideo(true);
     try {
-      const { id, previewUrl } = await storeUploadedWallpaper(file);
+      const { id, previewUrl, name } = await storeUploadedLiveVideo(file);
       updateWallpaper({
         sourceType: 'live',
         liveWallpaper: {
           type: 'video',
           videoId: id,
           videoUrl: previewUrl,
-          videoName: file.name,
+          videoName: name,
           speed: wallpaper.liveWallpaper?.speed ?? 1,
           interactive: false,
           colorScheme: wallpaper.liveWallpaper?.colorScheme ?? 'cyan',
@@ -450,7 +450,7 @@ export const AppearanceSettings: React.FC = () => {
                   type="file"
                   ref={videoInputRef}
                   onChange={handleVideoUpload}
-                  accept="video/mp4,video/webm,video/ogg,image/gif"
+                  accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-matroska,image/gif"
                   className="hidden"
                 />
 
@@ -597,6 +597,7 @@ export const AppearanceSettings: React.FC = () => {
                   </button>
                 );
               })}
+            </div>
             </div>
 
             {/* Live Wallpaper Fine-Tuning Controls */}

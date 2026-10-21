@@ -1,13 +1,14 @@
 import React from 'react';
-import { Settings, Sun, Moon, Sparkles, Bookmark } from 'lucide-react';
+import { Settings, Sun, Moon, Sparkles, Bookmark, Zap } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 import { useBookmarks } from '../../context/BookmarkContext';
 
 interface TopBarProps {
   onOpenSettings: () => void;
+  onOpenLiveWallpaper: () => void;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
+export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings, onOpenLiveWallpaper }) => {
   const { settings, effectiveTheme, updateSettings, accentTheme } = useSettings();
   const { setIsManagerOpen, stats } = useBookmarks();
 
@@ -15,6 +16,8 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
     const next = effectiveTheme === 'dark' ? 'light' : 'dark';
     updateSettings({ theme: next });
   };
+
+  const isLiveActive = settings.wallpaper.sourceType === 'live';
 
   return (
     <header className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-neutral-300">
@@ -63,6 +66,26 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSettings }) => {
 
       {/* Zone 3: Actions */}
       <div className="flex items-center gap-2">
+        {/* Live Wallpaper Studio Button */}
+        <button
+          onClick={onOpenLiveWallpaper}
+          title="Open Live Wallpaper Studio (Choose & Import Video Loops)"
+          aria-label="Open live wallpaper studio"
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 cursor-pointer ${
+            isLiveActive
+              ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border border-cyan-500/40'
+              : 'text-neutral-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10'
+          }`}
+        >
+          <Zap className="w-3.5 h-3.5 text-cyan-400" />
+          <span className="hidden sm:inline">Live Wallpaper</span>
+          {isLiveActive ? (
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          ) : (
+            <span className="text-[10px] text-neutral-400 hidden lg:inline">FX</span>
+          )}
+        </button>
+
         <button
           onClick={() => setIsManagerOpen(true)}
           title="Open Bookmarks Explorer (B)"
