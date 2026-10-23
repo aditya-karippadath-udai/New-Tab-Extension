@@ -3,8 +3,12 @@ build/
 dist/
 chrome-dist/
 firefox-dist/
+artifacts/
+*.xpi
+*.zip
 coverage/
 .DS_Store
 *.log
 .env*
 !.env.example
+

@@ -9,8 +9,11 @@
     "build": "node scripts/build-extension.mjs",
     "build:chrome": "node scripts/build-extension.mjs chrome",
     "build:firefox": "node scripts/build-extension.mjs firefox",
+    "package": "node scripts/package-extension.mjs",
+    "package:xpi": "node scripts/package-extension.mjs xpi",
+    "package:chrome": "node scripts/package-extension.mjs chrome",
     "preview": "vite preview",
-    "clean": "rm -rf dist chrome-dist firefox-dist",
+    "clean": "rm -rf dist chrome-dist firefox-dist artifacts *.xpi *.zip",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
