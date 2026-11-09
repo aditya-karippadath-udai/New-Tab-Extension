@@ -43,21 +43,21 @@ export const WidgetsSettings: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 text-xs text-neutral-300">
+    <div className="space-y-6 text-xs text-neutral-800 dark:text-neutral-300">
       <div className="flex items-center justify-between">
         <div>
-          <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-            <LayoutGrid className="w-3.5 h-3.5 text-cyan-400" />
+          <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+            <LayoutGrid className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Customize Dashboard Widgets</span>
           </h4>
-          <p className="text-[11px] text-neutral-500 mt-0.5">
+          <p className="text-[11px] text-neutral-600 dark:text-neutral-500 mt-0.5">
             Toggle visibility, adjust scale, and reorder dashboard modules
           </p>
         </div>
         <button
           onClick={handleResetLayout}
           title="Reset to default widget arrangement"
-          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 transition-colors"
         >
           <RotateCcw className="w-3 h-3" />
           <span>Reset</span>
@@ -70,8 +70,8 @@ export const WidgetsSettings: React.FC = () => {
             key={widget.id}
             className={`p-3 rounded-xl border transition-all ${
               widget.enabled
-                ? 'bg-white/5 border-white/10'
-                : 'bg-black/20 border-white/5 opacity-60'
+                ? 'bg-black/[0.02] dark:bg-white/5 border-neutral-200 dark:border-white/10'
+                : 'bg-black/[0.05] dark:bg-black/20 border-neutral-200 dark:border-white/5 opacity-60'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
@@ -82,7 +82,7 @@ export const WidgetsSettings: React.FC = () => {
                   onChange={() => toggleWidget(widget.id)}
                   className="w-4 h-4 rounded accent-cyan-500"
                 />
-                <span className="font-semibold text-neutral-200">{widget.name}</span>
+                <span className="font-bold text-neutral-900 dark:text-neutral-200">{widget.name}</span>
               </label>
 
               {/* Order Controls */}
@@ -90,14 +90,14 @@ export const WidgetsSettings: React.FC = () => {
                 <button
                   disabled={idx === 0}
                   onClick={() => moveUp(idx)}
-                  className="p-1 rounded text-neutral-400 hover:text-white disabled:opacity-20 hover:bg-white/10"
+                  className="p-1 rounded text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white disabled:opacity-20 hover:bg-black/5 dark:hover:bg-white/10"
                 >
                   <ChevronUp className="w-3.5 h-3.5" />
                 </button>
                 <button
                   disabled={idx === widgets.length - 1}
                   onClick={() => moveDown(idx)}
-                  className="p-1 rounded text-neutral-400 hover:text-white disabled:opacity-20 hover:bg-white/10"
+                  className="p-1 rounded text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white disabled:opacity-20 hover:bg-black/5 dark:hover:bg-white/10"
                 >
                   <ChevronDown className="w-3.5 h-3.5" />
                 </button>
@@ -106,17 +106,17 @@ export const WidgetsSettings: React.FC = () => {
 
             {/* Size Options */}
             {widget.enabled && widget.id !== 'clock' && (
-              <div className="flex items-center gap-2 pt-1 border-t border-white/5 text-[11px]">
-                <span className="text-neutral-500">Scale:</span>
+              <div className="flex items-center gap-2 pt-1 border-t border-neutral-200 dark:border-white/5 text-[11px]">
+                <span className="text-neutral-600 dark:text-neutral-500 font-medium">Scale:</span>
                 <div className="flex items-center gap-1">
                   {(['small', 'medium', 'large'] as WidgetSize[]).map((sz) => (
                     <button
                       key={sz}
                       onClick={() => changeSize(widget.id, sz)}
-                      className={`px-2 py-0.5 rounded capitalize ${
+                      className={`px-2 py-0.5 rounded capitalize font-medium ${
                         widget.size === sz
-                          ? `${accentTheme.bgActive} font-medium`
-                          : 'bg-white/5 hover:bg-white/10 text-neutral-400'
+                          ? `${accentTheme.bgActive} shadow-xs text-white`
+                          : 'bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400'
                       }`}
                     >
                       {sz}

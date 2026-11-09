@@ -282,28 +282,28 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-4xl max-h-[90vh] bg-neutral-900 border border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-neutral-100"
+        className="w-full max-w-4xl max-h-[90vh] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-neutral-900 dark:text-neutral-100"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-white/10 bg-black/[0.02] dark:bg-white/5">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-400">
+            <div className="p-2 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
               <Zap className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base sm:text-lg font-bold text-white">Live Wallpaper Studio</h2>
+                <h2 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white">Live Wallpaper Studio</h2>
                 {isLiveActive ? (
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/40">
                     Active Playing
                   </span>
                 ) : (
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-neutral-800 text-neutral-400 border border-white/10">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-white/10">
                     Still Wallpaper Mode
                   </span>
                 )}
               </div>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400">
                 Import custom looping videos, cinematic atmospheres, or 60FPS dynamic canvas engines
               </p>
             </div>
@@ -323,7 +323,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                     },
                   })
                 }
-                className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500 hover:bg-cyan-400 text-neutral-950 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition-colors cursor-pointer"
               >
                 Enable Live Mode
               </button>
@@ -335,7 +335,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                     selectedBuiltinId: wallpaper.selectedBuiltinId || 'cosmic_nebula',
                   })
                 }
-                className="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 hover:bg-white/10 text-neutral-300 border border-white/10 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-300 border border-neutral-200 dark:border-white/10 transition-colors cursor-pointer"
               >
                 Switch to Still
               </button>
@@ -343,7 +343,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -351,19 +351,19 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-1 px-6 py-2.5 border-b border-white/10 bg-black/40 text-xs font-medium overflow-x-auto">
+        <div className="flex items-center gap-1 px-6 py-2.5 border-b border-neutral-200 dark:border-white/10 bg-black/[0.02] dark:bg-black/40 text-xs font-medium overflow-x-auto">
           <button
             onClick={() => setActiveTab('import')}
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'import'
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold'
-                : 'text-neutral-400 hover:text-white hover:bg-white/5'
+                ? 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/40 font-semibold'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
             }`}
           >
-            <Upload className="w-4 h-4 text-cyan-400" />
+            <Upload className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             <span>Import My Own</span>
             {importedLibrary.length > 0 && (
-              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-cyan-500/30 text-cyan-200">
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-cyan-200 dark:bg-cyan-500/30 text-cyan-900 dark:text-cyan-200 font-bold">
                 {importedLibrary.length}
               </span>
             )}
@@ -373,11 +373,11 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
             onClick={() => setActiveTab('videos')}
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'videos'
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold'
-                : 'text-neutral-400 hover:text-white hover:bg-white/5'
+                ? 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/40 font-semibold'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
             }`}
           >
-            <Film className="w-4 h-4 text-purple-400" />
+            <Film className="w-4 h-4 text-purple-600 dark:text-purple-400" />
             <span>Cinematic Video Loops</span>
           </button>
 
@@ -385,11 +385,11 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
             onClick={() => setActiveTab('canvas')}
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'canvas'
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold'
-                : 'text-neutral-400 hover:text-white hover:bg-white/5'
+                ? 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/40 font-semibold'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
             }`}
           >
-            <Sparkles className="w-4 h-4 text-amber-400" />
+            <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             <span>60 FPS Canvas Engines</span>
           </button>
 
@@ -397,11 +397,11 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
             onClick={() => setActiveTab('controls')}
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'controls'
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold'
-                : 'text-neutral-400 hover:text-white hover:bg-white/5'
+                ? 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/40 font-semibold'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
             }`}
           >
-            <Sliders className="w-4 h-4 text-emerald-400" />
+            <Sliders className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Speed & Visual Tuning</span>
           </button>
         </div>
@@ -452,11 +452,11 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
               {/* Upload Drop Zone */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-white flex items-center gap-2">
-                    <Upload className="w-4 h-4 text-cyan-400" />
+                  <h3 className="text-sm font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+                    <Upload className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                     <span>Upload Local Video / Live Wallpaper File</span>
                   </h3>
-                  <span className="text-xs text-neutral-400 font-mono">
+                  <span className="text-xs text-neutral-600 dark:text-neutral-400 font-mono">
                     Supported: .mp4, .webm, .ogg, .mov, .gif
                   </span>
                 </div>
@@ -476,8 +476,8 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                   onClick={() => fileInputRef.current?.click()}
                   className={`border-2 border-dashed rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
                     dragActive
-                      ? 'border-cyan-400 bg-cyan-500/10 scale-[1.01]'
-                      : 'border-white/15 bg-white/5 hover:border-white/30 hover:bg-white/[0.08]'
+                      ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-500/10 scale-[1.01]'
+                      : 'border-neutral-300 dark:border-white/15 bg-neutral-50/80 dark:bg-white/5 hover:border-neutral-400 dark:hover:border-white/30 hover:bg-neutral-100 dark:hover:bg-white/[0.08]'
                   }`}
                 >
                   <input
@@ -491,23 +491,23 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                     className="hidden"
                   />
 
-                  <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3">
+                  <div className="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400 mb-3">
                     <Video className="w-6 h-6" />
                   </div>
 
-                  <div className="text-sm font-semibold text-white mb-1">
+                  <div className="text-sm font-semibold text-neutral-900 dark:text-white mb-1">
                     {isImporting ? 'Processing and saving live video...' : 'Click to select or drag and drop your live video'}
                   </div>
-                  <p className="text-xs text-neutral-400 max-w-md">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 max-w-md">
                     Seamless loops, anime live wallpapers, gaming moments, or cinematic nature clips. Automatically cached safely in browser storage.
                   </p>
                 </div>
               </div>
 
               {/* Paste URL Option */}
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
-                <div className="text-xs font-semibold text-white flex items-center gap-2">
-                  <LinkIcon className="w-4 h-4 text-cyan-400" />
+              <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-3">
+                <div className="text-xs font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+                  <LinkIcon className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                   <span>Or Import from Direct Live Video URL</span>
                 </div>
 
@@ -517,7 +517,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                     value={customNameInput}
                     onChange={(e) => setCustomNameInput(e.target.value)}
                     placeholder="Optional title (e.g. Neon City Loop)"
-                    className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder:text-neutral-500 outline-none focus:border-cyan-500/50"
+                    className="w-full bg-white dark:bg-black/40 border border-neutral-300 dark:border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-cyan-500"
                   />
 
                   <input
@@ -528,7 +528,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                       if (e.key === 'Enter') handleApplyUrl();
                     }}
                     placeholder="Paste direct .mp4 or .webm URL..."
-                    className="sm:col-span-2 w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder:text-neutral-500 outline-none focus:border-cyan-500/50 font-mono"
+                    className="sm:col-span-2 w-full bg-white dark:bg-black/40 border border-neutral-300 dark:border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-cyan-500 font-mono"
                   />
                 </div>
 
@@ -544,7 +544,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
               </div>
 
               {importError && (
-                <div className="p-3 rounded-xl bg-rose-500/20 border border-rose-500/30 text-xs text-rose-300">
+                <div className="p-3 rounded-xl bg-rose-500/20 border border-rose-500/30 text-xs text-rose-700 dark:text-rose-300 font-medium">
                   {importError}
                 </div>
               )}
@@ -553,10 +553,10 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
               {importedLibrary.length > 0 && (
                 <div className="space-y-3 pt-2">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">
+                    <h4 className="text-xs font-semibold text-neutral-800 dark:text-neutral-300 uppercase tracking-wider">
                       My Imported Live Wallpapers Library ({importedLibrary.length})
                     </h4>
-                    <span className="text-[10px] text-neutral-500">Stored safely in browser IndexedDB</span>
+                    <span className="text-[10px] text-neutral-600 dark:text-neutral-500">Stored safely in browser IndexedDB</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -580,17 +580,17 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                           }}
                           className={`p-3 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
                             isCurrent
-                              ? 'border-cyan-400 bg-cyan-950/40 ring-2 ring-cyan-500/30'
-                              : 'border-white/10 bg-white/5 hover:border-white/25 hover:bg-white/10'
+                              ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-950/40 ring-2 ring-cyan-500/30'
+                              : 'border-neutral-200 dark:border-white/10 bg-black/[0.02] hover:bg-black/[0.04] dark:bg-white/5 hover:border-neutral-300 dark:hover:border-white/25'
                           }`}
                         >
                           <div className="flex items-center gap-3 min-w-0">
-                            <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-300 shrink-0">
+                            <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-300 shrink-0">
                               <Video className="w-5 h-5" />
                             </div>
                             <div className="min-w-0">
-                              <div className="text-xs font-bold text-white truncate">{item.name}</div>
-                              <div className="text-[10px] text-neutral-400">
+                              <div className="text-xs font-bold text-neutral-900 dark:text-white truncate">{item.name}</div>
+                              <div className="text-[10px] text-neutral-600 dark:text-neutral-400">
                                 {new Date(item.createdAt).toLocaleDateString()} • {(item.size / (1024 * 1024)).toFixed(1)} MB
                               </div>
                             </div>
@@ -605,7 +605,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                             <button
                               onClick={(e) => handleDeleteImported(e, item.id)}
                               title="Delete from library"
-                              className="p-1.5 rounded-lg text-neutral-500 hover:text-rose-400 hover:bg-white/10 transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -624,12 +624,12 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-semibold text-white">Curated Cinematic Loops</h3>
-                  <p className="text-xs text-neutral-400">
+                  <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">Curated Cinematic Loops</h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400">
                     High definition, seamless video loops optimized for background productivity
                   </p>
                 </div>
-                <span className="text-xs text-neutral-500 font-mono">Looping MP4</span>
+                <span className="text-xs text-neutral-600 dark:text-neutral-500 font-mono">Looping MP4</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -657,8 +657,8 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                       }
                       className={`group relative p-4 rounded-2xl border text-left transition-all overflow-hidden flex flex-col justify-between min-h-[140px] cursor-pointer ${
                         isCurrent
-                          ? 'border-cyan-400 ring-2 ring-cyan-500/40 bg-white/15 shadow-xl shadow-cyan-950/50'
-                          : 'border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10'
+                          ? 'border-cyan-500 ring-2 ring-cyan-500/40 bg-cyan-50/70 dark:bg-white/15 shadow-xl shadow-cyan-950/20'
+                          : 'border-neutral-200 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/30 bg-black/[0.02] hover:bg-black/[0.04] dark:bg-white/5 dark:hover:bg-white/10'
                       }`}
                     >
                       {/* Ambient background glow */}
@@ -666,7 +666,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
 
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-black/50 text-cyan-300 border border-white/10">
+                          <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-neutral-900/80 text-cyan-300 border border-white/10">
                             {vid.category}
                           </span>
                           {isCurrent ? (
@@ -680,15 +680,15 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                           )}
                         </div>
 
-                        <div className="font-bold text-sm text-white mb-1">{vid.title}</div>
-                        <p className="text-xs text-neutral-300 line-clamp-2 leading-relaxed">
+                        <div className="font-bold text-sm text-neutral-900 dark:text-white mb-1">{vid.title}</div>
+                        <p className="text-xs text-neutral-700 dark:text-neutral-300 line-clamp-2 leading-relaxed">
                           {vid.description}
                         </p>
                       </div>
 
                       <div className="flex flex-wrap gap-1 mt-3">
                         {vid.tags.map((tag) => (
-                          <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-neutral-300">
+                          <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 font-medium">
                             #{tag}
                           </span>
                         ))}
@@ -705,12 +705,12 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-semibold text-white">Dynamic 60FPS Canvas Engines</h3>
-                  <p className="text-xs text-neutral-400">
+                  <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">Dynamic 60FPS Canvas Engines</h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400">
                     Pure procedural animation that responds dynamically to mouse movement with zero video streaming
                   </p>
                 </div>
-                <span className="text-xs text-emerald-400 font-mono">0% CPU in background tabs</span>
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-mono font-medium">0% CPU in background tabs</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -737,15 +737,15 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                       }
                       className={`group relative p-4 rounded-2xl border text-left transition-all overflow-hidden flex flex-col justify-between min-h-[140px] cursor-pointer ${
                         isCurrent
-                          ? 'border-cyan-400 ring-2 ring-cyan-500/40 bg-white/15 shadow-xl shadow-cyan-950/50'
-                          : 'border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10'
+                          ? 'border-cyan-500 ring-2 ring-cyan-500/40 bg-cyan-50/70 dark:bg-white/15 shadow-xl shadow-cyan-950/20'
+                          : 'border-neutral-200 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/30 bg-black/[0.02] hover:bg-black/[0.04] dark:bg-white/5 dark:hover:bg-white/10'
                       }`}
                     >
                       <div className={`absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-gradient-to-br ${eng.gradient} blur-2xl pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity`} />
 
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <div className="p-2 rounded-xl bg-black/40 border border-white/10 text-cyan-400">
+                          <div className="p-2 rounded-xl bg-black/10 dark:bg-black/40 border border-neutral-200 dark:border-white/10 text-cyan-600 dark:text-cyan-400">
                             <IconComponent className="w-4 h-4" />
                           </div>
                           {isCurrent && (
@@ -755,13 +755,13 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                           )}
                         </div>
 
-                        <div className="font-bold text-sm text-white mb-1">{eng.title}</div>
-                        <p className="text-xs text-neutral-300 leading-relaxed">
+                        <div className="font-bold text-sm text-neutral-900 dark:text-white mb-1">{eng.title}</div>
+                        <p className="text-xs text-neutral-700 dark:text-neutral-300 leading-relaxed">
                           {eng.description}
                         </p>
                       </div>
 
-                      <div className="mt-3 flex items-center justify-between text-[11px] text-cyan-400/80">
+                      <div className="mt-3 flex items-center justify-between text-[11px] text-cyan-700 dark:text-cyan-400/80 font-medium">
                         <span>Interactive cursor reaction</span>
                         <span className="font-mono">60 FPS</span>
                       </div>
@@ -777,18 +777,18 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-semibold text-white">Live Wallpaper Fine Tuning</h3>
-                  <p className="text-xs text-neutral-400">
+                  <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">Live Wallpaper Fine Tuning</h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400">
                     Adjust animation speed, color palette, cursor reaction, and readability overlay
                   </p>
                 </div>
               </div>
 
               {/* Speed Controller */}
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2.5">
-                <div className="flex justify-between text-xs text-neutral-300">
-                  <span className="font-semibold text-white">Motion Speed Multiplier</span>
-                  <span className="font-mono text-cyan-400 font-bold">
+              <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-2.5">
+                <div className="flex justify-between text-xs text-neutral-700 dark:text-neutral-300">
+                  <span className="font-semibold text-neutral-900 dark:text-white">Motion Speed Multiplier</span>
+                  <span className="font-mono text-cyan-700 dark:text-cyan-400 font-bold">
                     {wallpaper.liveWallpaper?.speed || 1}x Speed
                   </span>
                 </div>
@@ -811,8 +811,8 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                       }
                       className={`py-2 rounded-xl border text-center font-mono text-xs transition-colors cursor-pointer ${
                         (wallpaper.liveWallpaper?.speed ?? 1) === spd
-                          ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 font-bold'
-                          : 'bg-white/5 border-white/10 text-neutral-400 hover:text-white'
+                          ? 'bg-cyan-100 dark:bg-cyan-500/20 border-cyan-400 text-cyan-800 dark:text-cyan-300 font-bold'
+                          : 'bg-white dark:bg-white/5 border-neutral-200 dark:border-white/10 text-neutral-700 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white'
                       }`}
                     >
                       {spd}x {spd === 0.5 ? 'Slow' : spd === 1 ? 'Normal' : spd === 1.5 ? 'Fast' : 'Hyper'}
@@ -822,8 +822,8 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
               </div>
 
               {/* Color Palette for Canvas Engines */}
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2.5">
-                <div className="text-xs font-semibold text-white">Canvas Engine Color Scheme</div>
+              <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-2.5">
+                <div className="text-xs font-semibold text-neutral-900 dark:text-white">Canvas Engine Color Scheme</div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
                   {COLOR_SCHEMES.map((scheme) => {
                     const isCur = (wallpaper.liveWallpaper?.colorScheme ?? 'cyan') === scheme.id;
@@ -845,12 +845,12 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                         }
                         className={`flex flex-col items-center justify-center p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
                           isCur
-                            ? 'border-cyan-400 bg-cyan-950/40 ring-2 ring-cyan-500/30'
-                            : 'border-white/5 bg-white/5 hover:bg-white/10'
+                            ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-950/40 ring-2 ring-cyan-500/30'
+                            : 'border-neutral-200 dark:border-white/5 bg-white dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10'
                         }`}
                       >
                         <span className={`w-6 h-6 rounded-full ${scheme.dot} mb-1.5 shadow-sm`} />
-                        <span className="text-[10px] text-neutral-200 font-medium">{scheme.label}</span>
+                        <span className="text-[10px] text-neutral-800 dark:text-neutral-200 font-medium">{scheme.label}</span>
                       </button>
                     );
                   })}
@@ -859,10 +859,10 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
 
               {/* Brightness, Blur & Overlay */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                  <div className="flex justify-between text-xs text-neutral-300">
-                    <span>Brightness</span>
-                    <span className="font-mono text-cyan-400">{wallpaper.brightness}%</span>
+                <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-2">
+                  <div className="flex justify-between text-xs text-neutral-700 dark:text-neutral-300">
+                    <span className="font-medium">Brightness</span>
+                    <span className="font-mono text-cyan-700 dark:text-cyan-400 font-semibold">{wallpaper.brightness}%</span>
                   </div>
                   <input
                     type="range"
@@ -870,14 +870,14 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                     max="140"
                     value={wallpaper.brightness}
                     onChange={(e) => updateWallpaper({ brightness: Number(e.target.value) })}
-                    className="w-full accent-cyan-500 cursor-pointer"
+                    className="w-full accent-cyan-600 dark:accent-cyan-500 cursor-pointer"
                   />
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                  <div className="flex justify-between text-xs text-neutral-300">
-                    <span>Background Blur</span>
-                    <span className="font-mono text-cyan-400">{wallpaper.blur}px</span>
+                <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-2">
+                  <div className="flex justify-between text-xs text-neutral-700 dark:text-neutral-300">
+                    <span className="font-medium">Background Blur</span>
+                    <span className="font-mono text-cyan-700 dark:text-cyan-400 font-semibold">{wallpaper.blur}px</span>
                   </div>
                   <input
                     type="range"
@@ -885,14 +885,14 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                     max="20"
                     value={wallpaper.blur}
                     onChange={(e) => updateWallpaper({ blur: Number(e.target.value) })}
-                    className="w-full accent-cyan-500 cursor-pointer"
+                    className="w-full accent-cyan-600 dark:accent-cyan-500 cursor-pointer"
                   />
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                  <div className="flex justify-between text-xs text-neutral-300">
-                    <span>Readability Scrim Tint</span>
-                    <span className="font-mono text-cyan-400">{wallpaper.overlayOpacity}%</span>
+                <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-2">
+                  <div className="flex justify-between text-xs text-neutral-700 dark:text-neutral-300">
+                    <span className="font-medium">Readability Scrim Tint</span>
+                    <span className="font-mono text-cyan-700 dark:text-cyan-400 font-semibold">{wallpaper.overlayOpacity}%</span>
                   </div>
                   <input
                     type="range"
@@ -900,16 +900,16 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                     max="80"
                     value={wallpaper.overlayOpacity}
                     onChange={(e) => updateWallpaper({ overlayOpacity: Number(e.target.value) })}
-                    className="w-full accent-cyan-500 cursor-pointer"
+                    className="w-full accent-cyan-600 dark:accent-cyan-500 cursor-pointer"
                   />
                 </div>
               </div>
 
               {/* Interactive Cursor Checkbox */}
-              <label className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer">
+              <label className="flex items-center justify-between p-4 rounded-2xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/10 cursor-pointer">
                 <div>
-                  <div className="text-xs font-semibold text-white">Interactive Cursor Reaction</div>
-                  <div className="text-[11px] text-neutral-400">
+                  <div className="text-xs font-semibold text-neutral-900 dark:text-white">Interactive Cursor Reaction</div>
+                  <div className="text-[11px] text-neutral-600 dark:text-neutral-400">
                     Mouse movements cause gentle wave ripples, particle deflection, and star warp
                   </div>
                 </div>
@@ -929,7 +929,7 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
                       },
                     })
                   }
-                  className="w-5 h-5 rounded accent-cyan-500 cursor-pointer"
+                  className="w-5 h-5 rounded accent-cyan-600 dark:accent-cyan-500 cursor-pointer"
                 />
               </label>
             </div>
@@ -937,9 +937,9 @@ export const LiveWallpaperModal: React.FC<LiveWallpaperModalProps> = ({ isOpen, 
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-6 py-3 border-t border-white/10 bg-black/40 text-xs">
-          <div className="text-neutral-400 flex items-center gap-1.5">
-            <Info className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="flex items-center justify-between px-6 py-3 border-t border-neutral-200 dark:border-white/10 bg-black/[0.02] dark:bg-black/40 text-xs">
+          <div className="text-neutral-600 dark:text-neutral-400 flex items-center gap-1.5">
+            <Info className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Changes apply live immediately to your background</span>
           </div>
 

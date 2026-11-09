@@ -64,14 +64,14 @@ export const BookmarkTree: React.FC = () => {
         onClick={() => selectFolder(null)}
         className={`flex items-center justify-between py-1.5 px-2 rounded-xl transition-all cursor-pointer text-xs mb-1 border ${
           selectedFolderId === null
-            ? 'bg-white/15 border-white/20 text-white font-semibold'
-            : 'border-transparent text-neutral-400 hover:text-white hover:bg-white/5'
+            ? 'bg-cyan-100 dark:bg-white/15 border-cyan-300 dark:border-white/20 text-cyan-900 dark:text-white font-semibold'
+            : 'border-transparent text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
         }`}
       >
         <span className="font-semibold uppercase tracking-wider text-[11px]">
           Root Hierarchy
         </span>
-        <span className="text-[10px] text-neutral-400 tabular-nums">
+        <span className="text-[10px] text-neutral-500 tabular-nums font-mono">
           {bookmarks.length} folders
         </span>
       </div>

@@ -49,20 +49,20 @@ export const ManageEventsModal: React.FC = () => {
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-fade-in">
       <div
-        className="w-full max-w-xl bg-neutral-900/95 dark:bg-neutral-950/95 border border-white/10 rounded-2xl shadow-2xl p-5 sm:p-6 text-neutral-100 flex flex-col max-h-[85vh] overflow-hidden"
+        className="w-full max-w-xl bg-white/95 dark:bg-neutral-950/95 border border-neutral-200 dark:border-white/10 rounded-2xl shadow-2xl p-5 sm:p-6 text-neutral-900 dark:text-neutral-100 flex flex-col max-h-[85vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-3.5 border-b border-white/10 shrink-0">
+        <div className="flex items-center justify-between pb-3.5 border-b border-neutral-200 dark:border-white/10 shrink-0">
           <div className="flex items-center gap-2.5">
             <div className={`p-2 rounded-xl ${accentTheme.bgActive}`}>
               <Calendar className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-base sm:text-lg font-semibold text-white">
+              <h3 className="text-base sm:text-lg font-semibold text-neutral-900 dark:text-white">
                 All Event Countdowns
               </h3>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400">
                 Manage your scheduled events and countdown timers
               </p>
             </div>
@@ -73,14 +73,14 @@ export const ManageEventsModal: React.FC = () => {
                 closeManageModal();
                 openAddModal();
               }}
-              className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold ${accentTheme.buttonClass} transition-all`}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold ${accentTheme.buttonClass} transition-all cursor-pointer`}
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Event</span>
             </button>
             <button
               onClick={closeManageModal}
-              className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -90,10 +90,10 @@ export const ManageEventsModal: React.FC = () => {
         {/* Content list */}
         <div className="mt-4 flex-1 overflow-y-auto space-y-2.5 pr-1">
           {events.length === 0 ? (
-            <div className="text-center py-12 px-4 rounded-xl border border-dashed border-white/10">
-              <Calendar className="w-10 h-10 mx-auto text-neutral-600 mb-2.5" />
-              <p className="text-sm font-medium text-neutral-300">No events added yet</p>
-              <p className="text-xs text-neutral-500 mt-1 max-w-xs mx-auto">
+            <div className="text-center py-12 px-4 rounded-xl border border-dashed border-neutral-300 dark:border-white/10">
+              <Calendar className="w-10 h-10 mx-auto text-neutral-400 dark:text-neutral-600 mb-2.5" />
+              <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-300">No events added yet</p>
+              <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-1 max-w-xs mx-auto">
                 Add milestones, birthdays, holidays or deadlines to show live countdowns below the clock.
               </p>
               <button
@@ -101,7 +101,7 @@ export const ManageEventsModal: React.FC = () => {
                   closeManageModal();
                   openAddModal();
                 }}
-                className={`mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold ${accentTheme.buttonClass}`}
+                className={`mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold ${accentTheme.buttonClass} cursor-pointer`}
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Create Your First Event</span>
@@ -119,16 +119,16 @@ export const ManageEventsModal: React.FC = () => {
                   key={evt.id}
                   className={`p-3.5 rounded-xl border transition-all flex items-center justify-between gap-3 ${
                     isActive
-                      ? 'bg-white/[0.07] border-cyan-500/40 shadow-xs'
-                      : 'bg-white/[0.03] border-white/5 hover:border-white/10'
+                      ? 'bg-cyan-50/80 dark:bg-white/[0.07] border-cyan-500/50 dark:border-cyan-500/40 shadow-xs'
+                      : 'bg-black/[0.02] hover:bg-black/[0.04] dark:bg-white/[0.03] border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div
                       className={`p-2 rounded-xl border shrink-0 ${
                         isActive
-                          ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'
-                          : 'bg-white/5 border-white/10 text-neutral-400'
+                          ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-600 dark:text-cyan-300'
+                          : 'bg-black/5 dark:bg-white/5 border-neutral-200 dark:border-white/10 text-neutral-600 dark:text-neutral-400'
                       }`}
                     >
                       <Icon className="w-4 h-4" />
@@ -136,18 +136,18 @@ export const ManageEventsModal: React.FC = () => {
 
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-sm text-white truncate">
+                        <span className="font-semibold text-sm text-neutral-900 dark:text-white truncate">
                           {evt.title}
                         </span>
                         {isActive && (
-                          <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-cyan-500/30 text-cyan-200 border border-cyan-500/40">
+                          <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-cyan-100 dark:bg-cyan-500/30 text-cyan-800 dark:text-cyan-200 border border-cyan-300 dark:border-cyan-500/40">
                             Active on Clock
                           </span>
                         )}
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-neutral-400 mt-0.5">
-                        <span className="text-neutral-300">{countdown.formattedTargetDate}</span>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+                        <span className="font-medium text-neutral-800 dark:text-neutral-300">{countdown.formattedTargetDate}</span>
                         {evt.time && (
                           <>
                             <span>•</span>
@@ -156,12 +156,12 @@ export const ManageEventsModal: React.FC = () => {
                         )}
                         <span>•</span>
                         <span
-                          className={`font-medium ${
+                          className={`font-semibold ${
                             countdown.isToday
-                              ? 'text-amber-400 font-semibold'
+                              ? 'text-amber-600 dark:text-amber-400'
                               : countdown.isPast
                               ? 'text-neutral-500'
-                              : 'text-cyan-400'
+                              : 'text-cyan-600 dark:text-cyan-400'
                           }`}
                         >
                           {countdown.isPast
@@ -173,7 +173,7 @@ export const ManageEventsModal: React.FC = () => {
                       </div>
 
                       {evt.description && (
-                        <p className="text-[11px] text-neutral-500 truncate mt-0.5">
+                        <p className="text-[11px] text-neutral-600 dark:text-neutral-500 truncate mt-0.5">
                           {evt.description}
                         </p>
                       )}
@@ -185,7 +185,7 @@ export const ManageEventsModal: React.FC = () => {
                     {!isActive && (
                       <button
                         onClick={() => selectActiveEvent(evt.id)}
-                        className="px-2.5 py-1 rounded-lg text-xs font-medium text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/5 transition-colors cursor-pointer"
+                        className="px-2.5 py-1 rounded-lg text-xs font-semibold text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/5 transition-colors cursor-pointer"
                       >
                         Set Active
                       </button>
@@ -195,13 +195,13 @@ export const ManageEventsModal: React.FC = () => {
                       <div className="flex items-center gap-1 bg-red-500/20 border border-red-500/40 rounded-lg p-1">
                         <button
                           onClick={() => deleteEvent(evt.id)}
-                          className="px-2 py-0.5 text-[11px] font-bold rounded bg-red-600 hover:bg-red-500 text-white transition-colors"
+                          className="px-2 py-0.5 text-[11px] font-bold rounded bg-red-600 hover:bg-red-500 text-white transition-colors cursor-pointer"
                         >
                           Delete
                         </button>
                         <button
                           onClick={() => setConfirmDeleteId(null)}
-                          className="px-1.5 text-xs text-neutral-300 hover:text-white"
+                          className="px-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white cursor-pointer"
                         >
                           ✕
                         </button>
@@ -210,7 +210,7 @@ export const ManageEventsModal: React.FC = () => {
                       <button
                         onClick={() => setConfirmDeleteId(evt.id)}
                         title="Delete event"
-                        className="p-1.5 rounded-lg text-neutral-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                        className="p-1.5 rounded-lg text-neutral-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -223,11 +223,11 @@ export const ManageEventsModal: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-neutral-500 shrink-0">
+        <div className="pt-3 border-t border-neutral-200 dark:border-white/10 flex items-center justify-between text-xs text-neutral-600 dark:text-neutral-500 shrink-0">
           <span>{events.length} event{events.length === 1 ? '' : 's'} scheduled</span>
           <button
             onClick={closeManageModal}
-            className="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-neutral-200 text-xs font-medium transition-colors"
+            className="px-3.5 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-transparent text-xs font-semibold transition-colors cursor-pointer"
           >
             Close
           </button>

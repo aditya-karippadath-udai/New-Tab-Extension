@@ -386,12 +386,12 @@ export const SpeedometerClock: React.FC<SpeedometerClockProps> = ({ onToggleMode
       {/* Speedometer Footer Info */}
       <div className="mt-2 text-center">
         {settings.showDate && (
-          <div className="text-xs sm:text-sm font-medium text-neutral-300 tracking-wide">
+          <div className="text-xs sm:text-sm font-semibold text-neutral-800 dark:text-neutral-300 tracking-wide">
             {formattedDate}
           </div>
         )}
         {settings.showGreeting && (
-          <div className="mt-1 text-xs text-neutral-400 font-normal">
+          <div className="mt-1 text-xs text-neutral-600 dark:text-neutral-400 font-medium">
             {greetingText}
           </div>
         )}

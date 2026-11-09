@@ -37,15 +37,15 @@ export const BookmarkManager: React.FC = () => {
         }`}
       >
         {/* Top Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 select-none">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-neutral-200 dark:border-white/10 select-none">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
               <Bookmark className={`w-4 h-4 ${accentTheme.textColor}`} />
             </div>
             <div>
-              <h2 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">
+              <h2 className="text-sm font-bold tracking-tight text-neutral-900 dark:text-white flex items-center gap-2">
                 <span>Bookmarks Explorer</span>
-                <span className="text-[10px] font-mono font-normal text-neutral-400 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">
+                <span className="text-[10px] font-mono font-medium text-neutral-600 dark:text-neutral-400 px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/5 border border-neutral-200 dark:border-white/10">
                   {stats.totalBookmarks} bookmarks · {stats.totalFolders} folders
                 </span>
               </h2>
@@ -55,7 +55,7 @@ export const BookmarkManager: React.FC = () => {
           <button
             onClick={() => setIsManagerOpen(false)}
             aria-label="Close Bookmarks Explorer (Esc)"
-            className="p-1.5 rounded-xl text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
+            className="p-1.5 rounded-xl text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -67,10 +67,10 @@ export const BookmarkManager: React.FC = () => {
         {/* Dual-Pane Explorer Body */}
         <div className="flex-1 flex overflow-hidden">
           {/* Left Pane: Hierarchical Tree Sidebar */}
-          <aside className="w-64 sm:w-72 md:w-80 border-r border-white/10 flex flex-col p-3 overflow-hidden bg-black/20 shrink-0">
-            <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 mb-2 px-1 flex items-center justify-between">
+          <aside className="w-64 sm:w-72 md:w-80 border-r border-neutral-200 dark:border-white/10 flex flex-col p-3 overflow-hidden bg-neutral-50 dark:bg-black/20 shrink-0">
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2 px-1 flex items-center justify-between">
               <span>Folder Hierarchy</span>
-              <Layers className="w-3.5 h-3.5 text-neutral-500" />
+              <Layers className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500" />
             </div>
             <div className="flex-1 overflow-y-auto">
               <BookmarkTree />
@@ -78,9 +78,9 @@ export const BookmarkManager: React.FC = () => {
           </aside>
 
           {/* Right Pane: Breadcrumbs + Folder Content View OR Search Results */}
-          <main className="flex-1 flex flex-col overflow-hidden bg-black/10">
+          <main className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-black/10">
             {/* Breadcrumb Navigation Bar */}
-            <div className="px-4 py-2 border-b border-white/5 bg-white/[0.02]">
+            <div className="px-4 py-2 border-b border-neutral-200 dark:border-white/5 bg-neutral-100/50 dark:bg-white/[0.02]">
               <BookmarkBreadcrumbs />
             </div>
 
@@ -92,14 +92,14 @@ export const BookmarkManager: React.FC = () => {
         </div>
 
         {/* Bottom Status Footer */}
-        <footer className="px-5 py-2.5 border-t border-white/10 flex items-center justify-between text-[11px] text-neutral-400 select-none bg-black/30">
+        <footer className="px-5 py-2.5 border-t border-neutral-200 dark:border-white/10 flex items-center justify-between text-[11px] text-neutral-600 dark:text-neutral-400 select-none bg-neutral-100/80 dark:bg-black/30">
           <div className="flex items-center gap-3">
             <span>Drag items to reorder or move between folders</span>
             <span aria-hidden="true" className="opacity-30">·</span>
             <span>Right-click for options</span>
           </div>
           <div>
-            <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/10 font-mono text-[10px]">
+            <kbd className="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 border border-neutral-300 dark:border-white/10 font-mono text-[10px] text-neutral-700 dark:text-neutral-300">
               Esc
             </kbd>{' '}
             to close

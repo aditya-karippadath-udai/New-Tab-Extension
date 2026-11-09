@@ -148,23 +148,23 @@ export const MainDashboard: React.FC = () => {
       </main>
 
       {/* Subtle bottom footer with quiet copyright, bookmarks link, & settings shortcut */}
-      <footer className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-[11px] text-neutral-400 select-none">
+      <footer className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-[11px] text-neutral-600 dark:text-neutral-400 select-none">
         <div>
-          <span>AuraTab</span>
+          <span className="font-semibold text-neutral-800 dark:text-neutral-300">AuraTab</span>
           <span className="mx-1.5 opacity-40">·</span>
           <span>Fast, Minimal & Private</span>
         </div>
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsManagerOpen(true)}
-            className="hover:text-cyan-300 transition-colors cursor-pointer"
+            className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors cursor-pointer"
           >
             Bookmarks Explorer (B)
           </button>
           <span aria-hidden="true" className="opacity-30">·</span>
           <button
             onClick={() => setIsSettingsOpen(true)}
-            className="hover:text-neutral-200 transition-colors cursor-pointer"
+            className="hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors cursor-pointer"
           >
             Preferences (Ctrl+,)
           </button>

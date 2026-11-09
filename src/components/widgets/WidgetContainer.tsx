@@ -41,11 +41,11 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = ({
       } ${paddingClass} ${className}`}
     >
       {(title || headerAction) && (
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5 dark:border-white/10 border-neutral-200/60">
+        <div className="flex items-center justify-between pb-3 mb-3 border-b border-neutral-200 dark:border-white/10">
           <div className="flex items-center gap-2">
-            {icon && <span className="text-neutral-400 dark:text-neutral-300">{icon}</span>}
+            {icon && <span className="text-neutral-600 dark:text-neutral-300">{icon}</span>}
             {title && (
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-300">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-200">
                 {title}
               </h2>
             )}

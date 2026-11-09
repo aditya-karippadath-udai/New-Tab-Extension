@@ -34,19 +34,19 @@ export const TasksSettings: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 text-xs text-neutral-300">
+    <div className="space-y-6 text-xs text-neutral-800 dark:text-neutral-300">
       {/* Task Preferences */}
       <section className="space-y-3">
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-          <CheckSquare className="w-3.5 h-3.5 text-cyan-400" />
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+          <CheckSquare className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>Task Preferences</span>
         </h4>
 
         {/* Progress Bar Toggle */}
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">Show Task Progress Bar</div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Show Task Progress Bar</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Display completion ratio and colored progress bar
             </div>
           </div>
@@ -59,8 +59,8 @@ export const TasksSettings: React.FC = () => {
         </label>
 
         {/* Default Filter */}
-        <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 space-y-1.5">
-          <div className="font-medium text-neutral-200">Default Filter on Launch</div>
+        <div className="p-2.5 rounded-xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/5 space-y-1.5">
+          <div className="font-semibold text-neutral-900 dark:text-neutral-200">Default Filter on Launch</div>
           <div className="grid grid-cols-4 gap-1.5 pt-1">
             {(['all', 'active', 'completed', 'today'] as const).map((flt) => (
               <button
@@ -68,8 +68,8 @@ export const TasksSettings: React.FC = () => {
                 onClick={() => updateSettings({ defaultTaskFilter: flt })}
                 className={`py-1.5 rounded-lg capitalize font-medium text-center transition-colors ${
                   settings.defaultTaskFilter === flt
-                    ? `${accentTheme.bgActive} border-cyan-500/40`
-                    : 'bg-white/5 hover:bg-white/10 text-neutral-400'
+                    ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs text-white`
+                    : 'bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400'
                 }`}
               >
                 {flt}
@@ -82,7 +82,7 @@ export const TasksSettings: React.FC = () => {
         {stats.completed > 0 && (
           <button
             onClick={clearCompleted}
-            className="w-full py-2 px-3 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 font-medium transition-colors text-center"
+            className="w-full py-2 px-3 rounded-xl border border-rose-500/40 bg-rose-500/10 hover:bg-rose-500/20 text-rose-700 dark:text-rose-300 font-semibold transition-colors text-center"
           >
             Clear {stats.completed} Completed Tasks
           </button>
@@ -90,16 +90,16 @@ export const TasksSettings: React.FC = () => {
       </section>
 
       {/* Favorites Preferences */}
-      <section className="space-y-3 pt-2 border-t border-white/10">
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-          <Bookmark className="w-3.5 h-3.5 text-cyan-400" />
+      <section className="space-y-3 pt-2 border-t border-neutral-200 dark:border-white/10">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+          <Bookmark className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>Favourite Pages</span>
         </h4>
 
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">Open Links in New Tab</div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Open Links in New Tab</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Launch shortcut targets in a new browser tab
             </div>
           </div>
@@ -113,15 +113,15 @@ export const TasksSettings: React.FC = () => {
       </section>
 
       {/* Backup & Reset */}
-      <section className="space-y-3 pt-2 border-t border-white/10">
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider">
+      <section className="space-y-3 pt-2 border-t border-neutral-200 dark:border-white/10">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider">
           Backup & Maintenance
         </h4>
 
         <div className="flex gap-2">
           <button
             onClick={handleExport}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-200 transition-colors"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-medium transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export Config</span>
@@ -135,7 +135,7 @@ export const TasksSettings: React.FC = () => {
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-200 transition-colors"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-medium transition-colors"
           >
             <Upload className="w-3.5 h-3.5" />
             <span>Import Config</span>
@@ -144,7 +144,7 @@ export const TasksSettings: React.FC = () => {
 
         <button
           onClick={resetAllSettings}
-          className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-400 hover:text-rose-300 transition-colors"
+          className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-black/[0.02] dark:bg-white/5 hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-600 hover:text-rose-600 dark:text-neutral-400 dark:hover:text-rose-300 font-medium transition-colors"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset to Default</span>

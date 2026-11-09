@@ -50,24 +50,24 @@ export const SettingsDrawer: React.FC = () => {
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-white/10 dark:border-white/10 border-neutral-200">
+        <div className="flex items-center justify-between p-5 border-b border-neutral-200 dark:border-white/10">
           <div className="flex items-center gap-2">
             <Sliders className={`w-4 h-4 ${accentTheme.textColor}`} />
-            <h3 className="font-semibold text-sm tracking-wide">
+            <h3 className="font-semibold text-sm tracking-wide text-neutral-900 dark:text-neutral-100">
               Dashboard Settings
             </h3>
           </div>
           <button
             onClick={() => setIsSettingsOpen(false)}
             aria-label="Close settings"
-            className="p-1.5 rounded-xl text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-xl text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-1 p-2 border-b border-white/5 dark:border-white/10 border-neutral-200 overflow-x-auto">
+        <div className="flex items-center gap-1 p-2 border-b border-neutral-200 dark:border-white/10 overflow-x-auto">
           {TABS.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -78,7 +78,7 @@ export const SettingsDrawer: React.FC = () => {
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-colors ${
                   isActive
                     ? `${accentTheme.bgActive} shadow-xs font-semibold`
-                    : 'text-neutral-400 hover:text-neutral-200 hover:bg-white/5'
+                    : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/5'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />

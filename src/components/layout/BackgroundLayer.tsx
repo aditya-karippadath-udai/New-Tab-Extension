@@ -99,7 +99,9 @@ export const BackgroundLayer: React.FC = () => {
       : `rgba(248, 250, 252, ${overlayAlpha * 0.8})`;
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden select-none pointer-events-none bg-neutral-950">
+    <div className={`fixed inset-0 -z-10 overflow-hidden select-none pointer-events-none transition-colors duration-300 ${
+      effectiveTheme === 'dark' ? 'bg-neutral-950' : 'bg-slate-100'
+    }`}>
       {/* Live Wallpaper or Static Wallpaper layer */}
       {wallpaper.sourceType === 'live' ? (
         wallpaper.liveWallpaper?.type === 'video' ? (

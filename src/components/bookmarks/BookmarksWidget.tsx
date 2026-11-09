@@ -47,14 +47,14 @@ export const BookmarksWidget: React.FC = () => {
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => openDialog('add-bookmark')}
-            className="flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 transition-colors cursor-pointer"
           >
             <Plus className="w-3 h-3" />
             <span>Add</span>
           </button>
           <button
             onClick={() => setIsManagerOpen(true)}
-            className="flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium text-cyan-400 hover:text-cyan-300 bg-cyan-950/30 hover:bg-cyan-900/40 border border-cyan-800/40 transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium text-cyan-700 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-300 bg-cyan-50 dark:bg-cyan-950/30 hover:bg-cyan-100 dark:hover:bg-cyan-900/40 border border-cyan-300 dark:border-cyan-800/40 transition-colors cursor-pointer"
           >
             <span>Explorer</span>
             <ArrowRight className="w-3 h-3" />
@@ -63,13 +63,13 @@ export const BookmarksWidget: React.FC = () => {
       }
     >
       {/* Tab Switcher */}
-      <div className="flex items-center gap-1 p-0.5 rounded-lg bg-black/20 dark:bg-black/30 border border-white/5 mb-3 text-xs">
+      <div className="flex items-center gap-1 p-0.5 rounded-lg bg-black/5 dark:bg-black/30 border border-neutral-200 dark:border-white/5 mb-3 text-xs">
         <button
           onClick={() => setTabMode('tree')}
           className={`flex-1 py-1 px-2 rounded-md font-medium text-center transition-colors cursor-pointer ${
             tabMode === 'tree'
-              ? `${accentTheme.bgActive} font-semibold shadow-xs`
-              : 'text-neutral-400 hover:text-neutral-200'
+              ? `${accentTheme.bgActive} text-white font-semibold shadow-xs`
+              : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'
           }`}
         >
           Folder Tree
@@ -78,8 +78,8 @@ export const BookmarksWidget: React.FC = () => {
           onClick={() => setTabMode('favorites')}
           className={`flex-1 py-1 px-2 rounded-md font-medium text-center transition-colors cursor-pointer ${
             tabMode === 'favorites'
-              ? `${accentTheme.bgActive} font-semibold shadow-xs`
-              : 'text-neutral-400 hover:text-neutral-200'
+              ? `${accentTheme.bgActive} text-white font-semibold shadow-xs`
+              : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'
           }`}
         >
           Favorites ({favoriteBookmarks.length})
@@ -88,8 +88,8 @@ export const BookmarksWidget: React.FC = () => {
           onClick={() => setTabMode('recent')}
           className={`flex-1 py-1 px-2 rounded-md font-medium text-center transition-colors cursor-pointer ${
             tabMode === 'recent'
-              ? `${accentTheme.bgActive} font-semibold shadow-xs`
-              : 'text-neutral-400 hover:text-neutral-200'
+              ? `${accentTheme.bgActive} text-white font-semibold shadow-xs`
+              : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'
           }`}
         >
           Recent ({recentBookmarks.length})
@@ -102,12 +102,12 @@ export const BookmarksWidget: React.FC = () => {
         {tabMode === 'tree' && (
           <div className="space-y-1">
             {bookmarks.length === 0 ? (
-              <div className="py-6 text-center text-xs text-neutral-400">
-                <Bookmark className="w-5 h-5 mx-auto mb-1 text-neutral-500" />
+              <div className="py-6 text-center text-xs text-neutral-600 dark:text-neutral-400">
+                <Bookmark className="w-5 h-5 mx-auto mb-1 text-neutral-400 dark:text-neutral-500" />
                 <p>No bookmarks yet</p>
                 <button
                   onClick={() => openDialog('add-bookmark')}
-                  className="mt-2 text-cyan-400 hover:underline"
+                  className="mt-2 text-cyan-600 dark:text-cyan-400 hover:underline cursor-pointer"
                 >
                   + Add Bookmark
                 </button>
@@ -121,10 +121,10 @@ export const BookmarksWidget: React.FC = () => {
                     {/* Folder header */}
                     <div
                       onClick={() => toggleFolderExpand(folder.id)}
-                      className="flex items-center justify-between p-1.5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group"
+                      className="flex items-center justify-between p-1.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer group"
                     >
                       <div className="flex items-center gap-1.5 min-w-0">
-                        <button className="text-neutral-400 group-hover:text-white">
+                        <button className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white">
                           {isExpanded ? (
                             <ChevronDown className="w-3.5 h-3.5" />
                           ) : (
@@ -132,31 +132,31 @@ export const BookmarksWidget: React.FC = () => {
                           )}
                         </button>
                         {isExpanded ? (
-                          <FolderOpen className="w-3.5 h-3.5 text-amber-400" />
+                          <FolderOpen className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                         ) : (
-                          <Folder className="w-3.5 h-3.5 text-amber-400" />
+                          <Folder className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                         )}
-                        <span className="font-semibold text-neutral-200 truncate">
+                        <span className="font-semibold text-neutral-800 dark:text-neutral-200 truncate">
                           {folder.title}
                         </span>
                       </div>
-                      <span className="text-[10px] text-neutral-500 tabular-nums">
+                      <span className="text-[10px] text-neutral-500 tabular-nums font-mono">
                         {folder.children.length}
                       </span>
                     </div>
 
                     {/* Children items if expanded */}
                     {isExpanded && (
-                      <div className="border-l border-white/10 ml-3.5 pl-2 space-y-0.5">
+                      <div className="border-l border-neutral-200 dark:border-white/10 ml-3.5 pl-2 space-y-0.5">
                         {folder.children.map((child) => {
                           if (isFolder(child)) {
                             return (
                               <div
                                 key={child.id}
                                 onClick={() => setIsManagerOpen(true)}
-                                className="flex items-center gap-1.5 p-1 rounded-lg hover:bg-white/5 text-neutral-400 hover:text-white cursor-pointer"
+                                className="flex items-center gap-1.5 p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white cursor-pointer"
                               >
-                                <Folder className="w-3.5 h-3.5 text-amber-400" />
+                                <Folder className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                                 <span className="truncate">{child.title}</span>
                               </div>
                             );
@@ -167,7 +167,7 @@ export const BookmarksWidget: React.FC = () => {
                             <div
                               key={bm.id}
                               onClick={() => openBookmark(bm)}
-                              className="group flex items-center justify-between p-1 rounded-lg hover:bg-white/5 cursor-pointer text-neutral-300 hover:text-white"
+                              className="group flex items-center justify-between p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer text-neutral-800 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
                             >
                               <div className="flex items-center gap-2 min-w-0">
                                 <img
@@ -181,7 +181,7 @@ export const BookmarksWidget: React.FC = () => {
                                 />
                                 <span className="truncate">{bm.title}</span>
                               </div>
-                              <ExternalLink className="w-3 h-3 text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <ExternalLink className="w-3 h-3 text-neutral-400 dark:text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
                           );
                         })}
@@ -198,8 +198,8 @@ export const BookmarksWidget: React.FC = () => {
         {tabMode === 'favorites' && (
           <div className="space-y-1">
             {favoriteBookmarks.length === 0 ? (
-              <div className="py-6 text-center text-xs text-neutral-400">
-                <Star className="w-5 h-5 mx-auto mb-1 text-neutral-500" />
+              <div className="py-6 text-center text-xs text-neutral-600 dark:text-neutral-400">
+                <Star className="w-5 h-5 mx-auto mb-1 text-neutral-400 dark:text-neutral-500" />
                 <p>No favorite bookmarks marked with ⭐ yet</p>
               </div>
             ) : (
@@ -207,7 +207,7 @@ export const BookmarksWidget: React.FC = () => {
                 <div
                   key={bm.id}
                   onClick={() => openBookmark(bm)}
-                  className="group flex items-center justify-between p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all cursor-pointer"
+                  className="group flex items-center justify-between p-2 rounded-xl bg-black/[0.02] hover:bg-black/[0.05] dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/5 transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-2 min-w-0">
                     <img
@@ -220,7 +220,7 @@ export const BookmarksWidget: React.FC = () => {
                       loading="lazy"
                     />
                     <div className="min-w-0">
-                      <div className="font-medium text-neutral-200 group-hover:text-white truncate">
+                      <div className="font-medium text-neutral-800 group-hover:text-neutral-950 dark:text-neutral-200 dark:group-hover:text-white truncate">
                         {bm.title}
                       </div>
                       <div className="text-[10px] text-neutral-500 truncate font-mono">
@@ -228,7 +228,7 @@ export const BookmarksWidget: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-neutral-400 group-hover:text-white shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white shrink-0" />
                 </div>
               ))
             )}
@@ -239,8 +239,8 @@ export const BookmarksWidget: React.FC = () => {
         {tabMode === 'recent' && (
           <div className="space-y-1">
             {recentBookmarks.length === 0 ? (
-              <div className="py-6 text-center text-xs text-neutral-400">
-                <Clock className="w-5 h-5 mx-auto mb-1 text-neutral-500" />
+              <div className="py-6 text-center text-xs text-neutral-600 dark:text-neutral-400">
+                <Clock className="w-5 h-5 mx-auto mb-1 text-neutral-400 dark:text-neutral-500" />
                 <p>No recently opened bookmarks</p>
               </div>
             ) : (
@@ -248,7 +248,7 @@ export const BookmarksWidget: React.FC = () => {
                 <div
                   key={bm.id}
                   onClick={() => openBookmark(bm)}
-                  className="group flex items-center justify-between p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all cursor-pointer"
+                  className="group flex items-center justify-between p-2 rounded-xl bg-black/[0.02] hover:bg-black/[0.05] dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/5 transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-2 min-w-0">
                     <img
@@ -260,11 +260,11 @@ export const BookmarksWidget: React.FC = () => {
                       className="w-4 h-4 object-contain"
                       loading="lazy"
                     />
-                    <span className="font-medium text-neutral-200 group-hover:text-white truncate">
+                    <span className="font-medium text-neutral-800 group-hover:text-neutral-950 dark:text-neutral-200 dark:group-hover:text-white truncate">
                       {bm.title}
                     </span>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-neutral-400 group-hover:text-white shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white shrink-0" />
                 </div>
               ))
             )}
@@ -273,11 +273,11 @@ export const BookmarksWidget: React.FC = () => {
       </div>
 
       {/* Bottom Link to Full Explorer */}
-      <div className="pt-2.5 mt-2 border-t border-white/5 flex items-center justify-between text-[11px]">
-        <span className="text-neutral-500">{allBookmarks.length} total bookmarks</span>
+      <div className="pt-2.5 mt-2 border-t border-neutral-200 dark:border-white/5 flex items-center justify-between text-[11px]">
+        <span className="text-neutral-600 dark:text-neutral-500">{allBookmarks.length} total bookmarks</span>
         <button
           onClick={() => setIsManagerOpen(true)}
-          className="flex items-center gap-1 font-medium text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
+          className="flex items-center gap-1 font-semibold text-cyan-700 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-300 transition-colors cursor-pointer"
         >
           <span>Open Full Manager</span>
           <ArrowRight className="w-3 h-3" />

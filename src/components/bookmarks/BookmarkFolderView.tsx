@@ -75,29 +75,29 @@ export const BookmarkFolderView: React.FC = () => {
   if (items.length === 0) {
     return (
       <div className="h-full flex flex-col items-center justify-center p-8 text-center select-none">
-        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-3">
-          <Folder className="w-6 h-6 text-amber-400" />
+        <div className="w-12 h-12 rounded-2xl bg-black/5 dark:bg-white/5 border border-neutral-200 dark:border-white/10 flex items-center justify-center mb-3">
+          <Folder className="w-6 h-6 text-amber-500 dark:text-amber-400" />
         </div>
-        <h3 className="text-sm font-semibold text-neutral-200">
+        <h3 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
           This folder is empty
         </h3>
-        <p className="text-xs text-neutral-400 mt-1 mb-5 max-w-sm">
+        <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 mb-5 max-w-sm">
           Add frequently used websites or create subfolders to organize your links.
         </p>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => openDialog('add-bookmark', null, selectedFolderId)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-white cursor-pointer ${accentTheme.buttonClass}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-white cursor-pointer ${accentTheme.buttonClass}`}
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Bookmark</span>
           </button>
           <button
             onClick={() => openDialog('add-folder', null, selectedFolderId)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-neutral-200 bg-white/10 hover:bg-white/20 border border-white/10 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-neutral-700 hover:text-neutral-900 dark:text-neutral-200 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20 border border-neutral-200 dark:border-white/10 transition-colors cursor-pointer"
           >
-            <FolderPlus className="w-3.5 h-3.5 text-amber-400" />
+            <FolderPlus className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
             <span>New Subfolder</span>
           </button>
         </div>
@@ -134,17 +134,17 @@ export const BookmarkFolderView: React.FC = () => {
                 onDrop={(e) => handleDrop(e, item.id)}
                 onClick={() => selectFolder(item.id)}
                 onContextMenu={(e) => openContextMenu(e, item, selectedFolderId)}
-                className="item-card group relative flex items-center justify-between p-3 rounded-2xl bg-white/5 hover:bg-white/10 dark:bg-black/20 dark:hover:bg-black/40 border border-white/5 hover:border-white/15 transition-all cursor-pointer text-xs"
+                className="item-card group relative flex items-center justify-between p-3 rounded-2xl bg-black/[0.02] hover:bg-black/[0.05] dark:bg-black/20 dark:hover:bg-black/40 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/15 transition-all cursor-pointer text-xs"
               >
                 <div className="flex items-center gap-2.5 min-w-0 flex-1">
                   <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0">
-                    <Folder className="w-4 h-4 text-amber-400" />
+                    <Folder className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-neutral-200 group-hover:text-white truncate">
+                    <div className="font-semibold text-neutral-800 group-hover:text-neutral-950 dark:text-neutral-200 dark:group-hover:text-white truncate">
                       {item.title}
                     </div>
-                    <div className="text-[10px] text-neutral-400">
+                    <div className="text-[10px] text-neutral-500 font-mono">
                       {item.children.length} {item.children.length === 1 ? 'item' : 'items'}
                     </div>
                   </div>
@@ -156,7 +156,7 @@ export const BookmarkFolderView: React.FC = () => {
                     e.stopPropagation();
                     openContextMenu(e, item, selectedFolderId);
                   }}
-                  className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-opacity"
+                  className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-opacity"
                 >
                   <MoreVertical className="w-3.5 h-3.5" />
                 </button>
@@ -177,10 +177,10 @@ export const BookmarkFolderView: React.FC = () => {
               onDrop={(e) => handleDrop(e, bm.id)}
               onClick={(e) => openBookmark(bm, e.metaKey || e.ctrlKey)}
               onContextMenu={(e) => openContextMenu(e, bm, selectedFolderId)}
-              className="item-card group relative flex items-center justify-between p-3 rounded-2xl bg-white/5 hover:bg-white/10 dark:bg-black/20 dark:hover:bg-black/40 border border-white/5 hover:border-white/15 transition-all cursor-pointer text-xs"
+              className="item-card group relative flex items-center justify-between p-3 rounded-2xl bg-black/[0.02] hover:bg-black/[0.05] dark:bg-black/20 dark:hover:bg-black/40 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/15 transition-all cursor-pointer text-xs"
             >
               <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 flex items-center justify-center overflow-hidden shrink-0">
                   <img
                     src={faviconSrc}
                     alt=""
@@ -194,10 +194,10 @@ export const BookmarkFolderView: React.FC = () => {
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <div className="font-medium text-neutral-200 group-hover:text-white truncate flex items-center gap-1.5">
+                  <div className="font-medium text-neutral-800 group-hover:text-neutral-950 dark:text-neutral-200 dark:group-hover:text-white truncate flex items-center gap-1.5">
                     <span className="truncate">{bm.title}</span>
                     {bm.isFavorite && (
-                      <Star className="w-3 h-3 text-amber-400 fill-amber-400 shrink-0" />
+                      <Star className="w-3 h-3 text-amber-500 dark:text-amber-400 fill-amber-500 dark:fill-amber-400 shrink-0" />
                     )}
                   </div>
                   <div className="text-[10px] text-neutral-500 truncate font-mono">
@@ -215,9 +215,9 @@ export const BookmarkFolderView: React.FC = () => {
                     toggleFavoriteBookmark(bm);
                   }}
                   title={bm.isFavorite ? 'Remove favorite' : 'Add to favorites'}
-                  className="p-1 rounded-lg text-neutral-400 hover:text-amber-400 transition-colors"
+                  className="p-1 rounded-lg text-neutral-500 hover:text-amber-500 dark:text-neutral-400 dark:hover:text-amber-400 transition-colors"
                 >
-                  <Star className={`w-3.5 h-3.5 ${bm.isFavorite ? 'fill-amber-400 text-amber-400' : ''}`} />
+                  <Star className={`w-3.5 h-3.5 ${bm.isFavorite ? 'fill-amber-500 text-amber-500' : ''}`} />
                 </button>
                 <button
                   type="button"
@@ -226,7 +226,7 @@ export const BookmarkFolderView: React.FC = () => {
                     openBookmark(bm, true);
                   }}
                   title="Open in new tab"
-                  className="p-1 rounded-lg text-neutral-400 hover:text-white transition-colors"
+                  className="p-1 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                 </button>
@@ -236,7 +236,7 @@ export const BookmarkFolderView: React.FC = () => {
                     e.stopPropagation();
                     openContextMenu(e, bm, selectedFolderId);
                   }}
-                  className="p-1 rounded-lg text-neutral-400 hover:text-white transition-colors"
+                  className="p-1 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
                 >
                   <MoreVertical className="w-3.5 h-3.5" />
                 </button>

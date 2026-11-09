@@ -127,27 +127,27 @@ export const AddEventDialog: React.FC = () => {
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-fade-in">
       <div
-        className="w-full max-w-lg bg-neutral-900/95 dark:bg-neutral-950/95 border border-white/10 rounded-2xl shadow-2xl p-5 sm:p-6 text-neutral-100 flex flex-col max-h-[90vh] overflow-y-auto"
+        className="w-full max-w-lg bg-white/95 dark:bg-neutral-950/95 border border-neutral-200 dark:border-white/10 rounded-2xl shadow-2xl p-5 sm:p-6 text-neutral-900 dark:text-neutral-100 flex flex-col max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-white/10">
+        <div className="flex items-center justify-between pb-3 border-b border-neutral-200 dark:border-white/10">
           <div className="flex items-center gap-2">
             <div className={`p-2 rounded-xl ${accentTheme.bgActive}`}>
               <Calendar className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-base sm:text-lg font-semibold text-white">
+              <h3 className="text-base sm:text-lg font-semibold text-neutral-900 dark:text-white">
                 Add Event Countdown
               </h3>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400">
                 Track any day with an automatic live countdown
               </p>
             </div>
           </div>
           <button
             onClick={closeAddModal}
-            className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -156,15 +156,15 @@ export const AddEventDialog: React.FC = () => {
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           {error && (
-            <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-medium">
+            <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-700 dark:text-red-300 text-xs font-medium">
               {error}
             </div>
           )}
 
           {/* Event Title */}
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
-              Event Title <span className="text-cyan-400">*</span>
+            <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">
+              Event Title <span className="text-cyan-600 dark:text-cyan-400">*</span>
             </label>
             <input
               ref={titleInputRef}
@@ -175,42 +175,42 @@ export const AddEventDialog: React.FC = () => {
                 if (error) setError(null);
               }}
               placeholder="e.g. Product Launch, Mom's Birthday, Paris Vacation"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-neutral-500 focus:outline-hidden focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition-all"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-300 dark:border-white/10 text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-hidden focus:border-cyan-500 dark:focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition-all"
             />
           </div>
 
           {/* Event Date & Quick Presets */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-medium text-neutral-300">
-                Event Date <span className="text-cyan-400">*</span>
+              <label className="text-xs font-semibold text-neutral-800 dark:text-neutral-300">
+                Event Date <span className="text-cyan-600 dark:text-cyan-400">*</span>
               </label>
               <div className="flex items-center gap-1">
                 <button
                   type="button"
                   onClick={() => setDatePreset(0)}
-                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
+                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   Today
                 </button>
                 <button
                   type="button"
                   onClick={() => setDatePreset(1)}
-                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
+                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   Tomorrow
                 </button>
                 <button
                   type="button"
                   onClick={() => setDatePreset(7)}
-                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
+                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   1 Week
                 </button>
                 <button
                   type="button"
                   onClick={() => setDatePreset(30)}
-                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
+                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   1 Month
                 </button>
@@ -220,22 +220,22 @@ export const AddEventDialog: React.FC = () => {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white focus:outline-hidden focus:border-cyan-400 transition-all cursor-pointer"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-300 dark:border-white/10 text-sm text-neutral-900 dark:text-white focus:outline-hidden focus:border-cyan-500 dark:focus:border-cyan-400 transition-all cursor-pointer"
             />
           </div>
 
           {/* Time toggle (All-day vs Specific time) */}
-          <div className="rounded-xl bg-white/[0.03] border border-white/5 p-3">
+          <div className="rounded-xl bg-black/[0.02] dark:bg-white/[0.03] border border-neutral-200 dark:border-white/5 p-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-neutral-400" />
-                <span className="text-xs font-medium text-neutral-300">Specific Time</span>
+                <Clock className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <span className="text-xs font-semibold text-neutral-800 dark:text-neutral-300">Specific Time</span>
               </div>
               <button
                 type="button"
                 onClick={() => setHasTime(!hasTime)}
                 className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden ${
-                  hasTime ? accentTheme.bgActive : 'bg-neutral-700'
+                  hasTime ? accentTheme.bgActive : 'bg-neutral-300 dark:bg-neutral-700'
                 }`}
               >
                 <span
@@ -247,13 +247,13 @@ export const AddEventDialog: React.FC = () => {
             </div>
 
             {hasTime && (
-              <div className="mt-3 pt-3 border-t border-white/5 flex items-center gap-2">
-                <label className="text-xs text-neutral-400 shrink-0">Time:</label>
+              <div className="mt-3 pt-3 border-t border-neutral-200 dark:border-white/5 flex items-center gap-2">
+                <label className="text-xs text-neutral-600 dark:text-neutral-400 shrink-0 font-medium">Time:</label>
                 <input
                   type="time"
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
-                  className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-white focus:outline-hidden focus:border-cyan-400 font-mono"
+                  className="px-3 py-1.5 rounded-lg bg-white dark:bg-white/5 border border-neutral-300 dark:border-white/10 text-xs text-neutral-900 dark:text-white focus:outline-hidden focus:border-cyan-500 dark:focus:border-cyan-400 font-mono"
                 />
               </div>
             )}
@@ -261,7 +261,7 @@ export const AddEventDialog: React.FC = () => {
 
           {/* Category */}
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+            <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">
               Category
             </label>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
@@ -273,10 +273,10 @@ export const AddEventDialog: React.FC = () => {
                     key={cat.id}
                     type="button"
                     onClick={() => setCategory(cat.id)}
-                    className={`flex flex-col items-center gap-1 p-2 rounded-xl border text-xs font-medium transition-all ${
+                    className={`flex flex-col items-center gap-1 p-2 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
                       isSelected
-                        ? `${accentTheme.bgActive} border-white/30 text-white font-semibold shadow-xs`
-                        : 'bg-white/5 border-white/5 text-neutral-400 hover:text-white hover:bg-white/10'
+                        ? `${accentTheme.bgActive} border-transparent text-white font-semibold shadow-xs`
+                        : 'bg-black/5 dark:bg-white/5 border-neutral-200 dark:border-white/5 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -289,7 +289,7 @@ export const AddEventDialog: React.FC = () => {
 
           {/* Color Tag */}
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+            <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">
               Accent Color
             </label>
             <div className="flex items-center gap-2">
@@ -301,8 +301,8 @@ export const AddEventDialog: React.FC = () => {
                     type="button"
                     onClick={() => setColor(c.id)}
                     title={c.label}
-                    className={`w-6 h-6 rounded-full ${c.bg} flex items-center justify-center transition-transform ${
-                      isSelected ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100'
+                    className={`w-6 h-6 rounded-full ${c.bg} flex items-center justify-center transition-transform cursor-pointer ${
+                      isSelected ? 'ring-2 ring-cyan-500 dark:ring-white scale-110' : 'opacity-70 hover:opacity-100'
                     }`}
                   >
                     {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
@@ -314,7 +314,7 @@ export const AddEventDialog: React.FC = () => {
 
           {/* Optional Notes */}
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+            <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">
               Notes (Optional)
             </label>
             <textarea
@@ -322,16 +322,16 @@ export const AddEventDialog: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Add any reminders, location, or notes..."
-              className="w-full px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-neutral-500 focus:outline-hidden focus:border-cyan-400 resize-none"
+              className="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-white/5 border border-neutral-300 dark:border-white/10 text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-hidden focus:border-cyan-500 dark:focus:border-cyan-400 resize-none"
             />
           </div>
 
           {/* Action Buttons */}
-          <div className="pt-2 flex items-center justify-end gap-2 border-t border-white/10">
+          <div className="pt-2 flex items-center justify-end gap-2 border-t border-neutral-200 dark:border-white/10">
             <button
               type="button"
               onClick={closeAddModal}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
             >
               Cancel
             </button>

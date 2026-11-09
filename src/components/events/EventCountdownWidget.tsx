@@ -104,9 +104,9 @@ export const EventCountdownWidget: React.FC = () => {
       <div className="w-full flex justify-center mt-2 mb-1 animate-fade-in">
         <button
           onClick={() => openAddModal()}
-          className="group flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-xs text-neutral-400 hover:text-neutral-200 transition-all backdrop-blur-md shadow-xs cursor-pointer"
+          className="group flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 hover:bg-white dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-neutral-300 dark:border-white/10 hover:border-neutral-400 dark:hover:border-white/20 text-xs text-neutral-700 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200 transition-all backdrop-blur-md shadow-xs cursor-pointer"
         >
-          <Calendar className="w-3.5 h-3.5 text-neutral-400 group-hover:text-cyan-400 transition-colors" />
+          <Calendar className="w-3.5 h-3.5 text-neutral-500 group-hover:text-cyan-600 dark:text-neutral-400 dark:group-hover:text-cyan-400 transition-colors" />
           <span className="font-medium">+ Add Event Countdown</span>
         </button>
       </div>
@@ -143,7 +143,7 @@ export const EventCountdownWidget: React.FC = () => {
   return (
     <div className="w-full mt-2 mb-2 select-none animate-fade-in">
       <div
-        className={`relative overflow-hidden rounded-2xl p-3.5 sm:p-4 bg-neutral-900/60 dark:bg-black/40 backdrop-blur-xl border ${colorStyle.border} shadow-lg ${colorStyle.glow} transition-all duration-300`}
+        className={`relative overflow-hidden rounded-2xl p-3.5 sm:p-4 bg-white/90 dark:bg-black/40 backdrop-blur-xl border ${colorStyle.border} shadow-lg ${colorStyle.glow} transition-all duration-300`}
       >
         {/* Subtle accent gradient background */}
         <div
@@ -161,7 +161,7 @@ export const EventCountdownWidget: React.FC = () => {
 
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h4 className="text-sm sm:text-base font-semibold text-white truncate tracking-tight">
+                <h4 className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-white truncate tracking-tight">
                   {activeEvent.title}
                 </h4>
                 <span
@@ -170,7 +170,7 @@ export const EventCountdownWidget: React.FC = () => {
                   {categoryLabel}
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-[11px] text-neutral-400">
+              <div className="flex items-center gap-2 text-[11px] text-neutral-600 dark:text-neutral-400">
                 <span>{countdown.formattedTargetDate}</span>
                 {activeEvent.time && (
                   <>
@@ -179,7 +179,7 @@ export const EventCountdownWidget: React.FC = () => {
                   </>
                 )}
                 <span>•</span>
-                <span className={`${countdown.isToday ? 'text-amber-400 font-semibold' : colorStyle.text}`}>
+                <span className={`${countdown.isToday ? 'text-amber-600 dark:text-amber-400 font-semibold' : colorStyle.text}`}>
                   {countdown.relativeText}
                 </span>
               </div>
@@ -190,21 +190,21 @@ export const EventCountdownWidget: React.FC = () => {
           <div className="flex items-center gap-1 shrink-0">
             {/* Prev / Next arrows if multiple events */}
             {events.length > 1 && (
-              <div className="flex items-center bg-white/5 border border-white/10 rounded-lg p-0.5">
+              <div className="flex items-center bg-black/5 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg p-0.5">
                 <button
                   onClick={handlePrevEvent}
                   title="Previous event"
-                  className="p-1 rounded text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+                  className="p-1 rounded text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
                 >
                   <ChevronLeft className="w-3 h-3" />
                 </button>
-                <span className="text-[10px] font-mono px-1 text-neutral-400">
+                <span className="text-[10px] font-mono px-1 text-neutral-600 dark:text-neutral-400">
                   {currentIndex + 1}/{events.length}
                 </span>
                 <button
                   onClick={handleNextEvent}
                   title="Next event"
-                  className="p-1 rounded text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+                  className="p-1 rounded text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
                 >
                   <ChevronRight className="w-3 h-3" />
                 </button>
@@ -215,7 +215,7 @@ export const EventCountdownWidget: React.FC = () => {
             <button
               onClick={openManageModal}
               title="All Events"
-              className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-lg text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
             >
               <List className="w-3.5 h-3.5" />
             </button>
@@ -224,7 +224,7 @@ export const EventCountdownWidget: React.FC = () => {
             <button
               onClick={() => openAddModal()}
               title="Add New Event"
-              className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-lg text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
             </button>
@@ -232,7 +232,7 @@ export const EventCountdownWidget: React.FC = () => {
             {/* Delete button */}
             {showConfirmDelete ? (
               <div className="flex items-center gap-1 bg-red-500/20 border border-red-500/30 rounded-lg px-1.5 py-0.5">
-                <span className="text-[10px] text-red-300 font-medium">Delete?</span>
+                <span className="text-[10px] text-red-600 dark:text-red-300 font-medium">Delete?</span>
                 <button
                   onClick={handleDelete}
                   className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-red-600 hover:bg-red-500 text-white transition-colors"
@@ -241,7 +241,7 @@ export const EventCountdownWidget: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setShowConfirmDelete(false)}
-                  className="px-1 text-[10px] text-neutral-300 hover:text-white"
+                  className="px-1 text-[10px] text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
                 >
                   ✕
                 </button>
@@ -250,7 +250,7 @@ export const EventCountdownWidget: React.FC = () => {
               <button
                 onClick={() => setShowConfirmDelete(true)}
                 title="Delete this event"
-                className="p-1.5 rounded-lg text-neutral-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                className="p-1.5 rounded-lg text-neutral-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-500/10 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -262,18 +262,18 @@ export const EventCountdownWidget: React.FC = () => {
         {countdown.isToday ? (
           <div className="py-2.5 px-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <PartyPopper className="w-5 h-5 text-amber-400 animate-bounce" />
+              <PartyPopper className="w-5 h-5 text-amber-500 dark:text-amber-400 animate-bounce" />
               <div>
-                <p className="text-xs sm:text-sm font-semibold text-amber-300">
+                <p className="text-xs sm:text-sm font-semibold text-amber-800 dark:text-amber-300">
                   Today is the day! 🎉
                 </p>
-                <p className="text-[11px] text-neutral-300">
+                <p className="text-[11px] text-neutral-700 dark:text-neutral-300 font-medium">
                   {activeEvent.title} is happening today!
                 </p>
               </div>
             </div>
             {activeEvent.time && !countdown.isPast && (
-              <div className="flex items-center gap-2 font-mono text-xs tabular-nums text-amber-300">
+              <div className="flex items-center gap-2 font-mono text-xs tabular-nums text-amber-700 dark:text-amber-300 font-semibold">
                 <span>{countdown.hours}h</span>
                 <span>{countdown.minutes}m</span>
                 <span>{countdown.seconds}s</span>
@@ -281,15 +281,15 @@ export const EventCountdownWidget: React.FC = () => {
             )}
           </div>
         ) : countdown.isPast ? (
-          <div className="py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
-            <div className="text-xs text-neutral-400">
-              <span className="font-medium text-neutral-300">Event has passed</span>
+          <div className="py-2.5 px-3 rounded-xl bg-black/5 dark:bg-white/5 border border-neutral-200 dark:border-white/10 flex items-center justify-between">
+            <div className="text-xs text-neutral-600 dark:text-neutral-400">
+              <span className="font-semibold text-neutral-800 dark:text-neutral-300">Event has passed</span>
               <span className="ml-2 text-neutral-500 font-mono">({countdown.relativeText})</span>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={handleDelete}
-                className="px-2 py-1 rounded-lg text-[11px] font-medium bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-colors"
+                className="px-2 py-1 rounded-lg text-[11px] font-medium bg-red-500/20 text-red-700 dark:text-red-300 hover:bg-red-500/30 transition-colors"
               >
                 Remove
               </button>
@@ -304,41 +304,41 @@ export const EventCountdownWidget: React.FC = () => {
         ) : (
           <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
             {/* Days */}
-            <div className="p-2 sm:p-2.5 rounded-xl bg-white/[0.04] border border-white/5 flex flex-col items-center justify-center">
-              <span className="font-mono text-xl sm:text-2xl md:text-3xl font-bold tabular-nums text-white tracking-tight">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.04] border border-neutral-200 dark:border-white/5 flex flex-col items-center justify-center">
+              <span className="font-mono text-xl sm:text-2xl md:text-3xl font-bold tabular-nums text-neutral-900 dark:text-white tracking-tight">
                 {String(countdown.days).padStart(2, '0')}
               </span>
-              <span className="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-neutral-400 mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-neutral-600 dark:text-neutral-400 mt-0.5">
                 Days
               </span>
             </div>
 
             {/* Hours */}
-            <div className="p-2 sm:p-2.5 rounded-xl bg-white/[0.04] border border-white/5 flex flex-col items-center justify-center">
-              <span className="font-mono text-xl sm:text-2xl md:text-3xl font-bold tabular-nums text-white tracking-tight">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.04] border border-neutral-200 dark:border-white/5 flex flex-col items-center justify-center">
+              <span className="font-mono text-xl sm:text-2xl md:text-3xl font-bold tabular-nums text-neutral-900 dark:text-white tracking-tight">
                 {String(countdown.hours).padStart(2, '0')}
               </span>
-              <span className="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-neutral-400 mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-neutral-600 dark:text-neutral-400 mt-0.5">
                 Hours
               </span>
             </div>
 
             {/* Minutes */}
-            <div className="p-2 sm:p-2.5 rounded-xl bg-white/[0.04] border border-white/5 flex flex-col items-center justify-center">
-              <span className="font-mono text-xl sm:text-2xl md:text-3xl font-bold tabular-nums text-white tracking-tight">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.04] border border-neutral-200 dark:border-white/5 flex flex-col items-center justify-center">
+              <span className="font-mono text-xl sm:text-2xl md:text-3xl font-bold tabular-nums text-neutral-900 dark:text-white tracking-tight">
                 {String(countdown.minutes).padStart(2, '0')}
               </span>
-              <span className="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-neutral-400 mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-neutral-600 dark:text-neutral-400 mt-0.5">
                 Minutes
               </span>
             </div>
 
             {/* Seconds */}
-            <div className="p-2 sm:p-2.5 rounded-xl bg-white/[0.04] border border-white/5 flex flex-col items-center justify-center">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-neutral-100/90 dark:bg-white/[0.04] border border-neutral-200 dark:border-white/5 flex flex-col items-center justify-center">
               <span className={`font-mono text-xl sm:text-2xl md:text-3xl font-bold tabular-nums tracking-tight ${colorStyle.text}`}>
                 {String(countdown.seconds).padStart(2, '0')}
               </span>
-              <span className="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-neutral-400 mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-neutral-600 dark:text-neutral-400 mt-0.5">
                 Seconds
               </span>
             </div>

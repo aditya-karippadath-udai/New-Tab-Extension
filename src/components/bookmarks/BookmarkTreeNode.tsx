@@ -139,10 +139,10 @@ export const BookmarkTreeNode: React.FC<BookmarkTreeNodeProps> = ({ node, level 
         style={{ paddingLeft }}
         className={`group flex items-center justify-between py-1.5 pr-2 rounded-xl transition-all cursor-pointer border ${
           isSelected
-            ? `${accentTheme.bgActive} border-cyan-500/40 shadow-xs font-medium`
+            ? `${accentTheme.bgActive} text-white border-cyan-500/40 shadow-xs font-medium`
             : isDragOver && dropPosition === 'inside'
             ? 'bg-cyan-500/20 border-cyan-400/60'
-            : 'border-transparent hover:bg-white/5 text-neutral-300 hover:text-white'
+            : 'border-transparent hover:bg-black/5 dark:hover:bg-white/5 text-neutral-800 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white'
         }`}
       >
         <div className="flex items-center gap-1.5 min-w-0 flex-1">
@@ -150,7 +150,7 @@ export const BookmarkTreeNode: React.FC<BookmarkTreeNodeProps> = ({ node, level 
           {isNodeFolder ? (
             <button
               onClick={handleToggleClick}
-              className="p-0.5 rounded text-neutral-400 hover:text-white transition-colors"
+              className="p-0.5 rounded text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               {isExpanded ? (
                 <ChevronDown className="w-3.5 h-3.5" />
@@ -165,9 +165,9 @@ export const BookmarkTreeNode: React.FC<BookmarkTreeNodeProps> = ({ node, level 
           {/* Node Icon */}
           {isNodeFolder ? (
             isExpanded ? (
-              <FolderOpen className="w-4 h-4 text-amber-400 shrink-0" />
+              <FolderOpen className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0" />
             ) : (
-              <Folder className="w-4 h-4 text-amber-400 shrink-0" />
+              <Folder className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0" />
             )
           ) : (
             <div className="w-4 h-4 shrink-0 flex items-center justify-center">
@@ -186,16 +186,16 @@ export const BookmarkTreeNode: React.FC<BookmarkTreeNodeProps> = ({ node, level 
           )}
 
           {/* Title */}
-          <span className="truncate flex-1">{node.title}</span>
+          <span className="truncate flex-1 font-medium">{node.title}</span>
         </div>
 
         {/* Right side indicators */}
         <div className="flex items-center gap-1 shrink-0 ml-1">
           {isBookmark(node) && node.isFavorite && (
-            <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+            <Star className="w-3 h-3 text-amber-500 dark:text-amber-400 fill-amber-500 dark:fill-amber-400" />
           )}
           {isNodeFolder && node.children.length > 0 && (
-            <span className="text-[10px] text-neutral-400 tabular-nums">
+            <span className="text-[10px] text-neutral-500 tabular-nums font-mono">
               {node.children.length}
             </span>
           )}
@@ -204,7 +204,7 @@ export const BookmarkTreeNode: React.FC<BookmarkTreeNodeProps> = ({ node, level 
 
       {/* Recursive Children */}
       {isNodeFolder && isExpanded && node.children.length > 0 && (
-        <div className="relative border-l border-white/10 ml-4 pl-1">
+        <div className="relative border-l border-neutral-200 dark:border-white/10 ml-4 pl-1">
           {node.children.map((child) => (
             <BookmarkTreeNode key={child.id} node={child} level={level + 1} />
           ))}

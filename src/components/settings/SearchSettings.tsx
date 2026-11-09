@@ -8,11 +8,11 @@ export const SearchSettings: React.FC = () => {
   const { settings, updateSettings, accentTheme } = useSettings();
 
   return (
-    <div className="space-y-6 text-xs text-neutral-300">
+    <div className="space-y-6 text-xs text-neutral-800 dark:text-neutral-300">
       {/* Default Engine */}
       <section>
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-          <Globe className="w-3.5 h-3.5 text-cyan-400" />
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <Globe className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>Default Search Provider</span>
         </h4>
         <div className="space-y-1.5">
@@ -24,13 +24,13 @@ export const SearchSettings: React.FC = () => {
                 onClick={() => updateSettings({ defaultSearchEngine: engine.id as SearchEngineId })}
                 className={`flex items-center justify-between p-2.5 rounded-xl border cursor-pointer transition-all ${
                   isSelected
-                    ? `${accentTheme.bgActive} border-cyan-500/40`
-                    : 'bg-white/5 border-white/5 hover:border-white/10 hover:bg-white/10'
+                    ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs text-white`
+                    : 'bg-black/[0.02] dark:bg-white/5 border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 hover:bg-black/5 dark:hover:bg-white/10'
                 }`}
               >
                 <div>
-                  <div className="font-semibold text-neutral-200">{engine.name}</div>
-                  <div className="text-[11px] text-neutral-500 truncate max-w-xs">{engine.placeholder}</div>
+                  <div className={`font-bold ${isSelected ? 'text-white' : 'text-neutral-900 dark:text-neutral-200'}`}>{engine.name}</div>
+                  <div className={`text-[11px] truncate max-w-xs ${isSelected ? 'text-white/80' : 'text-neutral-600 dark:text-neutral-500'}`}>{engine.placeholder}</div>
                 </div>
                 <input
                   type="radio"
@@ -47,18 +47,18 @@ export const SearchSettings: React.FC = () => {
 
       {/* Toggles */}
       <section className="space-y-3">
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider">
           Search Behavior
         </h4>
 
         {/* New Tab Toggle */}
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200 flex items-center gap-1.5">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200 flex items-center gap-1.5">
               <span>Open Queries in New Tab</span>
               <ExternalLink className="w-3 h-3 text-neutral-500" />
             </div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Preserve this New Tab dashboard when executing searches
             </div>
           </div>
@@ -71,10 +71,10 @@ export const SearchSettings: React.FC = () => {
         </label>
 
         {/* Search Suggestions */}
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">Show Suggestions & Recents</div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Show Suggestions & Recents</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Display quick engine shortcuts (gh:, yt:) and recent searches dropdown
             </div>
           </div>

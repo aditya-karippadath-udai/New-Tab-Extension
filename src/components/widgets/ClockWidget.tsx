@@ -37,13 +37,13 @@ export const ClockWidget: React.FC = () => {
   return (
     <div className="relative group w-full flex flex-col items-center">
       {/* Clock Mode Switcher Pills (Digital / Speedometer) */}
-      <div className="mb-2 flex items-center gap-1 p-0.5 rounded-xl bg-black/20 dark:bg-black/30 border border-white/5 opacity-80 group-hover:opacity-100 transition-opacity">
+      <div className="mb-2 flex items-center gap-1 p-0.5 rounded-xl bg-black/5 dark:bg-black/30 border border-neutral-200 dark:border-white/5 opacity-80 group-hover:opacity-100 transition-opacity">
         <button
           onClick={() => updateSettings({ clockType: 'digital' })}
           className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
             clockType === 'digital'
-              ? `${accentTheme.bgActive} shadow-xs font-semibold`
-              : 'text-neutral-400 hover:text-neutral-200'
+              ? `${accentTheme.bgActive} text-white shadow-xs font-semibold`
+              : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'
           }`}
         >
           <ClockIcon className="w-3.5 h-3.5" />
@@ -54,8 +54,8 @@ export const ClockWidget: React.FC = () => {
           onClick={() => updateSettings({ clockType: 'analog' })}
           className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
             clockType === 'analog'
-              ? `${accentTheme.bgActive} shadow-xs font-semibold`
-              : 'text-neutral-400 hover:text-neutral-200'
+              ? `${accentTheme.bgActive} text-white shadow-xs font-semibold`
+              : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'
           }`}
         >
           <Gauge className="w-3.5 h-3.5" />
@@ -78,20 +78,20 @@ export const ClockWidget: React.FC = () => {
               </span>
             )}
             {period && (
-              <span className="text-xs sm:text-sm font-medium tracking-wider text-neutral-400">
+              <span className="text-xs sm:text-sm font-medium tracking-wider text-neutral-600 dark:text-neutral-400">
                 {period}
               </span>
             )}
           </div>
 
           {showDate && (
-            <div className="mt-1 text-xs sm:text-sm font-medium text-neutral-400 tracking-wide">
+            <div className="mt-1 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 tracking-wide">
               {formattedDate}
             </div>
           )}
 
           {showGreeting && (
-            <div className="mt-1 text-xs text-neutral-400/90 font-normal">
+            <div className="mt-1 text-xs text-neutral-600 dark:text-neutral-400 font-medium">
               {greetingText}
             </div>
           )}
@@ -108,20 +108,20 @@ export const ClockWidget: React.FC = () => {
               </span>
             )}
             {period && (
-              <span className="text-sm sm:text-base font-semibold tracking-wider text-neutral-400 self-center">
+              <span className="text-sm sm:text-base font-semibold tracking-wider text-neutral-600 dark:text-neutral-400 self-center">
                 {period}
               </span>
             )}
           </div>
 
           {showDate && (
-            <div className="mt-2 text-sm sm:text-base font-medium text-neutral-300 dark:text-neutral-300 text-neutral-600 tracking-wide">
+            <div className="mt-2 text-sm sm:text-base font-semibold text-neutral-800 dark:text-neutral-200 tracking-wide">
               {formattedDate}
             </div>
           )}
 
           {showGreeting && (
-            <div className="mt-2 text-sm text-neutral-400 font-normal">
+            <div className="mt-2 text-sm text-neutral-600 dark:text-neutral-400 font-medium">
               {greetingText}
             </div>
           )}
@@ -143,20 +143,20 @@ export const ClockWidget: React.FC = () => {
               </span>
             )}
             {period && (
-              <span className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-400 self-center">
+              <span className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-600 dark:text-neutral-400 self-center">
                 {period}
               </span>
             )}
           </div>
 
           {showDate && (
-            <div className="mt-1.5 text-xs sm:text-sm font-medium tracking-wide text-neutral-400 dark:text-neutral-300">
+            <div className="mt-1.5 text-xs sm:text-sm font-semibold tracking-wide text-neutral-800 dark:text-neutral-200">
               {formattedDate}
             </div>
           )}
 
           {showGreeting && (
-            <div className="mt-1 text-xs text-neutral-400 font-normal">
+            <div className="mt-1 text-xs text-neutral-600 dark:text-neutral-400 font-medium">
               {greetingText}
             </div>
           )}

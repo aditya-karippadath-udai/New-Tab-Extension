@@ -223,16 +223,16 @@ export const AppearanceSettings: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6 text-xs text-neutral-300">
+    <div className="space-y-6 text-xs text-neutral-800 dark:text-neutral-300">
       {/* 1. User Name & Header Display */}
-      <section className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-          <User className="w-3.5 h-3.5 text-cyan-400" />
+      <section className="p-3.5 rounded-2xl bg-black/[0.03] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-3">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+          <User className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>User Name & Header Display</span>
         </h4>
 
         <div>
-          <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+          <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">
             Your Name / Header Title
           </label>
           <input
@@ -240,17 +240,17 @@ export const AppearanceSettings: React.FC = () => {
             value={settings.userName || ''}
             onChange={(e) => updateSettings({ userName: e.target.value })}
             placeholder="Enter your name (e.g. Aditya)"
-            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-100 placeholder:text-neutral-500 outline-none focus:border-white/30 transition-all"
+            className="w-full bg-white dark:bg-black/40 border border-neutral-300 dark:border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-neutral-400 dark:focus:border-white/30 transition-all"
           />
-          <p className="text-[11px] text-neutral-400 mt-1">
+          <p className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-1">
             Displayed in the top bar header and used for greetings.
           </p>
         </div>
 
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">Show Name in Header</div>
-            <div className="text-[11px] text-neutral-400">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Show Name in Header</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-400">
               Display "{settings.userName?.trim() || 'Your Name'}" in place of "AuraTab"
             </div>
           </div>
@@ -265,8 +265,8 @@ export const AppearanceSettings: React.FC = () => {
 
       {/* 2. Theme Mode */}
       <section>
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-          <Palette className="w-3.5 h-3.5 text-cyan-400" />
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <Palette className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>Interface Theme</span>
         </h4>
         <div className="grid grid-cols-3 gap-2">
@@ -274,10 +274,10 @@ export const AppearanceSettings: React.FC = () => {
             <button
               key={mode}
               onClick={() => updateSettings({ theme: mode })}
-              className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-medium ${
+              className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-semibold ${
                 settings.theme === mode
-                  ? `${accentTheme.bgActive} border-cyan-500/50`
-                  : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+                  ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs`
+                  : 'bg-black/[0.03] dark:bg-white/5 border-neutral-200 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-200'
               }`}
             >
               {mode}
@@ -288,7 +288,7 @@ export const AppearanceSettings: React.FC = () => {
 
       {/* 2. Accent Color */}
       <section>
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider mb-2">
           Accent Color
         </h4>
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -301,14 +301,14 @@ export const AppearanceSettings: React.FC = () => {
                 onClick={() => updateSettings({ accent: col })}
                 className={`flex flex-col items-center justify-center p-2 rounded-xl border transition-all ${
                   isSelected
-                    ? 'border-white/30 bg-white/10 ring-2 ring-white/20'
-                    : 'border-white/5 bg-white/5 hover:bg-white/10'
+                    ? 'border-neutral-400 dark:border-white/30 bg-black/5 dark:bg-white/10 ring-2 ring-neutral-300 dark:ring-white/20'
+                    : 'border-neutral-200 dark:border-white/5 bg-black/[0.02] dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full ${def.dotColor} mb-1 shadow-sm flex items-center justify-center`}>
                   {isSelected && <Check className="w-3 h-3 text-neutral-950 stroke-3" />}
                 </span>
-                <span className="text-[10px] text-neutral-400 capitalize">{col}</span>
+                <span className="text-[10px] font-medium text-neutral-700 dark:text-neutral-400 capitalize">{col}</span>
               </button>
             );
           })}
@@ -317,7 +317,7 @@ export const AppearanceSettings: React.FC = () => {
 
       {/* 3. Layout Density */}
       <section>
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider mb-2">
           Layout Density
         </h4>
         <div className="grid grid-cols-3 gap-2">
@@ -325,10 +325,10 @@ export const AppearanceSettings: React.FC = () => {
             <button
               key={density}
               onClick={() => updateSettings({ density })}
-              className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-medium ${
+              className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-semibold ${
                 settings.density === density
-                  ? `${accentTheme.bgActive}`
-                  : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400'
+                  ? `${accentTheme.bgActive} shadow-xs`
+                  : 'bg-black/[0.03] dark:bg-white/5 border-neutral-200 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-200'
               }`}
             >
               {density}
@@ -340,17 +340,17 @@ export const AppearanceSettings: React.FC = () => {
       {/* 4. Wallpaper Selection */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-            <Image className="w-3.5 h-3.5 text-cyan-400" />
+          <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+            <Image className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Wallpaper Studio</span>
           </h4>
-          <span className="text-[10px] font-mono text-cyan-400">
+          <span className="text-[10px] font-mono font-semibold text-cyan-700 dark:text-cyan-400">
             {wallpaper.sourceType === 'live' ? '⚡ Live Canvas Active' : '🖼️ Still Wallpaper'}
           </span>
         </div>
 
         {/* Mode Switcher: Live FX vs Still Wallpapers */}
-        <div className="flex items-center p-1 rounded-xl bg-black/30 border border-white/10 gap-1 text-xs">
+        <div className="flex items-center p-1 rounded-xl bg-black/5 dark:bg-black/30 border border-neutral-200 dark:border-white/10 gap-1 text-xs">
           <button
             onClick={() => {
               setWallpaperMode('live');
@@ -368,11 +368,11 @@ export const AppearanceSettings: React.FC = () => {
             }}
             className={`flex-1 py-1.5 px-3 rounded-lg font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
               wallpaperMode === 'live' || wallpaper.sourceType === 'live'
-                ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border border-cyan-500/30 font-semibold shadow-xs'
-                : 'text-neutral-400 hover:text-white'
+                ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-500/40 font-semibold shadow-xs'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
             }`}
           >
-            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+            <Zap className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Live Wallpapers (Active FX)</span>
           </button>
 
@@ -389,7 +389,7 @@ export const AppearanceSettings: React.FC = () => {
             className={`flex-1 py-1.5 px-3 rounded-lg font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
               wallpaperMode === 'static' && wallpaper.sourceType !== 'live'
                 ? `${accentTheme.bgActive} text-white font-semibold shadow-xs`
-                : 'text-neutral-400 hover:text-white'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
             }`}
           >
             <Image className="w-3.5 h-3.5" />
@@ -401,27 +401,27 @@ export const AppearanceSettings: React.FC = () => {
         {(wallpaperMode === 'live' || wallpaper.sourceType === 'live') ? (
           <div className="space-y-4 pt-1">
             {/* 1. Custom Video Live Wallpaper Importer */}
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2.5">
+            <div className="p-3 rounded-xl bg-black/[0.03] dark:bg-white/5 border border-neutral-200 dark:border-white/10 space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 font-medium text-xs text-neutral-200">
-                  <Film className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="flex items-center gap-1.5 font-semibold text-xs text-neutral-900 dark:text-neutral-200">
+                  <Film className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                   <span>Import Custom Live Wallpaper</span>
                 </div>
-                <span className="text-[10px] text-neutral-400">MP4, WebM, GIF, or Video URL</span>
+                <span className="text-[10px] text-neutral-600 dark:text-neutral-400">MP4, WebM, GIF, or Video URL</span>
               </div>
 
               {/* Active custom video banner */}
               {wallpaper.sourceType === 'live' && wallpaper.liveWallpaper?.type === 'video' && (
-                <div className="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/40 flex items-center justify-between gap-2">
+                <div className="p-2.5 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-400/50 dark:border-cyan-500/40 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-cyan-100 dark:bg-cyan-500/20 border border-cyan-300 dark:border-cyan-500/40 flex items-center justify-center text-cyan-700 dark:text-cyan-300 shrink-0">
                       <Video className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs font-semibold text-cyan-200 truncate">
+                      <div className="text-xs font-bold text-cyan-950 dark:text-cyan-200 truncate">
                         {wallpaper.liveWallpaper.videoName || 'Custom Video Wallpaper'}
                       </div>
-                      <div className="text-[10px] text-cyan-400/80">Active Playing on Background</div>
+                      <div className="text-[10px] text-cyan-700 dark:text-cyan-400/80">Active Playing on Background</div>
                     </div>
                   </div>
                   <button
@@ -437,7 +437,7 @@ export const AppearanceSettings: React.FC = () => {
                       })
                     }
                     title="Switch back to Canvas Engine"
-                    className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-300 hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                    className="p-1.5 rounded-lg text-neutral-500 hover:text-rose-600 hover:bg-black/5 dark:text-neutral-400 dark:hover:text-rose-300 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -458,9 +458,9 @@ export const AppearanceSettings: React.FC = () => {
                   <button
                     onClick={() => videoInputRef.current?.click()}
                     disabled={uploadingVideo}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-neutral-200 transition-colors cursor-pointer text-xs font-medium"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-neutral-50 dark:hover:bg-white/10 text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer text-xs font-semibold"
                   >
-                    <Upload className="w-3.5 h-3.5 text-cyan-400" />
+                    <Upload className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                     <span>{uploadingVideo ? 'Importing Video...' : 'Upload Video File (.mp4, .webm, .gif)'}</span>
                   </button>
                 </div>
@@ -475,7 +475,7 @@ export const AppearanceSettings: React.FC = () => {
                         if (e.key === 'Enter') handleApplyLiveVideoUrl();
                       }}
                       placeholder="Or paste direct video/live wallpaper URL..."
-                      className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-neutral-200 placeholder:text-neutral-500 outline-none focus:border-white/30 font-mono"
+                      className="w-full bg-white dark:bg-white/5 border border-neutral-300 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-neutral-400 dark:focus:border-white/30 font-mono"
                     />
                     <Link className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-2" />
                   </div>
@@ -491,7 +491,7 @@ export const AppearanceSettings: React.FC = () => {
 
             {/* 2. Curated Live Video Loops */}
             <div className="pt-1">
-              <div className="text-[11px] font-medium text-neutral-400 mb-2 flex items-center justify-between">
+              <div className="text-[11px] font-semibold text-neutral-700 dark:text-neutral-400 mb-2 flex items-center justify-between">
                 <span>Curated Cinematic Video Loops</span>
                 <span className="text-[10px] text-neutral-500">Looping MP4</span>
               </div>
@@ -520,14 +520,14 @@ export const AppearanceSettings: React.FC = () => {
                       }
                       className={`group relative p-3 rounded-xl border text-left transition-all overflow-hidden flex flex-col justify-between min-h-[90px] cursor-pointer ${
                         isSelected
-                          ? 'border-cyan-400 ring-2 ring-cyan-500/40 bg-white/10 shadow-md shadow-cyan-950/40'
-                          : 'border-white/10 hover:border-white/25 bg-white/5 hover:bg-white/[0.08]'
+                          ? 'border-cyan-500 ring-2 ring-cyan-500/40 bg-cyan-50/50 dark:bg-white/10 shadow-md'
+                          : 'border-neutral-200 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/25 bg-white dark:bg-white/5 hover:bg-neutral-50 dark:hover:bg-white/[0.08]'
                       }`}
                     >
                       <div className={`absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-gradient-to-br ${vid.gradient} blur-xl pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity`} />
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
-                          <div className="p-1 rounded-lg bg-black/40 border border-white/10 text-cyan-400">
+                          <div className="p-1 rounded-lg bg-black/10 dark:bg-black/40 border border-neutral-300 dark:border-white/10 text-cyan-600 dark:text-cyan-400">
                             <Video className="w-3.5 h-3.5" />
                           </div>
                           {isSelected && (
@@ -536,9 +536,9 @@ export const AppearanceSettings: React.FC = () => {
                             </span>
                           )}
                         </div>
-                        <div className="font-semibold text-xs text-neutral-200">{vid.title}</div>
+                        <div className="font-bold text-xs text-neutral-900 dark:text-neutral-200">{vid.title}</div>
                       </div>
-                      <div className="text-[10px] text-neutral-400 line-clamp-1 mt-1">{vid.description}</div>
+                      <div className="text-[10px] text-neutral-600 dark:text-neutral-400 line-clamp-1 mt-1">{vid.description}</div>
                     </button>
                   );
                 })}
@@ -547,7 +547,7 @@ export const AppearanceSettings: React.FC = () => {
 
             {/* 3. Dynamic Canvas FX Engines */}
             <div className="pt-1">
-              <div className="text-[11px] font-medium text-neutral-400 flex items-center justify-between mb-2">
+              <div className="text-[11px] font-semibold text-neutral-700 dark:text-neutral-400 flex items-center justify-between mb-2">
                 <span>Dynamic Canvas FX Engines (60 FPS)</span>
                 <span className="text-[10px] text-neutral-500 font-mono">Zero CPU when hidden</span>
               </div>
@@ -575,14 +575,14 @@ export const AppearanceSettings: React.FC = () => {
                     }
                     className={`group relative p-3 rounded-xl border text-left transition-all overflow-hidden flex flex-col justify-between min-h-[96px] cursor-pointer ${
                       isSelected
-                        ? 'border-cyan-400 ring-2 ring-cyan-500/40 bg-white/10 shadow-md shadow-cyan-950/40'
-                        : 'border-white/10 hover:border-white/25 bg-white/5 hover:bg-white/[0.08]'
+                        ? 'border-cyan-500 ring-2 ring-cyan-500/40 bg-cyan-50/50 dark:bg-white/10 shadow-md'
+                        : 'border-neutral-200 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/25 bg-white dark:bg-white/5 hover:bg-neutral-50 dark:hover:bg-white/[0.08]'
                     }`}
                   >
                     <div className={`absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-gradient-to-br ${preset.gradient} blur-xl pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity`} />
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <div className="p-1.5 rounded-lg bg-black/40 border border-white/10 text-cyan-400">
+                        <div className="p-1.5 rounded-lg bg-black/10 dark:bg-black/40 border border-neutral-300 dark:border-white/10 text-cyan-600 dark:text-cyan-400">
                           <IconComp className="w-3.5 h-3.5" />
                         </div>
                         {isSelected && (
@@ -591,9 +591,9 @@ export const AppearanceSettings: React.FC = () => {
                           </span>
                         )}
                       </div>
-                      <div className="font-semibold text-xs text-neutral-200">{preset.title}</div>
+                      <div className="font-bold text-xs text-neutral-900 dark:text-neutral-200">{preset.title}</div>
                     </div>
-                    <div className="text-[10px] text-neutral-400 line-clamp-1 mt-1">{preset.description}</div>
+                    <div className="text-[10px] text-neutral-600 dark:text-neutral-400 line-clamp-1 mt-1">{preset.description}</div>
                   </button>
                 );
               })}
@@ -601,12 +601,12 @@ export const AppearanceSettings: React.FC = () => {
             </div>
 
             {/* Live Wallpaper Fine-Tuning Controls */}
-            <div className="p-3 rounded-xl bg-black/20 border border-white/10 space-y-3 mt-2">
+            <div className="p-3 rounded-xl bg-black/[0.02] dark:bg-black/20 border border-neutral-200 dark:border-white/10 space-y-3 mt-2">
               {/* Speed selector */}
               <div>
-                <div className="flex justify-between text-xs text-neutral-300 mb-1.5">
-                  <span>Motion Speed</span>
-                  <span className="font-mono text-cyan-400 text-[11px]">
+                <div className="flex justify-between text-xs text-neutral-800 dark:text-neutral-300 mb-1.5">
+                  <span className="font-semibold">Motion Speed</span>
+                  <span className="font-mono text-cyan-700 dark:text-cyan-400 text-[11px] font-bold">
                     {wallpaper.liveWallpaper?.speed === 0.5 ? '0.5x Slow' : wallpaper.liveWallpaper?.speed === 1.5 ? '1.5x Brisk' : wallpaper.liveWallpaper?.speed === 2 ? '2.0x Hyper' : '1.0x Normal'}
                   </span>
                 </div>
@@ -626,8 +626,8 @@ export const AppearanceSettings: React.FC = () => {
                       }
                       className={`py-1 rounded-lg border text-center font-mono text-[11px] transition-colors cursor-pointer ${
                         (wallpaper.liveWallpaper?.speed ?? 1) === spd
-                          ? `${accentTheme.bgActive} border-cyan-400 text-white font-semibold`
-                          : 'bg-white/5 border-white/10 text-neutral-400 hover:text-white'
+                          ? `${accentTheme.bgActive} border-cyan-400 text-white font-bold`
+                          : 'bg-white dark:bg-white/5 border-neutral-200 dark:border-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white'
                       }`}
                     >
                       {spd}x
@@ -638,7 +638,7 @@ export const AppearanceSettings: React.FC = () => {
 
               {/* Color Palette Selector */}
               <div>
-                <div className="text-xs text-neutral-300 mb-1.5">Live Color Theme</div>
+                <div className="text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">Live Color Theme</div>
                 <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
                   {COLOR_SCHEMES.map((scheme) => {
                     const isCur = (wallpaper.liveWallpaper?.colorScheme ?? 'cyan') === scheme.id;
@@ -657,12 +657,12 @@ export const AppearanceSettings: React.FC = () => {
                         }
                         className={`flex flex-col items-center justify-center p-1.5 rounded-lg border text-center transition-all cursor-pointer ${
                           isCur
-                            ? 'border-white/30 bg-white/10 ring-1 ring-white/30'
-                            : 'border-white/5 bg-white/5 hover:bg-white/10'
+                            ? 'border-neutral-400 dark:border-white/30 bg-black/5 dark:bg-white/10 ring-1 ring-neutral-300 dark:ring-white/30'
+                            : 'border-neutral-200 dark:border-white/5 bg-black/[0.02] dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10'
                         }`}
                       >
                         <span className={`w-4 h-4 rounded-full ${scheme.dot} mb-1 shadow-xs`} />
-                        <span className="text-[9px] text-neutral-300 truncate w-full">{scheme.label}</span>
+                        <span className="text-[9px] font-medium text-neutral-700 dark:text-neutral-300 truncate w-full">{scheme.label}</span>
                       </button>
                     );
                   })}
@@ -670,10 +670,10 @@ export const AppearanceSettings: React.FC = () => {
               </div>
 
               {/* Interactive Cursor Checkbox */}
-              <div className="flex items-center justify-between pt-1 border-t border-white/5">
+              <div className="flex items-center justify-between pt-1 border-t border-neutral-200 dark:border-white/5">
                 <div>
-                  <div className="text-xs font-medium text-neutral-200">Interactive Cursor Reaction</div>
-                  <div className="text-[10px] text-neutral-400">Mouse parallax, gravity & particle deflection</div>
+                  <div className="text-xs font-semibold text-neutral-900 dark:text-neutral-200">Interactive Cursor Reaction</div>
+                  <div className="text-[10px] text-neutral-600 dark:text-neutral-400">Mouse parallax, gravity & particle deflection</div>
                 </div>
                 <input
                   type="checkbox"
@@ -708,7 +708,7 @@ export const AppearanceSettings: React.FC = () => {
               <button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-neutral-200 transition-colors cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-neutral-50 dark:hover:bg-white/10 text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer font-semibold"
               >
                 <Upload className="w-3.5 h-3.5" />
                 <span>{uploading ? 'Processing...' : 'Upload Image'}</span>
@@ -723,7 +723,7 @@ export const AppearanceSettings: React.FC = () => {
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
                   placeholder="Or paste wallpaper image URL..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-neutral-200 placeholder:text-neutral-500 outline-none focus:border-white/30"
+                  className="w-full bg-white dark:bg-white/5 border border-neutral-300 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-neutral-400 dark:focus:border-white/30"
                 />
                 <Link className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-2" />
               </div>
@@ -737,7 +737,7 @@ export const AppearanceSettings: React.FC = () => {
 
             {/* Built-in Categories Filter */}
             <div className="pt-2">
-              <div className="text-[11px] font-medium text-neutral-400 mb-2">Built-in Collection</div>
+              <div className="text-[11px] font-semibold text-neutral-700 dark:text-neutral-400 mb-2">Built-in Collection</div>
               <div className="flex flex-wrap gap-1 mb-3">
                 {CATEGORIES.map((cat) => (
                   <button
@@ -746,7 +746,7 @@ export const AppearanceSettings: React.FC = () => {
                     className={`px-2.5 py-1 rounded-lg text-xs transition-colors cursor-pointer ${
                       activeCategory === cat
                         ? `${accentTheme.bgActive} font-medium`
-                        : 'bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+                        : 'bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-200'
                     }`}
                   >
                     {cat}
@@ -773,8 +773,8 @@ export const AppearanceSettings: React.FC = () => {
                       }
                       className={`group relative aspect-video rounded-xl overflow-hidden border transition-all text-left cursor-pointer ${
                         isSelected
-                          ? 'border-cyan-400 ring-2 ring-cyan-500/50'
-                          : 'border-white/10 hover:border-white/30'
+                          ? 'border-cyan-500 ring-2 ring-cyan-500/50'
+                          : 'border-neutral-200 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/30'
                       }`}
                     >
                       {item.url ? (
@@ -809,17 +809,17 @@ export const AppearanceSettings: React.FC = () => {
       </section>
 
       {/* 5. Wallpaper Visual Controls */}
-      <section className="space-y-4 pt-2 border-t border-white/10">
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-          <Sliders className="w-3.5 h-3.5 text-cyan-400" />
+      <section className="space-y-4 pt-2 border-t border-neutral-200 dark:border-white/10">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+          <Sliders className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>Wallpaper Adjustments</span>
         </h4>
 
         {/* Brightness */}
         <div>
-          <div className="flex justify-between text-xs text-neutral-300 mb-1">
-            <span>Brightness</span>
-            <span className="font-mono text-neutral-400">{wallpaper.brightness}%</span>
+          <div className="flex justify-between text-xs text-neutral-800 dark:text-neutral-300 mb-1">
+            <span className="font-medium">Brightness</span>
+            <span className="font-mono text-neutral-600 dark:text-neutral-400">{wallpaper.brightness}%</span>
           </div>
           <input
             type="range"
@@ -834,9 +834,9 @@ export const AppearanceSettings: React.FC = () => {
 
         {/* Blur */}
         <div>
-          <div className="flex justify-between text-xs text-neutral-300 mb-1">
-            <span>Blur</span>
-            <span className="font-mono text-neutral-400">{wallpaper.blur}px</span>
+          <div className="flex justify-between text-xs text-neutral-800 dark:text-neutral-300 mb-1">
+            <span className="font-medium">Blur</span>
+            <span className="font-mono text-neutral-600 dark:text-neutral-400">{wallpaper.blur}px</span>
           </div>
           <input
             type="range"
@@ -851,9 +851,9 @@ export const AppearanceSettings: React.FC = () => {
 
         {/* Overlay Opacity */}
         <div>
-          <div className="flex justify-between text-xs text-neutral-300 mb-1">
-            <span>Dark / Light Overlay</span>
-            <span className="font-mono text-neutral-400">{wallpaper.overlayOpacity}%</span>
+          <div className="flex justify-between text-xs text-neutral-800 dark:text-neutral-300 mb-1">
+            <span className="font-medium">Dark / Light Overlay</span>
+            <span className="font-mono text-neutral-600 dark:text-neutral-400">{wallpaper.overlayOpacity}%</span>
           </div>
           <input
             type="range"
@@ -869,8 +869,8 @@ export const AppearanceSettings: React.FC = () => {
         {/* Animated Effect Toggle */}
         <div className="flex items-center justify-between pt-1">
           <div>
-            <div className="font-medium text-neutral-200">Ambient Star Drift</div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Ambient Star Drift</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Gentle celestial particle drift behind widgets
             </div>
           </div>

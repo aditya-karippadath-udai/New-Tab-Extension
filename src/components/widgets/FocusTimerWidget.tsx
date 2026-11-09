@@ -104,21 +104,21 @@ export const FocusTimerWidget: React.FC = () => {
       title="Focus Timer"
       icon={<Timer className={`w-4 h-4 ${accentTheme.textColor}`} />}
       headerAction={
-        <div className="flex items-center gap-1.5 text-[11px] text-neutral-400">
-          <Sparkles className="w-3 h-3 text-amber-400" />
+        <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 dark:text-neutral-400">
+          <Sparkles className="w-3 h-3 text-amber-500 dark:text-amber-400" />
           <span>{completedSessions} focus streak</span>
         </div>
       }
     >
       <div className="flex flex-col items-center justify-center p-2">
         {/* Mode selector pills */}
-        <div className="flex items-center bg-black/30 dark:bg-black/40 border border-white/10 rounded-xl p-1 gap-1 mb-4 text-xs">
+        <div className="flex items-center bg-black/5 dark:bg-black/40 border border-neutral-200 dark:border-white/10 rounded-xl p-1 gap-1 mb-4 text-xs">
           <button
             onClick={() => switchMode('pomodoro')}
             className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer ${
               mode === 'pomodoro'
                 ? `${accentTheme.bgActive} text-white shadow-sm`
-                : 'text-neutral-400 hover:text-white'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
             }`}
           >
             Pomodoro (25m)
@@ -127,8 +127,8 @@ export const FocusTimerWidget: React.FC = () => {
             onClick={() => switchMode('shortBreak')}
             className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer ${
               mode === 'shortBreak'
-                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                : 'text-neutral-400 hover:text-white'
+                ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
             }`}
           >
             Short Break (5m)
@@ -137,8 +137,8 @@ export const FocusTimerWidget: React.FC = () => {
             onClick={() => switchMode('longBreak')}
             className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer ${
               mode === 'longBreak'
-                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-                : 'text-neutral-400 hover:text-white'
+                ? 'bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30'
+                : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
             }`}
           >
             Long Break (15m)
@@ -153,7 +153,7 @@ export const FocusTimerWidget: React.FC = () => {
               cx="50"
               cy="50"
               r={strokeRadius}
-              className="text-white/10"
+              className="text-neutral-200 dark:text-white/10"
               strokeWidth="5"
               stroke="currentColor"
               fill="transparent"
@@ -165,10 +165,10 @@ export const FocusTimerWidget: React.FC = () => {
               r={strokeRadius}
               className={`${
                 mode === 'pomodoro'
-                  ? 'text-cyan-400'
+                  ? 'text-cyan-500 dark:text-cyan-400'
                   : mode === 'shortBreak'
-                  ? 'text-emerald-400'
-                  : 'text-purple-400'
+                  ? 'text-emerald-500 dark:text-emerald-400'
+                  : 'text-purple-500 dark:text-purple-400'
               } transition-all duration-300`}
               strokeWidth="5"
               strokeDasharray={circumference}
@@ -181,10 +181,10 @@ export const FocusTimerWidget: React.FC = () => {
 
           {/* Time digits */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <span className="text-3xl font-bold font-mono tracking-wider text-white">
+            <span className="text-3xl font-bold font-mono tracking-wider text-neutral-900 dark:text-white">
               {timeFormatted}
             </span>
-            <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium mt-0.5">
+            <span className="text-[10px] uppercase tracking-wider text-neutral-600 dark:text-neutral-400 font-semibold mt-0.5">
               {isRunning ? 'Focusing' : timeLeft === 0 ? 'Done' : 'Paused'}
             </span>
           </div>
@@ -196,7 +196,7 @@ export const FocusTimerWidget: React.FC = () => {
             onClick={toggleRunning}
             className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold shadow-lg transition-all cursor-pointer ${
               isRunning
-                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30'
+                ? 'bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/40 hover:bg-amber-500/30'
                 : `${accentTheme.bgActive} text-white shadow-cyan-500/20 hover:scale-105 active:scale-95`
             }`}
           >
@@ -216,7 +216,7 @@ export const FocusTimerWidget: React.FC = () => {
           <button
             onClick={handleReset}
             title="Reset timer"
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white border border-white/10 transition-colors cursor-pointer"
+            className="p-2 rounded-xl bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white border border-neutral-200 dark:border-white/10 transition-colors cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
@@ -224,13 +224,13 @@ export const FocusTimerWidget: React.FC = () => {
 
         {/* BrowserTime stats integration summary */}
         {timeStats && (
-          <div className="mt-4 pt-3 border-t border-white/5 w-full flex items-center justify-around text-[11px] text-neutral-400">
+          <div className="mt-4 pt-3 border-t border-neutral-200 dark:border-white/5 w-full flex items-center justify-around text-[11px] text-neutral-600 dark:text-neutral-400">
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Today: <strong className="text-neutral-200">{timeStats.focusMinutesCompleted + completedSessions * 25}m</strong> focus</span>
+              <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+              <span>Today: <strong className="text-neutral-800 dark:text-neutral-200 font-semibold">{timeStats.focusMinutesCompleted + completedSessions * 25}m</strong> focus</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
               <span>Session #{timeStats.sessionsCount}</span>
             </div>
           </div>

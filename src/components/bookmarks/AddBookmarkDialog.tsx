@@ -67,15 +67,15 @@ export const AddBookmarkDialog: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
-      <div className="w-full max-w-md rounded-2xl glass-panel bg-neutral-900/95 border border-white/15 p-5 shadow-2xl text-neutral-200">
-        <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
-          <h3 className="text-sm font-semibold text-neutral-100 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-cyan-400" />
+      <div className="w-full max-w-md rounded-2xl glass-panel bg-white/95 dark:bg-neutral-900/95 border border-neutral-200 dark:border-white/15 p-5 shadow-2xl text-neutral-900 dark:text-neutral-200">
+        <div className="flex items-center justify-between pb-3 mb-4 border-b border-neutral-200 dark:border-white/10">
+          <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+            <Globe className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             <span>{isEditing ? 'Edit Bookmark' : 'Add New Bookmark'}</span>
           </h3>
           <button
             onClick={closeDialog}
-            className="p-1 rounded-lg text-neutral-400 hover:text-white transition-colors"
+            className="p-1 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -83,7 +83,7 @@ export const AddBookmarkDialog: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+            <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">
               Bookmark Name
             </label>
             <input
@@ -91,13 +91,13 @@ export const AddBookmarkDialog: React.FC = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. GitHub"
-              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-100 placeholder:text-neutral-500 outline-none focus:border-white/30"
+              className="w-full bg-white dark:bg-black/40 border border-neutral-300 dark:border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-cyan-500 dark:focus:border-white/30"
               autoFocus={!isEditing}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+            <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5">
               Website URL *
             </label>
             <div className="relative">
@@ -110,58 +110,58 @@ export const AddBookmarkDialog: React.FC = () => {
                   if (urlError) setUrlError('');
                 }}
                 placeholder="https://github.com or docs.rs"
-                className={`w-full bg-black/40 border rounded-xl pl-8 pr-3 py-2 text-xs text-neutral-100 placeholder:text-neutral-500 outline-none transition-all ${
-                  urlError ? 'border-rose-500/80' : 'border-white/10 focus:border-white/30'
+                className={`w-full bg-white dark:bg-black/40 border rounded-xl pl-8 pr-3 py-2 text-xs text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none transition-all ${
+                  urlError ? 'border-rose-500' : 'border-neutral-300 dark:border-white/10 focus:border-cyan-500 dark:focus:border-white/30'
                 }`}
               />
-              <Link2 className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-2.5" />
+              <Link2 className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 absolute left-2.5 top-2.5" />
             </div>
-            {urlError && <p className="text-[11px] text-rose-400 mt-1">{urlError}</p>}
+            {urlError && <p className="text-[11px] text-rose-600 dark:text-rose-400 mt-1">{urlError}</p>}
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-neutral-300 mb-1.5 flex items-center gap-1.5">
-              <Folder className="w-3.5 h-3.5 text-amber-400" />
+            <label className="block text-xs font-semibold text-neutral-800 dark:text-neutral-300 mb-1.5 flex items-center gap-1.5">
+              <Folder className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
               <span>Target Folder</span>
             </label>
             <select
               value={selectedFolderId}
               onChange={(e) => setSelectedFolderId(e.target.value)}
-              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none cursor-pointer"
+              className="w-full bg-white dark:bg-black/40 border border-neutral-300 dark:border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-800 dark:text-neutral-200 outline-none cursor-pointer"
             >
               {allFolders.map((f) => (
-                <option key={f.id} value={f.id} className="bg-neutral-900 text-neutral-200">
+                <option key={f.id} value={f.id} className="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
                   {'\u00A0'.repeat(f.level * 3)}📁 {f.title}
                 </option>
               ))}
             </select>
           </div>
 
-          <label className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+          <label className="flex items-center gap-2 p-2.5 rounded-xl bg-black/[0.02] dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
             <input
               type="checkbox"
               checked={isFavorite}
               onChange={(e) => setIsFavorite(e.target.checked)}
-              className="w-4 h-4 rounded accent-cyan-500 cursor-pointer"
+              className="w-4 h-4 rounded accent-cyan-600 dark:accent-cyan-500 cursor-pointer"
             />
             <div className="flex items-center gap-1.5">
-              <Star className={`w-3.5 h-3.5 ${isFavorite ? 'text-amber-400 fill-amber-400' : 'text-neutral-400'}`} />
-              <span className="font-medium text-neutral-200">Add to Favorites / Quick Links</span>
+              <Star className={`w-3.5 h-3.5 ${isFavorite ? 'text-amber-500 fill-amber-500 dark:text-amber-400 dark:fill-amber-400' : 'text-neutral-400'}`} />
+              <span className="font-semibold text-neutral-800 dark:text-neutral-200">Add to Favorites / Quick Links</span>
             </div>
           </label>
 
-          <div className="flex items-center justify-end gap-2 pt-2 border-t border-white/10">
+          <div className="flex items-center justify-end gap-2 pt-2 border-t border-neutral-200 dark:border-white/10">
             <button
               type="button"
               onClick={closeDialog}
-              className="px-3 py-1.5 rounded-xl text-xs font-medium text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 transition-colors"
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-neutral-700 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-transparent transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!url.trim()}
-              className={`px-4 py-1.5 rounded-xl text-xs font-medium text-white transition-all disabled:opacity-40 cursor-pointer ${accentTheme.buttonClass}`}
+              className={`px-4 py-1.5 rounded-xl text-xs font-semibold text-white transition-all disabled:opacity-40 cursor-pointer ${accentTheme.buttonClass}`}
             >
               {isEditing ? 'Save Changes' : 'Add Bookmark'}
             </button>

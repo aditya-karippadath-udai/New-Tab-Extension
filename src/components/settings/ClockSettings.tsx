@@ -7,20 +7,20 @@ export const ClockSettings: React.FC = () => {
   const { settings, updateSettings, accentTheme } = useSettings();
 
   return (
-    <div className="space-y-6 text-xs text-neutral-300">
+    <div className="space-y-6 text-xs text-neutral-800 dark:text-neutral-300">
       {/* 1. Clock Mode (Digital vs Analog Speedometer) */}
       <section>
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-          <Clock className="w-3.5 h-3.5 text-cyan-400" />
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <Clock className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>Clock Mode</span>
         </h4>
         <div className="grid grid-cols-2 gap-2">
           <button
             onClick={() => updateSettings({ clockType: 'digital' })}
-            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-center transition-all font-medium cursor-pointer ${
+            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-center transition-all font-semibold cursor-pointer ${
               settings.clockType === 'digital'
-                ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs font-semibold`
-                : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+                ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs font-bold`
+                : 'bg-black/[0.03] dark:bg-white/5 border-neutral-200 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-200'
             }`}
           >
             <Clock className="w-4 h-4" />
@@ -29,13 +29,13 @@ export const ClockSettings: React.FC = () => {
 
           <button
             onClick={() => updateSettings({ clockType: 'analog' })}
-            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-center transition-all font-medium cursor-pointer ${
+            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-center transition-all font-semibold cursor-pointer ${
               settings.clockType === 'analog'
-                ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs font-semibold`
-                : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+                ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs font-bold`
+                : 'bg-black/[0.03] dark:bg-white/5 border-neutral-200 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-200'
             }`}
           >
-            <Gauge className="w-4 h-4 text-cyan-400" />
+            <Gauge className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             <span>Speedometer Analog</span>
           </button>
         </div>
@@ -44,7 +44,7 @@ export const ClockSettings: React.FC = () => {
       {/* 2. Digital Typography Style (if Digital) */}
       {settings.clockType === 'digital' && (
         <section>
-          <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-2">
+          <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider mb-2">
             Digital Clock Layout
           </h4>
           <div className="grid grid-cols-3 gap-2">
@@ -52,10 +52,10 @@ export const ClockSettings: React.FC = () => {
               <button
                 key={st}
                 onClick={() => updateSettings({ clockStyle: st })}
-                className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-medium cursor-pointer ${
+                className={`py-2 px-3 rounded-xl border text-center capitalize transition-all font-semibold cursor-pointer ${
                   settings.clockStyle === st
-                    ? `${accentTheme.bgActive} border-cyan-500/50`
-                    : 'bg-white/5 border-white/10 hover:bg-white/10 text-neutral-400 hover:text-neutral-200'
+                    ? `${accentTheme.bgActive} border-cyan-500/50 shadow-xs`
+                    : 'bg-black/[0.03] dark:bg-white/5 border-neutral-200 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 text-neutral-700 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-200'
                 }`}
               >
                 {st}
@@ -67,15 +67,15 @@ export const ClockSettings: React.FC = () => {
 
       {/* 3. Display Preferences */}
       <section className="space-y-3">
-        <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider">
+        <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider">
           Display Preferences
         </h4>
 
         {/* 24-Hour Toggle */}
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">24-Hour Time Format</div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">24-Hour Time Format</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Display time as 14:30 instead of 2:30 PM
             </div>
           </div>
@@ -88,10 +88,10 @@ export const ClockSettings: React.FC = () => {
         </label>
 
         {/* Seconds Toggle */}
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">Show Seconds</div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Show Seconds</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Live ticking seconds and speedometer redline sweep needle
             </div>
           </div>
@@ -104,10 +104,10 @@ export const ClockSettings: React.FC = () => {
         </label>
 
         {/* Date Toggle */}
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">Show Date</div>
-            <div className="text-[11px] text-neutral-500">Day of the week and full date</div>
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Show Date</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">Day of the week and full date</div>
           </div>
           <input
             type="checkbox"
@@ -118,10 +118,10 @@ export const ClockSettings: React.FC = () => {
         </label>
 
         {/* Greeting Toggle */}
-        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 cursor-pointer">
+        <label className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-white/5 border border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 cursor-pointer">
           <div>
-            <div className="font-medium text-neutral-200">Time-Aware Greeting</div>
-            <div className="text-[11px] text-neutral-500">
+            <div className="font-semibold text-neutral-900 dark:text-neutral-200">Time-Aware Greeting</div>
+            <div className="text-[11px] text-neutral-600 dark:text-neutral-500">
               Display "Good morning / afternoon / evening"
             </div>
           </div>
@@ -137,8 +137,8 @@ export const ClockSettings: React.FC = () => {
       {/* 4. Greeting User Name */}
       {settings.showGreeting && (
         <section className="space-y-2">
-          <label className="block text-xs font-semibold text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-            <User className="w-3.5 h-3.5 text-cyan-400" />
+          <label className="block text-xs font-bold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
+            <User className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Greeting Name</span>
           </label>
           <input
@@ -146,7 +146,7 @@ export const ClockSettings: React.FC = () => {
             value={settings.userName}
             onChange={(e) => updateSettings({ userName: e.target.value })}
             placeholder="e.g. Aditya"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-200 placeholder:text-neutral-500 outline-none focus:border-white/30"
+            className="w-full bg-white dark:bg-white/5 border border-neutral-300 dark:border-white/10 rounded-xl px-3 py-2 text-xs text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-neutral-400 dark:focus:border-white/30"
           />
         </section>
       )}

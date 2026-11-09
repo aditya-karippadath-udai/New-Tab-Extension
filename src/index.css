@@ -52,21 +52,102 @@ html.dark {
   color-scheme: dark;
 }
 
+html.light {
+  color-scheme: light;
+}
+
 html.dark input,
 html.dark textarea,
 html.dark select {
   color: #ffffff;
 }
 
-/* Fix browser autofill styling in dark mode */
+/* Ensure inputs, select, and textarea in light mode are dark colored */
+html.light input,
+html.light textarea,
+html.light select {
+  color: #0f172a;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #64748b;
+}
+
+/* Light mode text contrast enhancements across widgets, panels, and settings */
+html.light {
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+}
+
+/* Ensure light mode renders dark text on glass-panel and widget containers */
+html.light .glass-panel {
+  color: #0f172a;
+}
+
+/* Fix light mode borders, buttons and text contrast */
+html.light .glass-panel h2,
+html.light .glass-panel h3,
+html.light .glass-panel h4 {
+  color: #0f172a;
+}
+
+/* Ensure light mode calendar days, labels and countdown numbers are dark */
+html.light #calendar-widget .text-neutral-200,
+html.light #calendar-widget .text-neutral-300,
+html.light #calendar-widget .font-mono.text-xs {
+  color: #1e293b;
+}
+
+html.light #calendar-widget .text-neutral-400,
+html.light #calendar-widget .text-neutral-500 {
+  color: #475569;
+}
+
+html.light #calendar-widget .text-neutral-600 {
+  color: #94a3b8;
+}
+
+html.light #calendar-widget button:not([class*="bg-cyan"]):not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-emerald"]):not([class*="bg-amber"]):not([class*="bg-rose"]) {
+  color: #1e293b;
+}
+
+html.light #calendar-widget button:hover {
+  background-color: rgba(15, 23, 42, 0.06);
+}
+
+/* Settings drawer text in light mode */
+html.light .drawer-content,
+html.light [class*="SettingsDrawer"],
+html.light input[type="text"],
+html.light input[type="url"],
+html.light input[type="date"] {
+  color: #0f172a;
+}
+
+/* Fix browser autofill styling */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus {
-  -webkit-text-fill-color: #ffffff !important;
-  -webkit-box-shadow: 0 0 0px 1000px #171717 inset !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+html.dark input:-webkit-autofill,
+html.dark input:-webkit-autofill:hover,
+html.dark input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #171717 inset !important;
+}
+
+html.light input:-webkit-autofill,
+html.light input:-webkit-autofill:hover,
+html.light input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f172a !important;
+  -webkit-box-shadow: 0 0 0px 1000px #f8fafc inset !important;
+}
+
 

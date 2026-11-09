@@ -14,7 +14,7 @@ export const NewTabPage: React.FC = () => {
         <FavoritesProvider>
           <BookmarkProvider>
             <EventProvider>
-              <div className="min-h-screen relative font-sans text-neutral-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
+              <div className="min-h-screen relative font-sans text-neutral-900 dark:text-neutral-100 antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-800 dark:selection:text-cyan-200">
                 {/* Wallpaper, Scrim & Animation Layer */}
                 <BackgroundLayer />
 
